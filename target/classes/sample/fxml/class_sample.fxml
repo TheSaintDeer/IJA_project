@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="800.0" maxWidth="1000.0" minHeight="568.0" minWidth="682.0" prefHeight="568.0" prefWidth="682.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ClassController">
+    <children>
+        <Label alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="40.0" prefWidth="682.0" text="New Class" textFill="WHITE" AnchorPane.bottomAnchor="514.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font name="System Italic" size="32.0" />
+            </font>
+        </Label>
+        <AnchorPane layoutY="67.0" prefHeight="502.0" prefWidth="682.0" style="-fx-background-color: #fafafa;">
+            <children>
+                <Button fx:id="createNewClass" layoutX="232.0" layoutY="448.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="219.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-background-radius: 7; -fx-border-radius: 7;" text="CREATE CLASS" textFill="WHITE" AnchorPane.leftAnchor="232.0" AnchorPane.rightAnchor="231.0" />
+                <TextField fx:id="nameOfClass" layoutX="53.0" layoutY="42.0" prefHeight="33.0" prefWidth="573.0" promptText="Name of class" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="56.0" />
+                <TextField alignment="CENTER" layoutX="1.0" layoutY="75.0" prefHeight="36.0" prefWidth="682.0" style="-fx-background-color: #fafafa;" text="Create Attribute" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="nameOfAttribute" layoutX="53.0" layoutY="147.0" prefHeight="33.0" prefWidth="573.0" promptText="Name of attribute" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="56.0" />
+                <TextField alignment="CENTER" layoutX="3.0" layoutY="180.0" prefHeight="36.0" prefWidth="682.0" style="-fx-background-color: #fafafa;" text="Visibility of Attribute" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </TextField>
+                <CheckBox fx:id="checkboxPublic" layoutX="53.0" layoutY="233.0" mnemonicParsing="false" selected="true" text="Public" />
+                <CheckBox fx:id="checkboxPrivate" layoutX="208.0" layoutY="233.0" mnemonicParsing="false" text="Private" />
+                <CheckBox fx:id="checkboxProtected" layoutX="386.0" layoutY="233.0" mnemonicParsing="false" text="Protected" />
+                <CheckBox fx:id="checkboxPackage" layoutX="540.0" layoutY="233.0" mnemonicParsing="false" text="Package" />
+                <Button fx:id="createNewAttribute" layoutX="230.0" layoutY="284.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="219.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-background-radius: 7; -fx-border-radius: 7;" text="CREATE ATTRIBUTE" textFill="WHITE" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
