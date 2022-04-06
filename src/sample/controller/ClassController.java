@@ -37,6 +37,7 @@ public class ClassController {
     @FXML
     private TextField nameOfClass;
 
+    @FXML
     void initialize() {
         createNewClass.setOnAction(event -> {
             createNewClass.getScene().getWindow().hide();
