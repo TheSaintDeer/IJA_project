@@ -20,8 +20,7 @@ public class UMLAttribute extends Element{
     }
 
     public String toString() {
-        String ret = name + ":" + type.toString();
-        return ret;
+        return name + ":" + type.toString();
     }
     
 }

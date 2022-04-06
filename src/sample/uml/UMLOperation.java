@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.lang.String;
 import java.util.List;
 import java.util.Collections;
+import java.util.Objects;
 
 public class UMLOperation extends UMLAttribute{
     
@@ -29,7 +30,7 @@ public class UMLOperation extends UMLAttribute{
 
     public boolean addArgument(UMLAttribute arg) {
         for (UMLAttribute i: this.arg) {
-            if (i.name == arg.name) {
+            if (Objects.equals(i.name, arg.name)) {
                 return false;
             }
         }
@@ -40,8 +41,7 @@ public class UMLOperation extends UMLAttribute{
     }
 
     public List<UMLAttribute> getArguments() {
-        List<UMLAttribute> list = Collections.unmodifiableList(arg);
-        return list;
+        return Collections.unmodifiableList(arg);
     }
 
 }

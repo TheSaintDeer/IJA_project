@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.lang.String;
 import java.util.List;
 import java.util.Collections;
+import java.util.Objects;
 
 public class UMLClass extends UMLClassifier{
     
@@ -11,14 +12,12 @@ public class UMLClass extends UMLClassifier{
     ArrayList<UMLAttribute> attr;
 
     //Constructors
-
     public UMLClass(String name) {
         super(name);
         attr = new ArrayList<UMLAttribute>();
     }
 
     //Methods
-
     public boolean isAbstract() {
         return isAbstract;
     }
@@ -29,7 +28,7 @@ public class UMLClass extends UMLClassifier{
 
     public boolean addAttribute(UMLAttribute attr) {
         for (UMLAttribute i: this.attr) {
-            if (i.name == attr.name) {
+            if (Objects.equals(i.name, attr.name)) {
                 return false;
             }
         }
@@ -41,7 +40,7 @@ public class UMLClass extends UMLClassifier{
 
     public int getAttrPosition(UMLAttribute attr) {
         for (int i = 0; i < this.attr.size(); i++) {
-            if (this.attr.get(i).name == attr.name) {
+            if (Objects.equals(this.attr.get(i).name, attr.name)) {
                 return i;
             }
         }
@@ -51,7 +50,7 @@ public class UMLClass extends UMLClassifier{
 
     public int moveAttrAtPosition(UMLAttribute attr, int pos) {
         for (UMLAttribute i: this.attr) {
-            if (i.name == attr.name) {
+            if (Objects.equals(i.name, attr.name)) {
                 ArrayList<UMLAttribute> new_attr = new ArrayList<UMLAttribute>();
                 int cur_pos = 0;
                 for (UMLAttribute j: this.attr) {
@@ -59,7 +58,7 @@ public class UMLClass extends UMLClassifier{
                         new_attr.add(i);
                     }
                     
-                    if (i.name != j.name) {
+                    if (!Objects.equals(i.name, j.name)) {
                         new_attr.add(j);
                     }
 
@@ -74,7 +73,6 @@ public class UMLClass extends UMLClassifier{
     }
 
     public List<UMLAttribute> getAttributes() {
-        List<UMLAttribute> list = Collections.unmodifiableList(attr);
-        return list;
+        return Collections.unmodifiableList(attr);
     }
 }

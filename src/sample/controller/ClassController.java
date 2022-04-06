@@ -23,6 +23,9 @@ public class ClassController extends Main {
     public UMLClass umlclass;
 
     @FXML
+    private MenuItem booleanType;
+
+    @FXML
     private Button createNewAttribute;
 
     @FXML
@@ -32,13 +35,10 @@ public class ClassController extends Main {
     private MenuItem customType;
 
     @FXML
-    private MenuItem dateType;
-
-    @FXML
-    private MenuItem floatType;
-
-    @FXML
     private MenuItem intType;
+
+    @FXML
+    private SplitMenuButton menuButton;
 
     @FXML
     private TextField nameOfAttribute;
@@ -48,6 +48,9 @@ public class ClassController extends Main {
 
     @FXML
     private MenuItem stringType;
+
+    @FXML
+    private MenuItem voidType;
 
     @FXML
     void initialize() {
@@ -61,11 +64,16 @@ public class ClassController extends Main {
         createNewAttribute.setOnAction(event -> {
 
             umlclass = createNewClass();
-            UMLAttribute attr = new UMLAttribute(nameOfAttribute.getText(), MnemonicPars());
+//            UMLAttribute attr = new UMLAttribute(nameOfAttribute.getText(), menuButton.getText());
             //Create error if attribute had already created \/
-            umlclass.addAttribute(attr);
+//            umlclass.addAttribute(attr);
             nameOfAttribute.setText("");
 
+        });
+
+        menuButton.setOnAction(event -> {
+
+            MnemonicPars();
         });
 
     }
@@ -80,17 +88,17 @@ public class ClassController extends Main {
         return umlclass;
     }
 
-    public UMLClassifier MnemonicPars () {
+    public void MnemonicPars () {
         if (intType.isMnemonicParsing()) {
-            return new UMLClassifier("Integer");
-        } else if (floatType.isMnemonicParsing()) {
-            return new UMLClassifier("Float");
-        } else if (dateType.isMnemonicParsing()) {
-            return new UMLClassifier("Date");
+            menuButton.setText("Integer");
         } else if (stringType.isMnemonicParsing()) {
-            return new UMLClassifier("String");
+            menuButton.setText("String");
+        } else if (booleanType.isMnemonicParsing()) {
+            menuButton.setText("Boolean");
+        } else if (voidType.isMnemonicParsing()) {
+            menuButton.setText("Void");
         } else {
-            return new UMLClassifier("Custom");
+            menuButton.setText("Custom");
         }
 
     }
