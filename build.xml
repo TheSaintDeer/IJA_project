@@ -1,0 +1,71 @@
+<project name="Main">
+
+    <property name="src.dir"   value="src"/>
+    <property name="data.dir"  value="data"/>
+    <property name="build.dir" value="build"/>
+    <property name="doc.dir"   value="doc"/>
+    <property name="dest.dir"  value="dest"/>
+    <property name="lib.dir"   value="lib/lib"/>
+    <property name="data" value="data/diagram.txt" />
+
+    <property name="main-class"  value="sample.Main"/>
+
+    <path id="class.path">
+        <fileset dir="lib/lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="help">
+        <echo message="${lib.dir}"/>
+<!--        <mkdir dir="${lib.dir}/help"/>-->
+        <pathconvert property="classpathProp" refid="class.path"/>
+        <echo>Classpath is ${classpathProp}</echo>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${doc.dir}"/>
+        <delete dir="${dest.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dest.dir}"/>
+        <copy file="src/sample/sample.fxml" todir="build/sample"/>
+
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+            <modulepath path="${lib.dir}"/>
+            <compilerarg line="--add-modules javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.media,javafx.web"/>
+            <classpath refid="class.path"/>
+        </javac>
+
+        <jar destfile="${dest.dir}/${ant.project.name}.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-class" value="${main-class}"/>
+            </manifest>
+        </jar>
+
+    </target>
+
+    <target name="run" depends="compile">
+        <java jar="${dest.dir}/${ant.project.name}.jar" fork="true">
+            <modulepath path="${lib.dir}"/>
+            <jvmarg line="--add-modules=javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.media,javafx.web"/>
+        </java>
+    </target>
+
+    <target name="runwith" depends="compile">
+        <java jar="${dest.dir}/${ant.project.name}.jar" fork="true">
+<!--            <module></module>-->
+            <modulepath path="${lib.dir}"/>
+            <jvmarg line="--add-modules=javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.media,javafx.web"/>
+            <arg line="${data}"/>
+        </java>
+    </target>
+
+    <target name="clean-build" depends="clean,run"/>
+
+    <target name="main" depends="clean,run"/>
+
+</project>
