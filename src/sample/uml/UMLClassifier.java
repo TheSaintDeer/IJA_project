@@ -4,11 +4,17 @@ import java.lang.String;
 
 public class UMLClassifier extends Element {
 
-    boolean isUserDefined = false;
+    public boolean isUserDefined;
+    private final String[] nonUserDefined = {"int","boolean","String","void"};
 
-    //Constructors
     public UMLClassifier(String name) {
         super(name);
+        for (String s : nonUserDefined) {
+            if (s.equals(name)) {
+                isUserDefined = false;
+                return;
+            }
+        }
         isUserDefined = true;
     }
 
@@ -17,18 +23,15 @@ public class UMLClassifier extends Element {
         this.isUserDefined = isUserDefined;
     }
 
-    //Methods
-
     public static UMLClassifier forName(String name) {
-       return new UMLClassifier(name, false);
+        return new UMLClassifier(name);
     }
-    
+
     public boolean isUserDefined() {
-        return isUserDefined;
+        return this.isUserDefined;
     }
 
     public String toString() {
-        String ret = name + "(" + isUserDefined + ")";
-        return  ret;
+        return super.getName()+"("+isUserDefined+")";
     }
 }
