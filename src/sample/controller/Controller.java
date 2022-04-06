@@ -23,7 +23,6 @@ public class Controller {
     @FXML
     void initialize() {
         createClass.setOnAction(event -> {
-            createClass.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/sample/fxml/class_sample.fxml"));

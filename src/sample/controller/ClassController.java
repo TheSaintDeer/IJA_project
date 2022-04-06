@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class ClassController {
 
+//    public UMLClass umlclass;
+
     @FXML
     private CheckBox checkboxPackage;
 
@@ -40,21 +42,14 @@ public class ClassController {
     @FXML
     void initialize() {
         createNewClass.setOnAction(event -> {
+//
+//            if (umlclass == null) {
+//                if (nameOfClass.getText() != "") {
+//                    System.out.println(nameOfClass.getText());
+//                }
+//            }
+
             createNewClass.getScene().getWindow().hide();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/fxml/sample.fxml"));
-
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
         });
 
     }
