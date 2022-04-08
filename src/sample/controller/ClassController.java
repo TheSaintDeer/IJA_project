@@ -1,21 +1,12 @@
 package sample.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
 import sample.Main;
 import sample.uml.UMLAttribute;
 import sample.uml.UMLClass;
 import sample.uml.UMLClassifier;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.MenuItem;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class ClassController extends Main {
@@ -32,13 +23,16 @@ public class ClassController extends Main {
     private Button createNewClass;
 
     @FXML
+    private TextField fieldCustom;
+
+    @FXML
     private MenuItem customType;
 
     @FXML
     private MenuItem intType;
 
     @FXML
-    private SplitMenuButton menuButton;
+    private MenuButton menuButton;
 
     @FXML
     private TextField nameOfAttribute;
@@ -55,25 +49,51 @@ public class ClassController extends Main {
     @FXML
     void initialize() {
         createNewClass.setOnAction(event -> {
-
             createNewClass();
-
             createNewClass.getScene().getWindow().hide();
         });
 
         createNewAttribute.setOnAction(event -> {
-
             umlclass = createNewClass();
-//            UMLAttribute attr = new UMLAttribute(nameOfAttribute.getText(), menuButton.getText());
-            //Create error if attribute had already created \/
-//            umlclass.addAttribute(attr);
-            nameOfAttribute.setText("");
+            UMLAttribute attr;
+            if (Objects.equals(menuButton.getText(), "Custom")) {
+                attr = new UMLAttribute(nameOfAttribute.getText(), new UMLClassifier(fieldCustom.getText()));
+            } else {
+                attr = new UMLAttribute(nameOfAttribute.getText(), new UMLClassifier(menuButton.getText()));
+            }
 
+//            attr = new UMLAttribute(nameOfAttribute.getText(), new UMLClassifier(menuButton.getText()));
+//            Create error if attribute had already created \/
+            umlclass.addAttribute(attr);
+            clearCustomField();
+            nameOfAttribute.setText("");
+            menuButton.setText("Type of attribute");
         });
 
-        menuButton.setOnAction(event -> {
+        intType.setOnAction(event -> {
+            clearCustomField();
+            menuButton.setText("Integer");
+        });
 
-            MnemonicPars();
+        stringType.setOnAction(event -> {
+            clearCustomField();
+            menuButton.setText("String");
+        });
+
+        booleanType.setOnAction(event -> {
+            clearCustomField();
+            menuButton.setText("Boolean");
+        });
+
+        voidType.setOnAction(event -> {
+            clearCustomField();
+            menuButton.setText("Void");
+        });
+
+        customType.setOnAction(event -> {
+            menuButton.setText("Custom");
+            fieldCustom.setEditable(true);
+            fieldCustom.setPromptText("Enter your type");
         });
 
     }
@@ -88,19 +108,11 @@ public class ClassController extends Main {
         return umlclass;
     }
 
-    public void MnemonicPars () {
-        if (intType.isMnemonicParsing()) {
-            menuButton.setText("Integer");
-        } else if (stringType.isMnemonicParsing()) {
-            menuButton.setText("String");
-        } else if (booleanType.isMnemonicParsing()) {
-            menuButton.setText("Boolean");
-        } else if (voidType.isMnemonicParsing()) {
-            menuButton.setText("Void");
-        } else {
-            menuButton.setText("Custom");
-        }
-
+    public void clearCustomField () {
+        fieldCustom.setEditable(false);
+        fieldCustom.setPromptText("");
+        fieldCustom.setText("");
     }
+
 
 }

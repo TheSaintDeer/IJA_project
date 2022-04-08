@@ -1,14 +1,15 @@
 package sample.controller;
 
-        import javafx.fxml.FXML;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Parent;
-        import javafx.scene.Scene;
-        import javafx.scene.control.Button;
-        import javafx.stage.Modality;
-        import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import sample.Main;
 
-        import java.io.IOException;
+import java.io.IOException;
 
 public class Controller {
 
