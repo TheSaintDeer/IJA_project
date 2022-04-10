@@ -2,20 +2,15 @@ package sample.controller;
 
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import sample.Main;
 
 import java.io.IOException;
 
 public class Controller extends Main {
-
-    public static int countRow = 0;
 
     @FXML
     private Button closeWindow;
@@ -29,8 +24,7 @@ public class Controller extends Main {
     @FXML
     void initialize() {
         createClass.setOnAction(event -> {
-            Parent root = getMyParent();
-            createNewClass(root);
+            createNewClass();
         });
 
         closeWindow.setOnAction(event -> {
@@ -38,14 +32,17 @@ public class Controller extends Main {
         });
     }
 
-    void createNewClass(Parent root) {
-        grPane.add(root, (countOfClass % 4), (countOfClass / 4));
+    void createNewClass() {
+        grPane.add(getMyParent(), (countOfClass % 4), (countOfClass / 4));
         countOfClass++;
     }
 
     Parent getMyParent() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/fxml/class_sample.fxml"));
+
+//        ClassController controller = new ClassController();
+//        controller.
 
         try {
             loader.load();
