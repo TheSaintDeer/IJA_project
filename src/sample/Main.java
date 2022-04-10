@@ -12,6 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
     public static Scene scene;
     public static ClassDiagram classDiagram;
+    public static int countOfClass = 0;
 
     @Override
     public void start(Stage stage) throws IOException {
