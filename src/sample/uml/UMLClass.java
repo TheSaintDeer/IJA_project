@@ -9,6 +9,7 @@ public class UMLClass extends UMLClassifier {
     private boolean isAbstract;
 
     private List<UMLAttribute> attributes;
+    private List<UMLOperation> operations;
 
     public UMLClass(String name) {
         super(name);
@@ -41,11 +42,23 @@ public class UMLClass extends UMLClassifier {
         return -1;
     }
 
+    public UMLAttribute getAttributeByName(String name) {
+        for (UMLAttribute a :
+                attributes) {
+            if (a.getName().equals(name)) return a;
+        }
+        return null;
+    }
+
     public int moveAttrAtPosition(UMLAttribute attr, int pos) {
 
         if (getAttrPosition(attr) < 0) return -1;
         attributes.add(pos,attributes.remove(getAttrPosition(attr)));
         return pos;
+    }
+
+    public void addOperation(UMLOperation operation) {
+        operations.add(operation);
     }
 
     public List<UMLAttribute> getAttributes() {

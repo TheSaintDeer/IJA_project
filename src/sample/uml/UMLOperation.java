@@ -8,15 +8,17 @@ public class UMLOperation extends UMLAttribute{
 //    private
     private List<UMLAttribute> attributeList;
 
-    public UMLOperation(String name, UMLClassifier type) {
-        super(name, type);
+    public UMLOperation(String visibility, String name, UMLClassifier type) {
+        super(visibility, name, type);
         attributeList = new ArrayList<>();
     }
 
-    public static UMLOperation create(String name, UMLClassifier type, UMLAttribute... args) {
-        UMLOperation op = new UMLOperation(name, type);
-        for (UMLAttribute attr : args) {
-            op.addArgument(attr);
+    public static UMLOperation create(String visibility, String name, UMLClassifier type, Object[] args) {
+        UMLOperation op = new UMLOperation(visibility, name, type);
+        for (Object attr : args) {
+            if (attr.getClass() == UMLClass.class) {
+                op.addArgument( (UMLAttribute) attr);
+            }
         }
         return op;
     }

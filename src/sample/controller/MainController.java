@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import sample.Main;
+import sample.controller.MainController;
 import sample.uml.ClassDiagram;
 
 import java.io.IOException;

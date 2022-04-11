@@ -2,6 +2,7 @@ package sample.parser;
 
 import sample.uml.ClassDiagram;
 import sample.uml.UMLAttribute;
+import sample.uml.UMLOperation;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -115,9 +116,12 @@ public class Parser {
         if (str.equals("")) return;
         String visibility = null;
         String name = null;
+        String args_str = null;
         String classifier = null;
+        ArrayList<UMLAttribute> attributes = null;
 
-        Pattern pattern1 = Pattern.compile("^([+\\-#~])(.+\\(\\))$");
+
+        Pattern pattern1 = Pattern.compile("^([+\\-#~])([\\S\\w]+)\\((.*)\\)$");
         Pattern pattern2 = Pattern.compile("^([+\\-#~])(.+):(.+)$");
 
         Matcher matcher1 = pattern1.matcher(str.trim());
@@ -126,14 +130,21 @@ public class Parser {
         if (matcher1.matches()) {
             visibility = matcher1.group(1);
             name = matcher1.group(2);
-//            log("visibility: "+visibility+" name: "+name,Colors.YELLOW);
-//            diagram.getLast().addAttribute(new UMLAttribute(name,));
+            args_str = matcher1.group(3);
+
+            for (String s :
+                    args_str.split(",[ ]*")) {
+                attributes.add(diagram.getLast().getAttributeByName(s));
+            }
+
+            diagram.getLast().addOperation(UMLOperation.create(visibility, name, diagram.classifierForName("method") ,(attributes).toArray()));
 
 
         } else if (matcher2.matches()) {
             visibility = matcher2.group(1);
             classifier = matcher2.group(2);
             name = matcher2.group(3);
+            diagram.getLast().addAttribute(new UMLAttribute(visibility,name, diagram.classifierForName(classifier)));
 //            log("visibility: " + visibility + " classifier: " + classifier + " name: " + name, Colors.YELLOW);
         } else {
 //            log("no match found"); // TODO

@@ -3,9 +3,11 @@ package sample.uml;
 public class UMLAttribute extends Element{
 
     private UMLClassifier type;
+    private String visibility;
 
-    public UMLAttribute(String name, UMLClassifier type) {
+    public UMLAttribute(String visibility, String name, UMLClassifier type) {
         super.rename(name);
+        this.visibility = visibility;
         this.type = type;
     }
 

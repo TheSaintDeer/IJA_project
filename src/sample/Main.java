@@ -10,7 +10,6 @@ import sample.parser.Parser;
 import sample.uml.ClassDiagram;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main extends Application {
 
@@ -21,7 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        sceneSet(stage, "fxml/sample.");
+        sceneSet(stage, "fxml/main.");
     }
 
     private void sceneSet(Stage stage, String fxml) throws IOException {
@@ -41,9 +40,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         classDiagram = new ClassDiagram("Diagram");
-
+        parser = new Parser();
         try {
-            parser.parse(new String[] {"diagram.txt"}, classDiagram);
+//            parser.parse(new String[] {"src/sample/diagram.txt"}, classDiagram);
         } catch (Exception e) {
             e.printStackTrace();
         }
