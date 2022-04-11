@@ -1,30 +1,33 @@
 package sample.parser;
 
+import sample.uml.ClassDiagram;
+import sample.uml.UMLAttribute;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static sample.Colors.log;
+//import static sample.Colors.log;
 
 
 
 public class Parser {
 
-
     private File filename;
-    private ArrayList diagram;
+    private ClassDiagram diagram;
     private Scanner scanner;
 
+    public void parse(String[] args, ClassDiagram diagram) throws Exception {
 
+        if (args.length != 0) {
+            this.filename = new File(args[0]);
+        } else {
+            return;
+        }
 
-    public Parser(String filename, ArrayList diagram) {
-        this.filename = new File(filename);
         this.diagram = diagram;
-    }
-
-    public void parse() throws Exception {
 
         checkFilename();
         scanner = new Scanner(filename);
@@ -46,7 +49,7 @@ public class Parser {
         while (scanner.hasNext()) {
 
             switch (token = scanner.next()) {
-                case "interface":
+                case "abstract":
                     checkInterface();
                     break;
                 case "class":
@@ -82,11 +85,17 @@ public class Parser {
     }
 
     private void checkInterface() {
-        log("interface: " + scanner.next(),Colors.BLUE);
+
+        if (scanner.next().equals("class")) {
+            diagram.createClass(scanner.next()).setAbstract(true);
+        }
     }
 
     private void checkClass() {
-        log("class: " + scanner.next(),Colors.BLUE);
+
+        if (scanner.next().equals("class")) {
+            diagram.createClass(scanner.next()).setAbstract(false);
+        }
     }
 
     private void checkAttributes() {
@@ -94,7 +103,8 @@ public class Parser {
         String str = scanner.nextLine();
 
         while ((str = scanner.nextLine()) != null && !str.equals("}")) {
-            log(str,Colors.YELLOW);
+//            log(str,Colors.YELLOW);
+//            diagram
             parseAttribute(str);
         }
 
@@ -116,16 +126,20 @@ public class Parser {
         if (matcher1.matches()) {
             visibility = matcher1.group(1);
             name = matcher1.group(2);
-            log("visibility: "+visibility+" name: "+name,Colors.YELLOW);
+//            log("visibility: "+visibility+" name: "+name,Colors.YELLOW);
+//            diagram.getLast().addAttribute(new UMLAttribute(name,));
+
 
         } else if (matcher2.matches()) {
             visibility = matcher2.group(1);
             classifier = matcher2.group(2);
             name = matcher2.group(3);
-            log("visibility: " + visibility + " classifier: " + classifier + " name: " + name, Colors.YELLOW);
+//            log("visibility: " + visibility + " classifier: " + classifier + " name: " + name, Colors.YELLOW);
         } else {
-            log("no match found"); // TODO
+//            log("no match found"); // TODO
         }
+
+
 
     }
 
@@ -136,12 +150,12 @@ public class Parser {
 
     private void checkFilename() throws Exception {
 
-        log("checking \"" + filename + "\" for existense");  // TODO
+//        log("checking \"" + filename + "\" for existense");  // TODO
 
         if(filename.exists() && filename.isFile()){
-            log(filename + " exists");
+//            log(filename + " exists");
         }else{
-            log("file \"" + filename + "\" does not exists, throwing exception");  // TODO
+//            log("file \"" + filename + "\" does not exists, throwing exception");  // TODO
 //            throw new FileNotFoundException(filename + " does not exists");
 
         }
