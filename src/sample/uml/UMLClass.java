@@ -1,23 +1,23 @@
 package sample.uml;
 
 import java.util.ArrayList;
-import java.lang.String;
-import java.util.List;
 import java.util.Collections;
-import java.util.Objects;
+import java.util.List;
 
-public class UMLClass extends UMLClassifier{
-    
-    boolean isAbstract = false;
-    ArrayList<UMLAttribute> attr;
+public class UMLClass extends UMLClassifier {
 
-    //Constructors
+    private boolean isAbstract;
+
+    private List<UMLAttribute> attributes;
+
     public UMLClass(String name) {
         super(name);
-        attr = new ArrayList<UMLAttribute>();
+        this.isAbstract = false;
+        attributes = new ArrayList<>();
+
     }
 
-    //Methods
+
     public boolean isAbstract() {
         return isAbstract;
     }
@@ -27,52 +27,30 @@ public class UMLClass extends UMLClassifier{
     }
 
     public boolean addAttribute(UMLAttribute attr) {
-        for (UMLAttribute i: this.attr) {
-            if (Objects.equals(i.name, attr.name)) {
-                return false;
-            }
+        for (UMLAttribute a: attributes) {
+            if (a.getName() == attr.getName()) return false;
         }
-
-        UMLAttribute new_attr = new UMLAttribute(attr.name, attr.type);
-        this.attr.add(new_attr);
+        attributes.add(attr);
         return true;
     }
 
     public int getAttrPosition(UMLAttribute attr) {
-        for (int i = 0; i < this.attr.size(); i++) {
-            if (Objects.equals(this.attr.get(i).name, attr.name)) {
-                return i;
-            }
+        for (UMLAttribute a: attributes) {
+            if (a.getName() == attr.getName()) return attributes.indexOf(a);
         }
-
         return -1;
     }
 
     public int moveAttrAtPosition(UMLAttribute attr, int pos) {
-        for (UMLAttribute i: this.attr) {
-            if (Objects.equals(i.name, attr.name)) {
-                ArrayList<UMLAttribute> new_attr = new ArrayList<UMLAttribute>();
-                int cur_pos = 0;
-                for (UMLAttribute j: this.attr) {
-                    if (cur_pos == pos) {
-                        new_attr.add(i);
-                    }
-                    
-                    if (!Objects.equals(i.name, j.name)) {
-                        new_attr.add(j);
-                    }
 
-                    cur_pos++;
-                }
-                this.attr = new_attr;
-                return 0;
-            }
-        }
-
-        return -1;
+        if (getAttrPosition(attr) < 0) return -1;
+        attributes.add(pos,attributes.remove(getAttrPosition(attr)));
+        return pos;
     }
 
     public List<UMLAttribute> getAttributes() {
-        return Collections.unmodifiableList(attr);
+        return Collections.unmodifiableList(attributes);
     }
+
+
 }
