@@ -4,8 +4,8 @@ import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import sample.Main;
 
 import java.io.IOException;
@@ -19,7 +19,22 @@ public class Controller extends Main {
     private Button createClass;
 
     @FXML
+    private Button createRelat;
+
+    @FXML
+    private TextField fromClassX;
+
+    @FXML
+    private TextField fromClassY;
+
+    @FXML
     private GridPane grPane;
+
+    @FXML
+    private TextField toClassX;
+
+    @FXML
+    private TextField toClassY;
 
     @FXML
     void initialize() {
@@ -41,8 +56,8 @@ public class Controller extends Main {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/fxml/class_sample.fxml"));
 
-//        ClassController controller = new ClassController();
-//        controller.
+        ClassController controller = new ClassController(countOfClass);
+        loader.setController(controller);
 
         try {
             loader.load();

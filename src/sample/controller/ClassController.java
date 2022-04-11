@@ -7,6 +7,8 @@ import sample.Main;
 
 public class ClassController extends Main {
 
+    public static int index;
+
 //    public static int getIndex() {
 //        return index;
 //    }
@@ -15,8 +17,9 @@ public class ClassController extends Main {
 //        ClassController.index = index;
 //    }
 
-    public static int index;
-
+    public ClassController(int i) {
+        index = i;
+    }
 
     @FXML
     private Button acceptClass;
@@ -53,15 +56,11 @@ public class ClassController extends Main {
 
     @FXML
     void initialize() {
+        nameClass.setText(String.valueOf(countOfClass));
 
         deleteClass.setOnAction(event -> {
             System.out.println("Delete class on index: " + index + ", count of class: " + countOfClass);
         });
-
-        acceptClass.setOnAction(event -> {
-            System.out.println(nameClass.getText());
-        });
     }
-
 
 }
