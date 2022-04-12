@@ -51,6 +51,9 @@ public class ClassController extends Main {
         listView.setContextMenu(contextMenu);
         listView.setEditable(true);
 
+        /**
+         * Add new attribute
+         */
         add.setOnAction(new EventHandler<ActionEvent>() {
             int i = 0;
             @Override
@@ -59,15 +62,14 @@ public class ClassController extends Main {
             }
 
         });
+
         /**
-         *
+         * Edit attribute
          */
         edit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Stage popupSave = new Stage();
-//                popupSave.initModality(Modality.APPLICATION_MODAL);
-//                popupSave.initOwner(SwitchingPass.stage);
 
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/sample/fxml/class_edit_attribute.fxml"));
@@ -95,6 +97,10 @@ public class ClassController extends Main {
 
             }
         });
+
+        /**
+         * Delete attribute
+         */
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
