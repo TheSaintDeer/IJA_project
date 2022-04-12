@@ -1,11 +1,13 @@
 package sample.controller;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -16,8 +18,12 @@ import sample.uml.ClassDiagram;
 import sample.uml.UMLClass;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MainController extends Main {
+
+    @FXML
+    private Button acceptClass;
 
     @FXML
     private Button acceptRelat;
@@ -66,8 +72,17 @@ public class MainController extends Main {
         }
 
         createClass.setOnAction(event -> {
-            UMLClass newClass = diagram.createClass("Test " + i++);
-            addNewClass(newClass);
+            nameOfClass.setVisible(true);
+            acceptClass.setVisible(true);
+        });
+
+        acceptClass.setOnAction(event -> {
+            UMLClass newClass = diagram.createClass(nameOfClass.getText());
+            if (newClass == null) {
+                System.out.println("error eblan");
+            } else {
+                addNewClass(newClass);
+            }
         });
 
         closeWindow.setOnAction(event -> {
@@ -84,10 +99,11 @@ public class MainController extends Main {
 
     void addNewClass(UMLClass c) {
 
-        Node newClass = createNewClass(c);
+        TitledPane newClass = (TitledPane) createNewClass(c);
 
         newClass.setLayoutX(200*countOfClass);
-        newClass.setLayoutY(200*countOfClass);
+        newClass.setLayoutY(200*countOfClass++);
+        newClass.setCollapsible(false);
 
 //        newClass.
         mainPane.getChildren().add(newClass);

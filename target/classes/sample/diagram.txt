@@ -1,0 +1,32 @@
+@startuml
+abstract class Command {
+    +-string:hello
+    -int:2
+    #string:world
+    ~country:greece
+
+    +execute()
+    -undo()
+}
+class Invoker {
+    #setCommand()
+}
+class Client
+class Receiver{
+    ~action()
+}
+class ConcreteCommand{
+    +execute()
+    +undo()
+}
+
+Command <-- ConcreteCommand
+Client --> Receiver
+Client <o-- ConcreteCommand
+Client --o> ConcreteCommand
+Invoker <*-- Command
+Invoker --*> Command
+Receiver <|-- ConcreteCommand
+Receiver --|> ConcreteCommand
+
+@enduml
