@@ -42,7 +42,7 @@ public class Main extends Application {
         classDiagram = new ClassDiagram("Diagram");
         parser = new Parser();
         try {
-//            parser.parse(new String[] {"src/sample/diagram.txt"}, classDiagram);
+            parser.parse(new String[] {"src/sample/diagram.txt"}, classDiagram);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -81,7 +81,7 @@ public class Parser {
         connection = scanner.next();
         o2 = scanner.next();
 
-        System.out.println("o1: " + o1 + " con: " + connection + " o2: " + o2);
+//        System.out.println("o1: " + o1 + " con: " + connection + " o2: " + o2);
 
     }
 
@@ -94,9 +94,7 @@ public class Parser {
 
     private void checkClass() {
 
-        if (scanner.next().equals("class")) {
-            diagram.createClass(scanner.next()).setAbstract(false);
-        }
+        diagram.createClass(scanner.next()).setAbstract(false);
     }
 
     private void checkAttributes() {
@@ -118,7 +116,7 @@ public class Parser {
         String name = null;
         String args_str = null;
         String classifier = null;
-        ArrayList<UMLAttribute> attributes = null;
+        ArrayList<UMLAttribute> attributes = new ArrayList<>();
 
 
         Pattern pattern1 = Pattern.compile("^([+\\-#~])([\\S\\w]+)\\((.*)\\)$");
@@ -132,11 +130,14 @@ public class Parser {
             name = matcher1.group(2);
             args_str = matcher1.group(3);
 
+            if (args_str.equals(""))
             for (String s :
                     args_str.split(",[ ]*")) {
-                attributes.add(diagram.getLast().getAttributeByName(s));
+                UMLAttribute attr = diagram.getLast().getAttributeByName(s);
+                if (attr == null) continue;
+                attributes.add(attr);
             }
-
+//            System.out.println(attributes.toString());
             diagram.getLast().addOperation(UMLOperation.create(visibility, name, diagram.classifierForName("method") ,(attributes).toArray()));
 
 

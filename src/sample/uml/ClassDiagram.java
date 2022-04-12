@@ -5,20 +5,22 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ClassDiagram extends Element{
 
-    private List<UMLClass> classes;
+    private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
 
     public ClassDiagram(String name) {
-        super.rename(name);
-        classes = new ArrayList<>();
+        super(name);
+        classes = FXCollections.observableArrayList();
+        classifiers = new ArrayList<>();
     }
 
     public UMLClass createClass(String name) {
         for (UMLClassifier c : classes) {
-            if (c.getName() == name) return null;
+            if (Objects.equals(c.getName(), name)) return null;
         }
         UMLClass umlClass = new UMLClass(name);
         classes.add(umlClass);
@@ -37,6 +39,9 @@ public class ClassDiagram extends Element{
 
 
     public UMLClassifier findClassifier(String name) {
+
+        if (classifiers.isEmpty()) return null;
+
         for (UMLClassifier c : classifiers) {
             if (c.getName() == name) return c;
         }
@@ -45,7 +50,7 @@ public class ClassDiagram extends Element{
 
 
     public ObservableList<UMLClass> getAll() {
-        return FXCollections.observableList(classes);
+        return classes;
     }
 
     public UMLClass getLast() {

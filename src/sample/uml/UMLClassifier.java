@@ -9,7 +9,7 @@ public class UMLClassifier extends Element{
     private String[] nonUserDefined = {"int","boolean","String","void"};
 
     public UMLClassifier(String name) {
-        super.rename(name);
+        super(name);
         for (String s : nonUserDefined) {
             if (s == name) {
                 isUserDefined = false;
@@ -20,7 +20,7 @@ public class UMLClassifier extends Element{
     }
 
     public UMLClassifier(String name, boolean isUserDefined) {
-        super.rename(name);
+        super(name);
         this.isUserDefined = isUserDefined;
     }
 

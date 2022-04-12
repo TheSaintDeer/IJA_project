@@ -4,10 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import sample.Main;
+import sample.uml.UMLClass;
 
 public class ClassController extends Main {
 
     public static int index;
+
+    private UMLClass c;
 
 //    public static int getIndex() {
 //        return index;
@@ -56,11 +59,15 @@ public class ClassController extends Main {
 
     @FXML
     void initialize() {
-        nameClass.setText(String.valueOf(countOfClass));
+
+        nameClass.textProperty().bindBidirectional(c.nameProperty());
 
         deleteClass.setOnAction(event -> {
             System.out.println("Delete class on index: " + index + ", count of class: " + countOfClass);
         });
     }
 
+    public void setClass(UMLClass c) {
+        this.c = c;
+    }
 }

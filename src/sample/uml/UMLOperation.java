@@ -15,6 +15,7 @@ public class UMLOperation extends UMLAttribute{
 
     public static UMLOperation create(String visibility, String name, UMLClassifier type, Object[] args) {
         UMLOperation op = new UMLOperation(visibility, name, type);
+
         for (Object attr : args) {
             if (attr.getClass() == UMLClass.class) {
                 op.addArgument( (UMLAttribute) attr);

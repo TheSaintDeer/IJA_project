@@ -15,7 +15,7 @@ public class UMLClass extends UMLClassifier {
         super(name);
         this.isAbstract = false;
         attributes = new ArrayList<>();
-
+        operations = new ArrayList<>();
     }
 
 

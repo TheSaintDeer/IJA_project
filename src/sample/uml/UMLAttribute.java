@@ -6,7 +6,7 @@ public class UMLAttribute extends Element{
     private String visibility;
 
     public UMLAttribute(String visibility, String name, UMLClassifier type) {
-        super.rename(name);
+        super(name);
         this.visibility = visibility;
         this.type = type;
     }

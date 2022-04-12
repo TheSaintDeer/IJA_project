@@ -1,13 +1,27 @@
 package sample.uml;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Element {
 
-    private String name;
+    private StringProperty name = new SimpleStringProperty();
+
+    public Element(String name) {
+        rename(name);
+    }
+
     public String getName() {
-        return this.name;
+        return name.get();
     }
-    public void rename(String newName) {
-        this.name = newName;
+
+    public StringProperty nameProperty() {
+        return name;
     }
+
+    public void rename(String name) {
+        this.name.set(name);
+    }
+
 
 }
