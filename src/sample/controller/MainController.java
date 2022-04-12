@@ -22,6 +22,10 @@ import java.util.List;
 
 public class MainController extends Main {
 
+    private String nameOfActiveObject = null;
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+
     @FXML
     private Button acceptClass;
 
@@ -57,8 +61,6 @@ public class MainController extends Main {
 
     private ClassDiagram diagram;
 
-    private int i = 0;
-
     public MainController(ClassDiagram d) {
         this.diagram = d;
     }
@@ -81,7 +83,10 @@ public class MainController extends Main {
             if (newClass == null) {
                 System.out.println("error eblan");
             } else {
+                nameOfClass.setVisible(false);
+                acceptClass.setVisible(false);
                 addNewClass(newClass);
+                nameOfClass.setText("");
             }
         });
 
@@ -104,45 +109,36 @@ public class MainController extends Main {
         newClass.setLayoutX(200*countOfClass);
         newClass.setLayoutY(200*countOfClass++);
         newClass.setCollapsible(false);
+        newClass.setId(nameOfClass.getText()+"id");
 
-//        newClass.
+        newClass.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                nameOfActiveObject = newClass.getId();
+
+                orgSceneX = event.getSceneX();
+                orgSceneY = event.getSceneY();
+                orgTranslateX = ((TitledPane)(event.getSource())).getTranslateX();
+                orgTranslateY = ((TitledPane)(event.getSource())).getTranslateY();
+            }
+        });
+
+        newClass.setOnMouseDragged(new EventHandler <MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent event) {
+                double offsetX = event.getSceneX() - orgSceneX;
+                double offsetY = event.getSceneY() - orgSceneY;
+                double newTranslateX = orgTranslateX + offsetX;
+                double newTranslateY = orgTranslateY + offsetY;
+
+                ((TitledPane)(event.getSource())).setTranslateX(newTranslateX);
+                ((TitledPane)(event.getSource())).setTranslateY(newTranslateY);
+            }
+        });
+
         mainPane.getChildren().add(newClass);
 
-//        String nameClass = nameOfClass.getText();
-//
-//        if (!nameClass.isEmpty()) {
-////            nameOfClass.setVisible(false);
-//            nameOfClass.setText(null);
-//
-//            if (c != null) {
-//                TitledPane titledPane = new TitledPane(nameClass, createNewClass(c));
-//                titledPane.setId(nameClass.replaceAll("\\s+","€"));
-//                titledPane.setPrefSize(-1, -1);
-//                titledPane.setLayoutX(200*(countOfClass%4));
-//                titledPane.setLayoutY(300*(countOfClass++/4));
-//                titledPane.setCollapsible(false);
-//
-//                mainPane.getChildren().add(titledPane);
-//            }
-//
-//
-//        }
-    }
-
-    Parent createNewClass() {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/fxml/class_sample2.fxml"));
-
-        ClassController controller = new ClassController(countOfClass);
-        loader.setController(controller);
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return loader.getRoot();
     }
 
     Parent createNewClass(UMLClass c) {
