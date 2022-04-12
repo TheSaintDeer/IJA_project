@@ -43,7 +43,7 @@ public class ClassDiagram extends Element{
         if (classifiers.isEmpty()) return null;
 
         for (UMLClassifier c : classifiers) {
-            if (c.getName() == name) return c;
+            if (c.getName().equals(name)) return c;
         }
         return null;
     }

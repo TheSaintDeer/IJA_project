@@ -12,14 +12,6 @@ public class ClassController extends Main {
 
     private UMLClass c;
 
-//    public static int getIndex() {
-//        return index;
-//    }
-//
-//    public static void setIndex(int index) {
-//        ClassController.index = index;
-//    }
-
     public ClassController(int i) {
         index = i;
     }

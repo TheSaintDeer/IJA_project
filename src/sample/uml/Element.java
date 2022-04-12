@@ -5,7 +5,7 @@ import javafx.beans.property.StringProperty;
 
 public class Element {
 
-    private StringProperty name = new SimpleStringProperty();
+    private final StringProperty name = new SimpleStringProperty();
 
     public Element(String name) {
         rename(name);

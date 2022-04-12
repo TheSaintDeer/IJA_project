@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -82,7 +83,6 @@ public class MainController extends Main {
 
         createClass.setOnAction(event -> {
             addNewClass();
-
             diagram.createClass("Test");
 
         });
@@ -114,10 +114,8 @@ public class MainController extends Main {
     }
 
     void addNewClass() {
-        grPane.add(createNewClass(), (countOfClass % 4), (countOfClass / 4));
-    void createNewClass() {
         checkRow();
-        grPane.add(getMyParent(), (countOfClass % 4), (countOfClass / 4));
+        grPane.add(createNewClass(), (countOfClass % 4), (countOfClass / 4));
         countOfClass++;
     }
 
@@ -159,7 +157,7 @@ public class MainController extends Main {
         return loader.getRoot();
     }
 
-    private void visibleObject (boolean switcher) {
+    private void visibleObject(boolean switcher) {
         labelFrom.setVisible(switcher);
         labelTo.setVisible(switcher);
         fromClassX.setVisible(switcher);
