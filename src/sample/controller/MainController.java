@@ -117,8 +117,6 @@ public class MainController extends Main {
         createClass.setOnAction(event -> {
             nameOfClass.setVisible(true);
             acceptClass.setVisible(true);
-
-//            diagram.findClass("Command").getAttributeByName("hello:-string(true)").setName("bye");
         });
 
         acceptClass.setOnAction(event -> {
@@ -136,6 +134,7 @@ public class MainController extends Main {
         createRelat.setOnAction(event -> {
             visibleObject(true);
         });
+
         acceptRelat.setOnAction(event -> {
             visibleObject(false);
 
@@ -188,7 +187,7 @@ public class MainController extends Main {
 
         TitledPane newClass = (TitledPane) createNewClass(c);
 
-        newClass.setLayoutX(200* (countOfClass % 4));
+        newClass.setLayoutX(200*(countOfClass % 4));
         newClass.setLayoutY(250*(countOfClass++ /4));
         newClass.setCollapsible(false);
         newClass.setId(c.getName()+"id");
@@ -199,8 +198,6 @@ public class MainController extends Main {
 
                 nameOfSelectedClass.setText(c.getName());
                 attributesOfSelectedClass.setItems(c.getAttributes());
-
-
 
                 nameOfActiveObject = newClass.getId();
 
@@ -259,6 +256,7 @@ public class MainController extends Main {
         fromClass.setVisible(switcher);
         toClass.setVisible(switcher);
         acceptRelat.setVisible(switcher);
+        typeRelat.setVisible(switcher);
     }
 
     public void clearField () {
@@ -350,7 +348,7 @@ public class MainController extends Main {
                 line1 = new Line(x1+w1/2, y1+h1/2, x1+w1/2, y3);
                 line2 = new Line(x2+w2/2, y3, x1+w1/2, y3);
                 line3 = new Line(x2+w2/2, y2+h2/2, x2+w2/2, y3);
-                poly = new Polygon(x1+w1/2, y1+h1, x1+w1/2-10, y1+h1+20,x1+w1/2+10, y1+h1+20);
+                poly = new Polygon(x1+w1/2, y1+h1, x1+w1/2-5, y1+h1+20,x1+w1/2+5, y1+h1+20);
                 poly.setFill(Color.WHITE);
                 poly.setStroke(Color.BLACK);
                 line1.setId((r.fromClass + r.toClass +"id"));

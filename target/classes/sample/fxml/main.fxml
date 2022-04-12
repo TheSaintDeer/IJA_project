@@ -18,7 +18,7 @@
    <children>
       <AnchorPane layoutY="121.0" prefHeight="599.0" prefWidth="959.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="121.0">
          <children>
-            <MenuButton fx:id="typeRelat" layoutX="839.0" layoutY="534.0" mnemonicParsing="false" text="Type relat" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="839.0">
+            <MenuButton fx:id="typeRelat" layoutX="839.0" layoutY="534.0" mnemonicParsing="false" text="Type relat" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="839.0">
               <items>
                 <MenuItem fx:id="typeAs" mnemonicParsing="false" text="ASSOCIACE" />
                   <MenuItem fx:id="typeAg" mnemonicParsing="false" text="AGREGACE" />
@@ -69,7 +69,7 @@
               <items>
                   <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="522.0" prefWidth="854.0" vbarPolicy="NEVER">
                     <content>
-                      <AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" />
+                      <AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="1000.0" />
                     </content>
                   </ScrollPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="366.0">
