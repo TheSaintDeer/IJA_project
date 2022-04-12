@@ -20,22 +20,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        sceneSet(stage, "fxml/main.");
-    }
-
-    private void sceneSet(Stage stage, String fxml) throws IOException {
-        scene = new Scene(loadFXML(fxml));
-        stage.setScene(scene);
-        stage.setTitle("UML Editor");
-        stage.show();
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + "fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/main.fxml"));
 
         MainController mainController = new MainController(classDiagram);
         fxmlLoader.setController(mainController);
-        return fxmlLoader.load();
+
+        scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.setTitle("UML Editor");
+        stage.show();
     }
 
     public static void main(String[] args) {

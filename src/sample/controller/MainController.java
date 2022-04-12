@@ -39,21 +39,22 @@ public class MainController extends Main {
     double TranslateX, TranslateY;
 
     @FXML
-    private Label diagramName;
-    @FXML
     private Button acceptClass;
 
     @FXML
     private Button acceptRelat;
 
     @FXML
-    private Button closeWindow;
+    private ListView<?> attributesOfSelectedClass;
 
     @FXML
     private Button createClass;
 
     @FXML
     private Button createRelat;
+
+    @FXML
+    private Label diagramName;
 
     @FXML
     private TextField fromClass;
@@ -71,12 +72,6 @@ public class MainController extends Main {
     private TextField nameOfClass;
 
     @FXML
-    private TextField toClass;
-
-    @FXML
-    private ListView attributesOfSelectedClass;
-
-    @FXML
     private TextField nameOfSelectedAttribute;
 
     @FXML
@@ -85,6 +80,23 @@ public class MainController extends Main {
     @FXML
     private Button submitChangeButton;
 
+    @FXML
+    private TextField toClass;
+
+    @FXML
+    private MenuItem typeAg;
+
+    @FXML
+    private MenuItem typeAs;
+
+    @FXML
+    private MenuItem typeGe;
+
+    @FXML
+    private MenuItem typeKo;
+
+    @FXML
+    private MenuButton typeRelat;
     private ClassDiagram diagram;
 
     public MainController(ClassDiagram d) {
@@ -93,6 +105,8 @@ public class MainController extends Main {
 
     @FXML
     void initialize() {
+
+        diagramName.setText(diagram.getName());
 
         for (UMLClass c : diagram.getAll()) {
             System.out.println("adding class: " + c.getName());
@@ -121,17 +135,48 @@ public class MainController extends Main {
             }
         });
 
-        closeWindow.setOnAction(event -> {
-            closeWindow.getScene().getWindow().hide();
-        });
         createRelat.setOnAction(event -> {
             visibleObject(true);
         });
+
         acceptRelat.setOnAction(event -> {
             visibleObject(false);
-            UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), "<---");
-            drawRelat(relat);
+
+            String type = "";
+            if (typeRelat.getText() == "ASSOCIACE") {
+                type = "<---";
+            } else if (typeRelat.getText() == "AGREGACE") {
+                type = "<o--";
+            } else if (typeRelat.getText() == "KOMPOZICE") {
+                type = "<*--";
+            } else if (typeRelat.getText() == "GENERALIZACE") {
+                type = "<|--";
+            }
+
+            typeRelat.setText("Type relat");
+
+            if (diagram.findClass(fromClass.getText()) != null && diagram.findClass(toClass.getText()) != null && type != "") {
+                UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
+                drawRelat(relat);
+            }
+
             clearField();
+        });
+
+        typeAs.setOnAction(event -> {
+            typeRelat.setText("ASSOCIACE");
+        });
+
+        typeAg.setOnAction(event -> {
+            typeRelat.setText("AGREGACE");
+        });
+
+        typeKo.setOnAction(event -> {
+            typeRelat.setText("KOMPOZICE");
+        });
+
+        typeGe.setOnAction(event -> {
+            typeRelat.setText("GENERALIZACE");
         });
 
         submitChangeButton.setOnAction(event -> {
@@ -144,7 +189,7 @@ public class MainController extends Main {
 
         TitledPane newClass = (TitledPane) createNewClass(c);
 
-        newClass.setLayoutX(200* (countOfClass % 4));
+        newClass.setLayoutX(200*(countOfClass % 4));
         newClass.setLayoutY(250*(countOfClass++ /4));
         newClass.setCollapsible(false);
         newClass.setId(c.getName()+"id");
@@ -213,6 +258,7 @@ public class MainController extends Main {
         fromClass.setVisible(switcher);
         toClass.setVisible(switcher);
         acceptRelat.setVisible(switcher);
+        typeRelat.setVisible(switcher);
     }
 
     public void clearField () {
@@ -304,7 +350,7 @@ public class MainController extends Main {
                 line1 = new Line(x1+w1/2, y1+h1/2, x1+w1/2, y3);
                 line2 = new Line(x2+w2/2, y3, x1+w1/2, y3);
                 line3 = new Line(x2+w2/2, y2+h2/2, x2+w2/2, y3);
-                poly = new Polygon(x1+w1/2, y1+h1, x1+w1/2-10, y1+h1+20,x1+w1/2+10, y1+h1+20);
+                poly = new Polygon(x1+w1/2, y1+h1, x1+w1/2-5, y1+h1+20,x1+w1/2+5, y1+h1+20);
                 poly.setFill(Color.WHITE);
                 poly.setStroke(Color.BLACK);
                 line1.setId((r.fromClass + r.toClass +"id"));
