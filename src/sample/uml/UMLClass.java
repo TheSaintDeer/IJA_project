@@ -61,8 +61,10 @@ public class UMLClass extends UMLClassifier {
     }
 
     public ObservableList getAttributes() {
-        attributes.addAll(operations);
-        return attributes;
+        ObservableList result = FXCollections.observableArrayList();
+        result.addAll(attributes);
+        result.addAll(operations);
+        return result;
     }
 
 
