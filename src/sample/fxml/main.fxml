@@ -6,13 +6,15 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1024.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="720.0" maxWidth="1024.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutY="121.0" prefHeight="679.0" prefWidth="1000.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="121.0">
          <children>
@@ -32,22 +34,27 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <ScrollPane fitToHeight="true" layoutX="23.0" layoutY="14.0" prefHeight="496.0" prefWidth="987.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <ScrollPane layoutX="23.0" layoutY="-1.0" prefHeight="511.0" prefWidth="1024.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <GridPane fx:id="grPane" hgap="30.0" prefHeight="492.0" prefWidth="969.0" vgap="30.0">
-                    <columnConstraints>
-                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="182.0" prefWidth="182.0" />
-                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="182.0" prefWidth="182.0" />
-                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="182.0" prefWidth="182.0" />
-                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="182.0" prefWidth="182.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints fillHeight="false" maxHeight="400.0" minHeight="250.0" prefHeight="250.0" valignment="CENTER" vgrow="ALWAYS" />
-                    </rowConstraints>
+                  <AnchorPane fx:id="mainPane" prefHeight="513.0" prefWidth="1004.0">
                      <children>
-                        <ListView fx:id="testListView" prefHeight="357.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                        <GridPane fx:id="grPane" gridLinesVisible="true" hgap="30.0" prefHeight="494.0" prefWidth="1021.0" vgap="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                           <columnConstraints>
+                              <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="182.0" prefWidth="182.0" />
+                              <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="182.0" prefWidth="182.0" />
+                              <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="182.0" prefWidth="182.0" />
+                              <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" minWidth="182.0" prefWidth="182.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="240.0" prefHeight="240.0" />
+                              <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="240.0" prefHeight="240.0" />
+                           </rowConstraints>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </GridPane>
                      </children>
-                  </GridPane>
+                  </AnchorPane>
                </content>
             </ScrollPane>
             <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="239.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="52.0" prefWidth="209.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relationship" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="239.0" AnchorPane.rightAnchor="576.0">
@@ -58,12 +65,21 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Label layoutX="481.0" layoutY="533.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" />
-            <Label layoutX="481.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" />
+            <Label fx:id="labelFrom" layoutX="481.0" layoutY="533.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" />
+            <Label fx:id="labelTo" layoutX="481.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" />
             <TextField fx:id="fromClassX" layoutX="560.0" layoutY="533.0" prefHeight="24.0" prefWidth="26.0" visible="false" />
             <TextField fx:id="toClassX" layoutX="560.0" layoutY="559.0" prefHeight="24.0" prefWidth="26.0" visible="false" />
             <TextField fx:id="toClassY" layoutX="592.0" layoutY="559.0" prefHeight="24.0" prefWidth="26.0" visible="false" />
             <TextField fx:id="fromClassY" layoutX="592.0" layoutY="533.0" prefHeight="24.0" prefWidth="26.0" visible="false" />
+            <Button fx:id="acceptRelat" layoutX="633.0" layoutY="559.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="633.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/4879883_achievement_check_mark_ok_success_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <Label alignment="CENTER" layoutY="25.0" prefHeight="75.0" prefWidth="1000.0" text="Class diagram" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
