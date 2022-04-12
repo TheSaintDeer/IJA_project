@@ -7,18 +7,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The class represents a class diagram. It is derived from the Element class (has a name).
+ * Contains a list of classes (instances of the UMLClass class) or classifiers for user-undefined
+ * types (instances of the UMLClassifier class).
+ */
+
 public class ClassDiagram extends Element{
 
     private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
     private ObservableList<UMLRelationship> relationships;
 
+    /**
+     * Constructor for creating a diagram instance. Each diagram has its own name.
+     * @param name - the name of the diagram
+     */
     public ClassDiagram(String name) {
         super(name);
         classes = FXCollections.observableArrayList();
         classifiers = new ArrayList<>();
         relationships = FXCollections.observableArrayList();
     }
+
+    /**
+     * Creates an instance of the UML class and inserts it into the diagram.
+     * If a class with the same name already exists in the diagram, it does nothing.
+     * @param name - the name of the diagram
+     * @return An object (instance) representing a class. Returns null if the class
+     * with the given name already exists.
+     */
 
     public UMLClass createClass(String name) {
         for (UMLClassifier c : classes) {
@@ -28,6 +46,17 @@ public class ClassDiagram extends Element{
         classes.add(umlClass);
         return umlClass;
     }
+
+    /**
+     * Finds a classifier by name in the diagram. If it does not exist,
+     * it creates an instance of the Classifier class representing a classifier
+     * that is not captured in the diagram (see UMLClassifier.forName (java.lang.String));
+     * used, for example, for modeling the type of a variable that is not in the diagram.
+     * This instance is included in the diagram structures, that this already created
+     * instance will be used the next time you try to search.
+     * @param name - the name of the classifier.
+     * @return  Found or created classifier.
+     */
 
     public UMLClassifier classifierForName(String name) {
 
@@ -39,6 +68,12 @@ public class ClassDiagram extends Element{
         return classifier;
     }
 
+    /**
+     * Finds a classifier by name in the diagram.
+     * @param name - the name of the classifier.
+     * @return An object (instance) representing a class. Returns null if the class
+     * Classifier found. If the classifier of the given name does not exist, it returns null.
+     */
 
     public UMLClassifier findClassifier(String name) {
 
@@ -49,6 +84,16 @@ public class ClassDiagram extends Element{
         }
         return null;
     }
+
+    /**
+     * Creates an instance of the UML class and inserts it into the diagram.
+     * If a class with the same name already exists in the diagram, it does nothing.
+     * @param from - the name of the class from which the link comes
+     * @param to - the name of the class to which the link goes
+     * @param type - the type of the relation
+     * @return An object (instance) representing a relation. Returns null if the relation
+     * with the given name already exists.
+     */
 
     public UMLRelationship createRelat (String from, String to, String type) {
         UMLRelationship relat = new UMLRelationship(from, to, type);
@@ -63,6 +108,14 @@ public class ClassDiagram extends Element{
         return relat;
     }
 
+    /**
+     * Creates an instance of the UML class.
+     * If a class with the same don't exist in the diagram, it does nothing.
+     * @param name - the name of the diagram
+     * @return An object (instance) representing a class. Returns null if the relation
+     * with the given name already exists.
+     */
+
     public UMLClass findClass(String name) {
 
         if (classes.isEmpty()) return null;
@@ -73,18 +126,38 @@ public class ClassDiagram extends Element{
         return null;
     }
 
+    /**
+     * Function to get all classes in a diagram
+     * @return List representing all classes in the diagram.
+     */
 
     public ObservableList<UMLClass> getAll() {
         return classes;
     }
 
+    /**
+     * Function to get all relations in a diagram
+     * @return List representing all relations in the diagram.
+     */
+
     public ObservableList<UMLRelationship> getAllRelat() {
         return relationships;
     }
 
+    /**
+     * Function to get last class in a diagram
+     * @return An object (instance) representing last class.
+     */
+
     public UMLClass getLast() {
         return classes.get(classes.size()-1);
     }
+
+    /**
+     * Finding all relations with the desired class.
+     * @param nameOfClass - class name for which we want to find all relations
+     * @return List of relation in which the desired class is involved
+     */
 
     public List<UMLRelationship> findAllRelat(String nameOfClass){
         List<UMLRelationship> relations = new ArrayList<>();
