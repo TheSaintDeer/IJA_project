@@ -30,7 +30,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="397.0" layoutY="531.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="52.0" prefWidth="143.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relat" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="397.0" AnchorPane.rightAnchor="484.0">
+            <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="412.0" layoutY="531.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="52.0" prefWidth="143.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relat" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="469.0">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -38,11 +38,11 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Label fx:id="labelFrom" layoutX="550.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" />
-            <Label fx:id="labelTo" layoutX="550.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" />
-            <TextField fx:id="fromClass" layoutX="640.0" layoutY="533.0" prefHeight="24.0" prefWidth="143.0" />
-            <TextField fx:id="toClass" layoutX="640.0" layoutY="560.0" prefHeight="24.0" prefWidth="143.0" />
-            <Button fx:id="acceptRelat" layoutX="791.0" layoutY="559.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="791.0">
+            <Label fx:id="labelFrom" layoutX="561.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" />
+            <Label fx:id="labelTo" layoutX="561.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" />
+            <TextField fx:id="fromClass" layoutX="640.0" layoutY="533.0" prefHeight="24.0" prefWidth="143.0" visible="false" />
+            <TextField fx:id="toClass" layoutX="640.0" layoutY="560.0" prefHeight="24.0" prefWidth="143.0" visible="false" />
+            <Button fx:id="acceptRelat" layoutX="801.0" layoutY="559.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="801.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -56,7 +56,16 @@
                 <AnchorPane fx:id="mainPane" />
               </content>
             </ScrollPane>
-            <TextField fx:id="nameOfClass" layoutX="203.0" layoutY="543.0" prefHeight="34.0" prefWidth="171.0" promptText="Name of class" />
+            <TextField fx:id="nameOfClass" layoutX="203.0" layoutY="543.0" prefHeight="34.0" prefWidth="171.0" promptText="Name of class" visible="false" />
+            <Button fx:id="acceptClass" layoutX="380.0" layoutY="548.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/4879883_achievement_check_mark_ok_success_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <Label alignment="CENTER" layoutY="25.0" prefHeight="75.0" prefWidth="1000.0" text="Class diagram" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
