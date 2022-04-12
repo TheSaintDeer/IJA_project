@@ -65,7 +65,7 @@ public class MainController extends Main {
 
     private ClassDiagram diagram;
 
-    private int i;
+    private int i = 0;
 
     public MainController(ClassDiagram d) {
         this.diagram = d;
@@ -76,15 +76,13 @@ public class MainController extends Main {
 //        i = 0;
 //        testListView.setItems(diagram.getAll());
 
-        for (UMLClass c :
-                diagram.getAll()) {
+        for (UMLClass c : diagram.getAll()) {
             addNewClass(c);
         }
 
         createClass.setOnAction(event -> {
-            addNewClass();
-            diagram.createClass("Test");
-
+            UMLClass newClass = diagram.createClass("Test " + i++);
+            addNewClass(newClass);
         });
 
         closeWindow.setOnAction(event -> {
@@ -98,16 +96,6 @@ public class MainController extends Main {
             Node fromC = getNodeByRowColumnIndex(Integer.parseInt(fromClassY.getText()), Integer.parseInt(fromClassX.getText()));
             Node toC = getNodeByRowColumnIndex(Integer.parseInt(toClassY.getText()), Integer.parseInt(toClassX.getText()));
             drawNewLine(fromC, toC);
-
-
-//            Line line = new Line(0, 0, 300, 0);
-//            line.setStartX(fromC.getLayoutX() + 5);
-//            line.setStartY(fromC.getLayoutY());
-//            line.setEndX(fromC.getLayoutX() + grPane.getColumnConstraints().get(Integer.parseInt(fromClassX.getText())).getPrefWidth() + 5);
-//            line.setEndY(fromC.getLayoutY() + grPane.getRowConstraints().get(Integer.parseInt(fromClassX.getText())).getPrefHeight());
-//            grPane.add(line, 0, 0);
-//            mainPane.getChildren().add(line);
-
 
             clearField();
         });

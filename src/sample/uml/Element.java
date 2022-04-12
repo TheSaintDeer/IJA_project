@@ -8,7 +8,7 @@ public class Element {
     private final StringProperty name = new SimpleStringProperty();
 
     public Element(String name) {
-        rename(name);
+        setName(name);
     }
 
     public String getName() {
@@ -19,7 +19,7 @@ public class Element {
         return name;
     }
 
-    public void rename(String name) {
+    public void setName(String name) {
         this.name.set(name);
     }
 

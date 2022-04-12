@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.controller.MainController;
-//import sample.parser.Parser;
+import sample.parser.Parser;
 import sample.uml.ClassDiagram;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class Main extends Application {
 
     private static Scene scene;
     private static ClassDiagram classDiagram;
-//    private static Parser parser;
+    private static Parser parser;
     public static int countOfClass = 0;
 
     @Override
@@ -40,9 +40,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         classDiagram = new ClassDiagram("Diagram");
-//        parser = new Parser();
+        parser = new Parser();
         try {
-//            parser.parse(new String[] {"src/sample/diagram.txt"}, classDiagram);
+            parser.parse(new String[] {"src/sample/diagram.txt"}, classDiagram);
         } catch (Exception e) {
             e.printStackTrace();
         }

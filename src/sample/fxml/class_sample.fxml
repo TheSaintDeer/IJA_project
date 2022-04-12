@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-
+<!--xwgsxjkwyx-->
 <AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="182.0" style="-fx-background-color: #fafafa;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane prefHeight="220.0" prefWidth="182.0">
