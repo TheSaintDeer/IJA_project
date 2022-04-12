@@ -1,21 +1,20 @@
 package sample.uml;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class UMLClass extends UMLClassifier {
 
     private boolean isAbstract;
 
-    private final List<UMLAttribute> attributes;
-    private final List<UMLOperation> operations;
+    private final ObservableList<UMLAttribute> attributes;
+    private final ObservableList<UMLOperation> operations;
 
     public UMLClass(String name) {
         super(name);
         this.isAbstract = false;
-        attributes = new ArrayList<>();
-        operations = new ArrayList<>();
+        attributes = FXCollections.observableArrayList();
+        operations = FXCollections.observableArrayList();
     }
 
 
@@ -61,9 +60,11 @@ public class UMLClass extends UMLClassifier {
         operations.add(operation);
     }
 
-    public List<UMLAttribute> getAttributes() {
-        return Collections.unmodifiableList(attributes);
+    public ObservableList getAttributes() {
+        attributes.addAll(operations);
+        return attributes;
     }
+
 
 
 }
