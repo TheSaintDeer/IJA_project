@@ -35,21 +35,22 @@ public class MainController extends Main {
     double TranslateX, TranslateY;
 
     @FXML
-    private Label diagramName;
-    @FXML
     private Button acceptClass;
 
     @FXML
     private Button acceptRelat;
 
     @FXML
-    private Button closeWindow;
+    private ListView<?> attributesOfSelectedClass;
 
     @FXML
     private Button createClass;
 
     @FXML
     private Button createRelat;
+
+    @FXML
+    private Label diagramName;
 
     @FXML
     private TextField fromClass;
@@ -67,12 +68,6 @@ public class MainController extends Main {
     private TextField nameOfClass;
 
     @FXML
-    private TextField toClass;
-
-    @FXML
-    private ListView attributesOfSelectedClass;
-
-    @FXML
     private TextField nameOfSelectedAttribute;
 
     @FXML
@@ -81,6 +76,23 @@ public class MainController extends Main {
     @FXML
     private Button submitChangeButton;
 
+    @FXML
+    private TextField toClass;
+
+    @FXML
+    private MenuItem typeAg;
+
+    @FXML
+    private MenuItem typeAs;
+
+    @FXML
+    private MenuItem typeGe;
+
+    @FXML
+    private MenuItem typeKo;
+
+    @FXML
+    private MenuButton typeRelat;
     private ClassDiagram diagram;
 
     public MainController(ClassDiagram d) {
@@ -121,17 +133,47 @@ public class MainController extends Main {
             }
         });
 
-        closeWindow.setOnAction(event -> {
-            closeWindow.getScene().getWindow().hide();
-        });
         createRelat.setOnAction(event -> {
             visibleObject(true);
         });
         acceptRelat.setOnAction(event -> {
             visibleObject(false);
-            UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), "<---");
-            drawRelat(relat);
+
+            String type = "";
+            if (typeRelat.getText() == "ASSOCIACE") {
+                type = "<---";
+            } else if (typeRelat.getText() == "AGREGACE") {
+                type = "<o--";
+            } else if (typeRelat.getText() == "KOMPOZICE") {
+                type = "<*--";
+            } else if (typeRelat.getText() == "GENERALIZACE") {
+                type = "<|--";
+            }
+
+            typeRelat.setText("Type relat");
+
+            if (diagram.findClass(fromClass.getText()) != null && diagram.findClass(toClass.getText()) != null && type != "") {
+                UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
+                drawRelat(relat);
+            }
+
             clearField();
+        });
+
+        typeAs.setOnAction(event -> {
+            typeRelat.setText("ASSOCIACE");
+        });
+
+        typeAg.setOnAction(event -> {
+            typeRelat.setText("AGREGACE");
+        });
+
+        typeKo.setOnAction(event -> {
+            typeRelat.setText("KOMPOZICE");
+        });
+
+        typeGe.setOnAction(event -> {
+            typeRelat.setText("GENERALIZACE");
         });
 
         submitChangeButton.setOnAction(event -> {
