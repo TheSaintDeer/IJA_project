@@ -1,8 +1,5 @@
 package sample.uml;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class Element {
 
     private String name;
