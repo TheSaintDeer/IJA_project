@@ -185,6 +185,10 @@ public class MainController extends Main {
         });
     }
 
+    /**
+     * Creating new class in windows
+     * @param c - class from diagram
+     */
     void addNewClass(UMLClass c) {
 
         TitledPane newClass = (TitledPane) createNewClass(c);
@@ -194,6 +198,9 @@ public class MainController extends Main {
         newClass.setCollapsible(false);
         newClass.setId(c.getName()+"id");
 
+        /**
+         * Action when mouse pressed on class
+         */
         newClass.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -210,6 +217,9 @@ public class MainController extends Main {
             }
         });
 
+        /**
+         * Action when mouse dragging class
+         */
         newClass.setOnMouseDragged(new EventHandler <MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -235,6 +245,9 @@ public class MainController extends Main {
 
     }
 
+    /**
+     * Create and load loader
+     */
     Parent createNewClass(UMLClass c) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/sample/fxml/class_sample2.fxml"));
@@ -252,6 +265,10 @@ public class MainController extends Main {
         return loader.getRoot();
     }
 
+    /**
+     * makes objects visible or invisible
+     * @param switcher
+     */
     private void visibleObject(boolean switcher) {
         labelFrom.setVisible(switcher);
         labelTo.setVisible(switcher);
@@ -261,11 +278,18 @@ public class MainController extends Main {
         typeRelat.setVisible(switcher);
     }
 
+    /**
+     * Clearing texts in TextField
+     */
     public void clearField () {
         fromClass.setText("");
         toClass.setText("");
     }
 
+    /**
+     * Draw line of relation
+     * @param r - relation from diagram
+     */
     public void drawRelat(UMLRelationship r) {
 
         String fromClass = r.fromClass + "id";
