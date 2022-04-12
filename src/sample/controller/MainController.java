@@ -1,6 +1,5 @@
 package sample.controller;
 
-import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -21,6 +20,7 @@ import sample.controller.MainController;
 import sample.uml.ClassDiagram;
 import sample.uml.UMLAttribute;
 import sample.uml.UMLClass;
+import sample.uml.UMLRelationship;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,8 +28,8 @@ import java.util.List;
 public class MainController extends Main {
 
     private String nameOfActiveObject = null;
-    double orgSceneX, orgSceneY;
-    double orgTranslateX, orgTranslateY;
+    double SceneX, SceneY;
+    double TranslateX, TranslateY;
 
     @FXML
     private Button acceptClass;
@@ -117,11 +117,10 @@ public class MainController extends Main {
         });
         acceptRelat.setOnAction(event -> {
             visibleObject(false);
+            diagram.createRelat(fromClass.getText(), toClass.getText(), "<---");
+            drawRelat(fromClass.getText(), toClass.getText());
             clearField();
         });
-
-//        attributesOfSelectedClas
-
     }
 
     void addNewClass(UMLClass c) {
@@ -131,7 +130,7 @@ public class MainController extends Main {
         newClass.setLayoutX(200*countOfClass);
         newClass.setLayoutY(200*countOfClass++);
         newClass.setCollapsible(false);
-        newClass.setId(nameOfClass.getText()+"id");
+        newClass.setId(c.getName()+"id");
 
         newClass.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -161,30 +160,33 @@ public class MainController extends Main {
 
                 nameOfActiveObject = newClass.getId();
 
-                orgSceneX = event.getSceneX();
-                orgSceneY = event.getSceneY();
-                orgTranslateX = ((TitledPane)(event.getSource())).getTranslateX();
-                orgTranslateY = ((TitledPane)(event.getSource())).getTranslateY();
+                SceneX = event.getSceneX();
+                SceneY = event.getSceneY();
+                TranslateX = ((TitledPane)(event.getSource())).getTranslateX();
+                TranslateY = ((TitledPane)(event.getSource())).getTranslateY();
             }
-
-
         });
 
-        newClass.setOnMouseDragged(new EventHandler <MouseEvent>()
-        {
+        newClass.setOnMouseDragged(new EventHandler <MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                double offsetX = event.getSceneX() - orgSceneX;
-                double offsetY = event.getSceneY() - orgSceneY;
-                double newTranslateX = orgTranslateX + offsetX;
-                double newTranslateY = orgTranslateY + offsetY;
+                double offsetX = event.getSceneX() - SceneX;
+                double offsetY = event.getSceneY() - SceneY;
+                double newTranslateX = TranslateX + offsetX;
+                double newTranslateY = TranslateY + offsetY;
 
                 ((TitledPane)(event.getSource())).setTranslateX(newTranslateX);
                 ((TitledPane)(event.getSource())).setTranslateY(newTranslateY);
+
+                List<UMLRelationship> relations = diagram.findAllRelat(nameOfActiveObject.substring(0, (nameOfActiveObject.length() - 2)));
+                for (UMLRelationship i: relations) {
+                    mainPane.getChildren().removeAll(mainPane.lookupAll("#" + i.getFromClass() + i.getToClass() +"id"));
+                    mainPane.getChildren().removeAll(mainPane.lookupAll("#" + i.getToClass() + i.getFromClass() +"id"));
+                    drawRelat(i.getFromClass(), i.getToClass());
+                }
+
             }
         });
-
-//        newClass.setOnMouse
 
         mainPane.getChildren().add(newClass);
 
@@ -220,5 +222,24 @@ public class MainController extends Main {
         toClass.setText("");
     }
 
+    public void drawRelat(String from, String to) {
+        String fromClass = from + "id";
+        String toClass = to + "id";
 
+        double x1 = mainPane.lookup("#" +fromClass).getLayoutX() + mainPane.lookup("#" +fromClass).getTranslateX();
+        double y1 = mainPane.lookup("#" +fromClass).getLayoutY() + mainPane.lookup("#" +fromClass).getTranslateY();
+        double x2 = mainPane.lookup("#" +toClass).getLayoutX() + mainPane.lookup("#" +toClass).getTranslateX();
+        double y2 = mainPane.lookup("#" +toClass).getLayoutY() + mainPane.lookup("#" +toClass).getTranslateY();
+        double h1 = mainPane.lookup("#" +fromClass).getBoundsInLocal().getHeight();
+        double w1 = mainPane.lookup("#" +fromClass).getBoundsInLocal().getWidth();
+        double h2 = mainPane.lookup("#" +toClass).getBoundsInLocal().getHeight();
+        double w2 = mainPane.lookup("#" +toClass).getBoundsInLocal().getWidth();
+
+        Line line1 = new Line(x1+w1/2, y1+h1/2, x2+w2/2, y1+h1/2);
+        Line line2 = new Line(x2+w2/2, y1+h1/2, x2+w2/2, y2+h2/2);
+        line1.setId((from+ to +"id"));
+        line2.setId((from+ to + "id"));
+        mainPane.getChildren().add(0, line1);
+        mainPane.getChildren().add(0, line2);
+    }
 }

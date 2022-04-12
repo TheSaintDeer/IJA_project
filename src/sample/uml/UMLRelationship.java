@@ -35,11 +35,11 @@ public class UMLRelationship {
                     this.typeRelationship = Relationship.ERROR;
             }
 
-        } else {
+        } else if (tmp[tmp.length-1] == '>') {
             this.fromClass = fromClass;
             this.toClass = toClass;
 
-            switch (tmp[2]) {
+            switch (tmp[tmp.length-2]) {
                 case '-':
                     this.typeRelationship = Relationship.ASSOCIACE;
                     break;
@@ -59,6 +59,15 @@ public class UMLRelationship {
 
     }
 
+
     // Methods
+
+    public String getToClass () {
+        return this.toClass;
+    }
+
+    public String getFromClass () {
+        return this.fromClass;
+    }
 
 }

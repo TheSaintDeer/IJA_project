@@ -11,11 +11,13 @@ public class ClassDiagram extends Element{
 
     private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
+    private ArrayList<UMLRelationship> relationships;
 
     public ClassDiagram(String name) {
         super(name);
         classes = FXCollections.observableArrayList();
         classifiers = new ArrayList<>();
+        relationships = new ArrayList<>();
     }
 
     public UMLClass createClass(String name) {
@@ -48,6 +50,20 @@ public class ClassDiagram extends Element{
         return null;
     }
 
+    public UMLRelationship createRelat (String from, String to, String type) {
+        UMLRelationship relat = new UMLRelationship(from, to, type);
+
+        for (UMLRelationship r : relationships) {
+            if (r == relat) {
+                return null;
+            }
+        }
+
+        relationships.add(relat);
+        return relat;
+    }
+
+    public UMLClassifier findClass(String name) {
     public UMLClass findClass(String name) {
 
         if (classes.isEmpty()) return null;
@@ -65,6 +81,18 @@ public class ClassDiagram extends Element{
 
     public UMLClass getLast() {
         return classes.get(classes.size()-1);
+    }
+
+    public List<UMLRelationship> findAllRelat(String nameOfClass){
+        List<UMLRelationship> relations = new ArrayList<>();
+
+        for (UMLRelationship i: relationships) {
+            if (i.getFromClass().equals(nameOfClass) || i.getToClass().equals(nameOfClass)) {
+                relations.add(i);
+            }
+        }
+
+        return relations;
     }
 
 }
