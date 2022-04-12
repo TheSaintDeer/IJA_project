@@ -134,8 +134,8 @@ public class MainController extends Main {
 
         TitledPane newClass = (TitledPane) createNewClass(c);
 
-        newClass.setLayoutX(200*countOfClass);
-        newClass.setLayoutY(200*countOfClass++);
+        newClass.setLayoutX(200* (countOfClass % 4));
+        newClass.setLayoutY(250*(countOfClass++ /4));
         newClass.setCollapsible(false);
         newClass.setId(c.getName()+"id");
 
@@ -145,26 +145,6 @@ public class MainController extends Main {
 
                 nameOfSelectedClass.setText(c.getName());
                 attributesOfSelectedClass.setItems(c.getAttributes());
-//                attributesOfSelectedClass.setCellFactory(TextFieldListCell.forListView());
-//
-//                attributesOfSelectedClass.setOnEditCommit(new EventHandler<ListView.EditEvent<StringProperty>>() {
-//                    @Override
-//                    public void handle(ListView.EditEvent<StringProperty> t) {
-////                        attributesOfSelectedClass.getItems().set(t.getIndex(), t.getNewValue());
-//
-//                        System.out.println("setOnEditCommit");
-//                    }
-//
-//                });
-//
-//                attributesOfSelectedClass.setOnEditCancel(new EventHandler<ListView.EditEvent<StringProperty>>() {
-//                    @Override
-//                    public void handle(ListView.EditEvent<StringProperty> t) {
-//                        System.out.println("setOnEditCancel");
-//                    }
-//                });
-
-
                 nameOfActiveObject = newClass.getId();
 
                 SceneX = event.getSceneX();

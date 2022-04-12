@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1172.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1172.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="720.0" maxWidth="1172.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1172.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutY="121.0" prefHeight="599.0" prefWidth="959.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="121.0">
          <children>
@@ -65,9 +65,9 @@
             </Button>
             <SplitPane dividerPositions="0.7504273504273504" prefHeight="525.0" prefWidth="1172.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                  <ScrollPane prefHeight="522.0" prefWidth="854.0">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="522.0" prefWidth="854.0" vbarPolicy="ALWAYS">
                     <content>
-                      <AnchorPane fx:id="mainPane" />
+                      <AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="1000.0" />
                     </content>
                   </ScrollPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="366.0">
