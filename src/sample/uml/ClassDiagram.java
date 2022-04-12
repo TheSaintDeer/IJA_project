@@ -48,6 +48,16 @@ public class ClassDiagram extends Element{
         return null;
     }
 
+    public UMLClassifier findClass(String name) {
+
+        if (classes.isEmpty()) return null;
+
+        for (UMLClass c : classes) {
+            if (c.getName().equals(name)) return c;
+        }
+        return null;
+    }
+
 
     public ObservableList<UMLClass> getAll() {
         return classes;

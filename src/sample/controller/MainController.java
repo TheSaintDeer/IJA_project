@@ -66,8 +66,9 @@ public class MainController extends Main {
         }
 
         createClass.setOnAction(event -> {
-            UMLClass newClass = diagram.createClass("Test " + i++);
-            addNewClass(newClass);
+//            UMLClass newClass = diagram.createClass("Test " + i++);
+//            addNewClass(newClass);
+            diagram.findClass("Command").setName("Hahaha");
         });
 
         closeWindow.setOnAction(event -> {
@@ -87,7 +88,7 @@ public class MainController extends Main {
         Node newClass = createNewClass(c);
 
         newClass.setLayoutX(200*countOfClass);
-        newClass.setLayoutY(200*countOfClass);
+        newClass.setLayoutY(200*countOfClass++);
 
 //        newClass.
         mainPane.getChildren().add(newClass);
