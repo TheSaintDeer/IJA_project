@@ -61,6 +61,7 @@ public class MainController extends Main {
     void initialize() {
 
         for (UMLClass c : diagram.getAll()) {
+            System.out.println("adding class: " + c.getName());
             addNewClass(c);
         }
 
@@ -82,30 +83,39 @@ public class MainController extends Main {
     }
 
     void addNewClass(UMLClass c) {
-        String nameClass = nameOfClass.getText();
 
-        if (!nameClass.isEmpty()) {
-//            nameOfClass.setVisible(false);
-            nameOfClass.setText(null);
+        Node newClass = createNewClass(c);
 
-            if (c != null) {
-                TitledPane titledPane = new TitledPane(nameClass, createNewClass(c));
-                titledPane.setId(nameClass.replaceAll("\\s+","€"));
-                titledPane.setPrefSize(-1, -1);
-                titledPane.setLayoutX(200*(countOfClass%4));
-                titledPane.setLayoutY(300*(countOfClass++/4));
-                titledPane.setCollapsible(false);
+        newClass.setLayoutX(200*countOfClass);
+        newClass.setLayoutY(200*countOfClass);
 
-                mainPane.getChildren().add(titledPane);
-            }
+//        newClass.
+        mainPane.getChildren().add(newClass);
 
-
-        }
+//        String nameClass = nameOfClass.getText();
+//
+//        if (!nameClass.isEmpty()) {
+////            nameOfClass.setVisible(false);
+//            nameOfClass.setText(null);
+//
+//            if (c != null) {
+//                TitledPane titledPane = new TitledPane(nameClass, createNewClass(c));
+//                titledPane.setId(nameClass.replaceAll("\\s+","€"));
+//                titledPane.setPrefSize(-1, -1);
+//                titledPane.setLayoutX(200*(countOfClass%4));
+//                titledPane.setLayoutY(300*(countOfClass++/4));
+//                titledPane.setCollapsible(false);
+//
+//                mainPane.getChildren().add(titledPane);
+//            }
+//
+//
+//        }
     }
 
     Parent createNewClass() {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/fxml/class_sample.fxml"));
+        loader.setLocation(getClass().getResource("/sample/fxml/class_sample2.fxml"));
 
         ClassController controller = new ClassController(countOfClass);
         loader.setController(controller);
@@ -121,7 +131,7 @@ public class MainController extends Main {
 
     Parent createNewClass(UMLClass c) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/fxml/class_sample.fxml"));
+        loader.setLocation(getClass().getResource("/sample/fxml/class_sample2.fxml"));
 
         ClassController controller = new ClassController(countOfClass);
         controller.setClass(c);
