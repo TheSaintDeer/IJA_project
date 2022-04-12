@@ -76,12 +76,14 @@ public class Parser {
     private void parseConnection(String token) {
 
 
-//        String o1 = token;
-//        String connection = null;
-//        String o2 = null;
-//
-//        connection = scanner.next();
-//        o2 = scanner.next();
+        String o1 = token;
+        String connection = null;
+        String o2 = null;
+
+        connection = scanner.next();
+        o2 = scanner.next();
+
+        diagram.createRelat(o1, o2, connection);
 
 //        System.out.println("o1: " + o1 + " con: " + connection + " o2: " + o2);
 

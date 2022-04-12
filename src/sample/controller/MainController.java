@@ -12,7 +12,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import javafx.util.StringConverter;
 import javafx.util.converter.DefaultStringConverter;
 import sample.Main;
@@ -90,6 +92,11 @@ public class MainController extends Main {
             addNewClass(c);
         }
 
+        for (UMLRelationship r : diagram.getAllRelat()) {
+            System.out.println("adding relat: " + r.getFromClass() + " " + r.typeRelationship + " " + r.toClass);
+            drawRelat(r);
+        }
+
         createClass.setOnAction(event -> {
             nameOfClass.setVisible(true);
             acceptClass.setVisible(true);
@@ -117,8 +124,8 @@ public class MainController extends Main {
         });
         acceptRelat.setOnAction(event -> {
             visibleObject(false);
-            diagram.createRelat(fromClass.getText(), toClass.getText(), "<---");
-            drawRelat(fromClass.getText(), toClass.getText());
+            UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), "<---");
+            drawRelat(relat);
             clearField();
         });
     }
@@ -182,7 +189,7 @@ public class MainController extends Main {
                 for (UMLRelationship i: relations) {
                     mainPane.getChildren().removeAll(mainPane.lookupAll("#" + i.getFromClass() + i.getToClass() +"id"));
                     mainPane.getChildren().removeAll(mainPane.lookupAll("#" + i.getToClass() + i.getFromClass() +"id"));
-                    drawRelat(i.getFromClass(), i.getToClass());
+                    drawRelat(i);
                 }
 
             }
@@ -222,9 +229,10 @@ public class MainController extends Main {
         toClass.setText("");
     }
 
-    public void drawRelat(String from, String to) {
-        String fromClass = from + "id";
-        String toClass = to + "id";
+    public void drawRelat(UMLRelationship r) {
+
+        String fromClass = r.fromClass + "id";
+        String toClass = r.toClass + "id";
 
         double x1 = mainPane.lookup("#" +fromClass).getLayoutX() + mainPane.lookup("#" +fromClass).getTranslateX();
         double y1 = mainPane.lookup("#" +fromClass).getLayoutY() + mainPane.lookup("#" +fromClass).getTranslateY();
@@ -234,12 +242,90 @@ public class MainController extends Main {
         double w1 = mainPane.lookup("#" +fromClass).getBoundsInLocal().getWidth();
         double h2 = mainPane.lookup("#" +toClass).getBoundsInLocal().getHeight();
         double w2 = mainPane.lookup("#" +toClass).getBoundsInLocal().getWidth();
+        Line line1;
+        Line line2;
+        Line line3;
+        Line line4;
+        Polygon poly;
 
-        Line line1 = new Line(x1+w1/2, y1+h1/2, x2+w2/2, y1+h1/2);
-        Line line2 = new Line(x2+w2/2, y1+h1/2, x2+w2/2, y2+h2/2);
-        line1.setId((from+ to +"id"));
-        line2.setId((from+ to + "id"));
-        mainPane.getChildren().add(0, line1);
-        mainPane.getChildren().add(0, line2);
+        switch (r.getTypeRelationship()) {
+
+            case ASSOCIACE:
+                if (fromClass == toClass) {
+                    line1 = new Line(x1, y1+h1/2, x1-30, y1+h1/2);
+                    line2 = new Line(x2-30, y1+h1/2, x2-30, y2-30);
+                    line3 = new Line(x1-30, y1-30, x2+w2/2, y1-30);
+                    line4 = new Line(x2+w2/2, y1-30, x2+w2/2, y2+h2/2);
+                    line1.setId((r.fromClass + r.toClass +"id"));
+                    line2.setId((r.fromClass + r.toClass +"id"));
+                    line3.setId((r.fromClass + r.toClass +"id"));
+                    line4.setId((r.fromClass + r.toClass +"id"));
+                    mainPane.getChildren().add(0, line1);
+                    mainPane.getChildren().add(0, line2);
+                    mainPane.getChildren().add(0, line3);
+                    mainPane.getChildren().add(0, line4);
+                } else {
+                    line1 = new Line(x1 + w1 / 2, y1 + h1 / 2, x2 + w2 / 2, y1 + h1 / 2);
+                    line2 = new Line(x2 + w2 / 2, y1 + h1 / 2, x2 + w2 / 2, y2 + h2 / 2);
+                    line1.setId((r.fromClass + r.toClass + "id"));
+                    line2.setId((r.fromClass + r.toClass + "id"));
+                    mainPane.getChildren().add(0, line1);
+                    mainPane.getChildren().add(0, line2);
+                }
+                break;
+
+            case AGREGACE:
+                double y3 = y1+h1+60;
+                line1 = new Line(x1+w1/4*3, y1+h1/2, x1+w1/4*3, y3);
+                line2 = new Line(x2+w2/2, y3, x1+w1/4*3, y3);
+                line3 = new Line(x2+w2/2, y2+h2/2, x2+w2/2, y3);
+                poly = new Polygon(x1+w1/4*3, y1+h1, x1+w1/4*3-6, y1+h1+11, x1+w1/4*3, y1+h1+22, x1+w1/4*3+6, y1+h1+11);
+                poly.setFill(Color.WHITE);
+                poly.setStroke(Color.BLACK);
+                line1.setId((r.fromClass + r.toClass +"id"));
+                line2.setId((r.fromClass + r.toClass +"id"));
+                line3.setId((r.fromClass + r.toClass +"id"));
+                poly.setId((r.fromClass + r.toClass +"id"));
+                mainPane.getChildren().add(0, line1);
+                mainPane.getChildren().add(0, line2);
+                mainPane.getChildren().add(0, line3);
+                mainPane.getChildren().add(0, poly);
+                break;
+
+            case KOMPOZICE:
+                y3 = y1+h1+40;
+                line1 = new Line(x1+w1/4, y1+h1/2, x1+w1/4, y3);
+                line2 = new Line(x2+w2/2, y3, x1+w1/4, y3);
+                line3 = new Line(x2+w2/2, y2+h2/2, x2+w2/2, y3);
+                poly = new Polygon(x1+w1/4, y1+h1, x1+w1/4-6, y1+h1+11, x1+w1/4, y1+h1+22, x1+w1/4+6, y1+h1+11);
+                poly.setStroke(Color.BLACK);
+                line1.setId((r.fromClass + r.toClass +"id"));
+                line2.setId((r.fromClass + r.toClass +"id"));
+                line3.setId((r.fromClass + r.toClass +"id"));
+                poly.setId((r.fromClass + r.toClass +"id"));
+                mainPane.getChildren().add(0, poly);
+                mainPane.getChildren().add(0, line1);
+                mainPane.getChildren().add(0, line2);
+                mainPane.getChildren().add(0, line3);
+
+            case GENERALIZACE:
+                y3 = y1+h1+50;
+                line1 = new Line(x1+w1/2, y1+h1/2, x1+w1/2, y3);
+                line2 = new Line(x2+w2/2, y3, x1+w1/2, y3);
+                line3 = new Line(x2+w2/2, y2+h2/2, x2+w2/2, y3);
+                poly = new Polygon(x1+w1/2, y1+h1, x1+w1/2-10, y1+h1+20,x1+w1/2+10, y1+h1+20);
+                poly.setFill(Color.WHITE);
+                poly.setStroke(Color.BLACK);
+                line1.setId((r.fromClass + r.toClass +"id"));
+                line2.setId((r.fromClass + r.toClass +"id"));
+                line3.setId((r.fromClass + r.toClass +"id"));
+                poly.setId((r.fromClass + r.toClass +"id"));
+                mainPane.getChildren().add(0, poly);
+                mainPane.getChildren().add(0, line1);
+                mainPane.getChildren().add(0, line2);
+                mainPane.getChildren().add(0, line3);
+        }
+
+
     }
 }

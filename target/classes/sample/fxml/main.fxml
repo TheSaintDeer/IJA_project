@@ -3,18 +3,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1024.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="720.0" maxWidth="1172.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1172.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="121.0" prefHeight="679.0" prefWidth="1000.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="121.0">
+      <AnchorPane layoutY="121.0" prefHeight="599.0" prefWidth="959.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="121.0">
          <children>
-            <Button fx:id="createClass" alignment="CENTER" cache="true" layoutX="23.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="52.0" prefWidth="168.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create class" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="23.0">
+            <Button fx:id="createClass" alignment="CENTER" cache="true" layoutX="23.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create class" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="23.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -22,7 +24,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="closeWindow" alignment="CENTER" cache="true" layoutX="842.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="52.0" prefWidth="168.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Close window" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="closeWindow" alignment="CENTER" cache="true" layoutX="855.0" layoutY="532.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Close window" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="855.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -30,7 +32,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="412.0" layoutY="531.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="52.0" prefWidth="143.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relat" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="469.0">
+            <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="393.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relat" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="390.0">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -38,10 +40,10 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Label fx:id="labelFrom" layoutX="561.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" />
-            <Label fx:id="labelTo" layoutX="561.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" />
-            <TextField fx:id="fromClass" layoutX="640.0" layoutY="533.0" prefHeight="24.0" prefWidth="143.0" visible="false" />
-            <TextField fx:id="toClass" layoutX="640.0" layoutY="560.0" prefHeight="24.0" prefWidth="143.0" visible="false" />
+            <Label fx:id="labelFrom" layoutX="561.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" AnchorPane.leftAnchor="570.0" />
+            <Label fx:id="labelTo" layoutX="561.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" AnchorPane.leftAnchor="570.0" />
+            <TextField fx:id="fromClass" layoutX="640.0" layoutY="533.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.leftAnchor="650.0" />
+            <TextField fx:id="toClass" layoutX="640.0" layoutY="560.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.leftAnchor="650.0" />
             <Button fx:id="acceptRelat" layoutX="801.0" layoutY="559.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="801.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -51,12 +53,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <ScrollPane layoutX="7.0" layoutY="7.0" prefHeight="508.0" prefWidth="1015.0">
-              <content>
-                <AnchorPane fx:id="mainPane" />
-              </content>
-            </ScrollPane>
-            <TextField fx:id="nameOfClass" layoutX="203.0" layoutY="543.0" prefHeight="34.0" prefWidth="171.0" promptText="Name of class" visible="false" />
+            <TextField fx:id="nameOfClass" layoutX="203.0" layoutY="543.0" prefHeight="30.0" prefWidth="150.0" promptText="Name of class" visible="false" />
             <Button fx:id="acceptClass" layoutX="380.0" layoutY="548.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -66,6 +63,33 @@
                   </ImageView>
                </graphic>
             </Button>
+            <SplitPane dividerPositions="0.7504273504273504" prefHeight="525.0" prefWidth="1172.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                  <ScrollPane prefHeight="522.0" prefWidth="854.0">
+                    <content>
+                      <AnchorPane fx:id="mainPane" />
+                    </content>
+                  </ScrollPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="366.0">
+                     <children>
+                        <Label layoutX="91.0" layoutY="23.0" prefHeight="30.0" prefWidth="270.0" text="Selected Class" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nameOfSelectedClass" layoutX="14.0" layoutY="49.0" promptText="Name of Class" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
+                        <ListView fx:id="attributesOfSelectedClass" editable="true" layoutX="20.0" layoutY="88.0" prefHeight="256.0" prefWidth="249.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="90.0" />
+                        <Label layoutX="20.0" layoutY="361.0" prefHeight="30.0" prefWidth="270.0" text="Selected Attribute" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="350.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nameOfSelectedAttribute" layoutX="20.0" layoutY="380.0" promptText="Name of Attribute" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="380.0" />
+                        <Button fx:id="submitChangeButton" layoutX="207.0" layoutY="421.0" mnemonicParsing="false" text="Submit" AnchorPane.rightAnchor="20.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
          </children>
       </AnchorPane>
       <Label alignment="CENTER" layoutY="25.0" prefHeight="75.0" prefWidth="1000.0" text="Class diagram" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
