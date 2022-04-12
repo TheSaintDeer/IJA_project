@@ -11,13 +11,13 @@ public class ClassDiagram extends Element{
 
     private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
-    private ArrayList<UMLRelationship> relationships;
+    private ObservableList<UMLRelationship> relationships;
 
     public ClassDiagram(String name) {
         super(name);
         classes = FXCollections.observableArrayList();
         classifiers = new ArrayList<>();
-        relationships = new ArrayList<>();
+        relationships = FXCollections.observableArrayList();
     }
 
     public UMLClass createClass(String name) {
@@ -76,6 +76,10 @@ public class ClassDiagram extends Element{
 
     public ObservableList<UMLClass> getAll() {
         return classes;
+    }
+
+    public ObservableList<UMLRelationship> getAllRelat() {
+        return relationships;
     }
 
     public UMLClass getLast() {

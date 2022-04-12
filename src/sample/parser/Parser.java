@@ -83,8 +83,9 @@ public class Parser {
         connection = scanner.next();
         o2 = scanner.next();
 
-        diagram.createRelat(o1,o2,connection);
-        System.out.println("o1: " + o1 + " con: " + connection + " o2: " + o2);
+        diagram.createRelat(o1, o2, connection);
+
+//        System.out.println("o1: " + o1 + " con: " + connection + " o2: " + o2);
 
     }
 

@@ -65,9 +65,9 @@
             </Button>
             <SplitPane dividerPositions="0.7504273504273504" prefHeight="525.0" prefWidth="1172.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                  <ScrollPane prefHeight="522.0" prefWidth="854.0">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="522.0" prefWidth="854.0" vbarPolicy="ALWAYS">
                     <content>
-                      <AnchorPane fx:id="mainPane" />
+                      <AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="1000.0" />
                     </content>
                   </ScrollPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="366.0">

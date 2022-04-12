@@ -22,10 +22,10 @@ public class UMLRelationship {
                 case '-':
                     this.typeRelationship = Relationship.ASSOCIACE;
                     break;
-                case '0':
+                case 'o':
                     this.typeRelationship = Relationship.AGREGACE;
                     break;
-                case '1':
+                case '*':
                     this.typeRelationship = Relationship.KOMPOZICE;
                     break;
                 case '|':
@@ -43,10 +43,10 @@ public class UMLRelationship {
                 case '-':
                     this.typeRelationship = Relationship.ASSOCIACE;
                     break;
-                case '0':
+                case 'o':
                     this.typeRelationship = Relationship.AGREGACE;
                     break;
-                case '1':
+                case '*':
                     this.typeRelationship = Relationship.KOMPOZICE;
                     break;
                 case '|':
@@ -70,4 +70,7 @@ public class UMLRelationship {
         return this.fromClass;
     }
 
+    public Relationship getTypeRelationship () {
+        return this.typeRelationship;
+    }
 }
