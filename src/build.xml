@@ -1,4 +1,4 @@
-<project name="Main">
+<project name="Main" basedir="..">
 
     <property name="src.dir"   value="src"/>
     <property name="data.dir"  value="data"/>
@@ -22,12 +22,34 @@
 <!--        <mkdir dir="${lib.dir}/help"/>-->
         <pathconvert property="classpathProp" refid="class.path"/>
         <echo>Classpath is ${classpathProp}</echo>
+        <echo>Clean project: ant clean</echo>
+        <echo>Compile project: ant compile</echo>
+        <echo>Run .jar: ant run</echo>
+        <echo>Documentation for project: ant doc</echo>
+        <echo>Run + clean + compile + doc project: ant main</echo>
+    </target>
+
+    <target name="doc">
+        <mkdir dir="${doc.dir}"/>
+        <javadoc packagenames="sample.*"
+                 sourcepath="${src.dir}"
+                 destdir="${doc.dir}"
+                 author="true"
+                 version="true"
+                 windowtitle="IJA Project Documentation">
+            <modulepath path="${lib.dir}"/>
+            <arg line="--add-modules javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.media,javafx.web"/>
+        </javadoc>
     </target>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
         <delete dir="${doc.dir}"/>
         <delete dir="${dest.dir}"/>
+
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dest.dir}"/>
+        <mkdir dir="${doc.dir}"/>
     </target>
 
     <target name="compile">
@@ -48,7 +70,6 @@
                 <attribute name="Main-class" value="${main-class}"/>
             </manifest>
         </jar>
-
     </target>
 
     <target name="run" depends="compile">
@@ -58,17 +79,8 @@
         </java>
     </target>
 
-
-    <target name="runwith" depends="compile">
-        <java jar="${dest.dir}/${jar.name}.jar" fork="true">
-            <modulepath path="${lib.dir}"/>
-            <jvmarg line="--add-modules=javafx.controls,javafx.base,javafx.fxml,javafx.graphics,javafx.media,javafx.web"/>
-            <arg line="${data}"/>
-        </java>
-    </target>
-
     <target name="clean-build" depends="clean,compile"/>
 
-    <target name="main" depends="clean,compile,run"/>
+    <target name="main" depends="clean,compile,doc,run"/>
 
 </project>
