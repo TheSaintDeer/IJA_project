@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListView.EditEvent;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +32,8 @@ public class MainController extends Main {
     double SceneX, SceneY;
     double TranslateX, TranslateY;
 
+    @FXML
+    private Label diagramName;
     @FXML
     private Button acceptClass;
 
@@ -85,6 +88,8 @@ public class MainController extends Main {
     @FXML
     void initialize() {
 
+        diagramName.setText(diagram.getName());
+
         for (UMLClass c : diagram.getAll()) {
             System.out.println("adding class: " + c.getName());
             addNewClass(c);
@@ -121,6 +126,13 @@ public class MainController extends Main {
             drawRelat(fromClass.getText(), toClass.getText());
             clearField();
         });
+
+        submitChangeButton.setOnAction(event -> {
+            UMLAttribute selected = (UMLAttribute) attributesOfSelectedClass.getSelectionModel().getSelectedItem();
+            String className = nameOfSelectedClass.getText();
+            diagram.findClass(className).deleteAttribute(selected);
+
+        });
     }
 
     void addNewClass(UMLClass c) {
@@ -138,24 +150,7 @@ public class MainController extends Main {
 
                 nameOfSelectedClass.setText(c.getName());
                 attributesOfSelectedClass.setItems(c.getAttributes());
-//                attributesOfSelectedClass.setCellFactory(TextFieldListCell.forListView());
-//
-//                attributesOfSelectedClass.setOnEditCommit(new EventHandler<ListView.EditEvent<StringProperty>>() {
-//                    @Override
-//                    public void handle(ListView.EditEvent<StringProperty> t) {
-////                        attributesOfSelectedClass.getItems().set(t.getIndex(), t.getNewValue());
-//
-//                        System.out.println("setOnEditCommit");
-//                    }
-//
-//                });
-//
-//                attributesOfSelectedClass.setOnEditCancel(new EventHandler<ListView.EditEvent<StringProperty>>() {
-//                    @Override
-//                    public void handle(ListView.EditEvent<StringProperty> t) {
-//                        System.out.println("setOnEditCancel");
-//                    }
-//                });
+
 
 
                 nameOfActiveObject = newClass.getId();

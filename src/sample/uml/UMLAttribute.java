@@ -16,7 +16,7 @@ public class UMLAttribute extends Element{
     }
 
     public String toString() {
-        return getName()+":"+type;
+        return type+":"+getName();
     }
 
 

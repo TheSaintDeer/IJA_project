@@ -26,7 +26,7 @@ public class Main extends Application {
     private void sceneSet(Stage stage, String fxml) throws IOException {
         scene = new Scene(loadFXML(fxml));
         stage.setScene(scene);
-        stage.setTitle("Database");
+        stage.setTitle("UML Editor");
         stage.show();
     }
 

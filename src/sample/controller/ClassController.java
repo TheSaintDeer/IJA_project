@@ -58,7 +58,7 @@ public class ClassController extends Main {
     void initialize() {
 
 
-        titledPane.textProperty().bindBidirectional(c.nameProperty());
+//        titledPane.textProperty().bindBidirectional(c.nameProperty());
         listView.setItems(c.getAttributes());
 //        nameClass.textProperty().bindBidirectional(c.nameProperty());
 //

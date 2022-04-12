@@ -92,7 +92,7 @@
             </SplitPane>
          </children>
       </AnchorPane>
-      <Label alignment="CENTER" layoutY="25.0" prefHeight="75.0" prefWidth="1000.0" text="Class diagram" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <Label fx:id="diagramName" alignment="CENTER" layoutY="25.0" prefHeight="75.0" prefWidth="1000.0" text="Class diagram" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font name="System Italic" size="49.0" />
          </font>

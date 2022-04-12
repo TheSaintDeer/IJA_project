@@ -1,6 +1,6 @@
 @startuml
 abstract class Command {
-    +-string:hello
+    +string:hello
     -int:2
     #string:world
     ~country:greece

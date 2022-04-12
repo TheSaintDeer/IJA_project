@@ -1,5 +1,7 @@
 package sample.uml;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -7,6 +9,7 @@ public class UMLClass extends UMLClassifier {
 
     private boolean isAbstract;
 
+//    private StringProperty className = new SimpleStringProperty();
     private final ObservableList<UMLAttribute> attributes;
     private final ObservableList<UMLOperation> operations;
 
@@ -61,12 +64,14 @@ public class UMLClass extends UMLClassifier {
     }
 
     public ObservableList getAttributes() {
-        ObservableList result = FXCollections.observableArrayList();
-        result.addAll(attributes);
-        result.addAll(operations);
-        return result;
+//        ObservableList result = FXCollections.observableArrayList();
+//        result.addAll(attributes);
+//        result.addAll(operations);
+        return attributes;
     }
 
 
-
+    public void deleteAttribute(UMLAttribute selected) {
+        attributes.remove(selected);
+    }
 }

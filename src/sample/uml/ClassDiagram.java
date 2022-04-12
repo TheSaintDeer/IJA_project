@@ -63,7 +63,6 @@ public class ClassDiagram extends Element{
         return relat;
     }
 
-    public UMLClassifier findClass(String name) {
     public UMLClass findClass(String name) {
 
         if (classes.isEmpty()) return null;

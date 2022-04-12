@@ -30,6 +30,6 @@ public class UMLClassifier extends Element{
     }
 
     public String toString() {
-        return super.getName()+"("+isUserDefined+")";
+        return super.getName();
     }
 }
