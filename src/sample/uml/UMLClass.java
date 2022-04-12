@@ -8,8 +8,8 @@ public class UMLClass extends UMLClassifier {
 
     private boolean isAbstract;
 
-    private List<UMLAttribute> attributes;
-    private List<UMLOperation> operations;
+    private final List<UMLAttribute> attributes;
+    private final List<UMLOperation> operations;
 
     public UMLClass(String name) {
         super(name);
@@ -29,7 +29,7 @@ public class UMLClass extends UMLClassifier {
 
     public boolean addAttribute(UMLAttribute attr) {
         for (UMLAttribute a: attributes) {
-            if (a.getName() == attr.getName()) return false;
+            if (a.getName().equals(attr.getName())) return false;
         }
         attributes.add(attr);
         return true;
@@ -37,7 +37,7 @@ public class UMLClass extends UMLClassifier {
 
     public int getAttrPosition(UMLAttribute attr) {
         for (UMLAttribute a: attributes) {
-            if (a.getName() == attr.getName()) return attributes.indexOf(a);
+            if (a.getName().equals(attr.getName())) return attributes.indexOf(a);
         }
         return -1;
     }

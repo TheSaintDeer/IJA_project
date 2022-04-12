@@ -5,6 +5,7 @@ import sample.uml.UMLAttribute;
 import sample.uml.UMLOperation;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -43,7 +44,7 @@ public class Parser {
 
     }
 
-    private void body() throws Exception {
+    private void body() {
 
         String token;
 
@@ -63,8 +64,8 @@ public class Parser {
                     return;
 
                 default:
-//                throw new Exception("syntax error");
                     parseConnection(token);
+//                    throw new Exception("syntax error");
                     break;
 
             }
@@ -74,12 +75,13 @@ public class Parser {
 
     private void parseConnection(String token) {
 
-        String o1 = token;
-        String connection = null;
-        String o2 = null;
 
-        connection = scanner.next();
-        o2 = scanner.next();
+//        String o1 = token;
+//        String connection = null;
+//        String o2 = null;
+//
+//        connection = scanner.next();
+//        o2 = scanner.next();
 
 //        System.out.println("o1: " + o1 + " con: " + connection + " o2: " + o2);
 
@@ -87,7 +89,7 @@ public class Parser {
 
     private void checkInterface() {
 
-        if (scanner.next().equals("class")) {
+        if (checkWord(scanner.next(),"class")) {
             diagram.createClass(scanner.next()).setAbstract(true);
         }
     }
@@ -112,10 +114,10 @@ public class Parser {
     private void parseAttribute(String str) {
 
         if (str.equals("")) return;
-        String visibility = null;
-        String name = null;
-        String args_str = null;
-        String classifier = null;
+        String visibility;
+        String name;
+        String args_str;
+        String classifier;
         ArrayList<UMLAttribute> attributes = new ArrayList<>();
 
 
@@ -148,27 +150,35 @@ public class Parser {
             diagram.getLast().addAttribute(new UMLAttribute(visibility,name, diagram.classifierForName(classifier)));
 //            log("visibility: " + visibility + " classifier: " + classifier + " name: " + name, Colors.YELLOW);
         } else {
-//            log("no match found"); // TODO
+            System.out.println("no match found"); // TODO
         }
 
 
 
     }
 
-    private void checkWord(String next, String s) throws Exception {
-        if (!next.equals(s)) throw new Exception("wrong syntax");
+    private boolean checkWord(String next, String s) {
+        if (!next.equals(s)) {
+            try {
+                throw new Exception("wrong syntax");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        return true;
     }
 
 
     private void checkFilename() throws Exception {
 
-//        log("checking \"" + filename + "\" for existense");  // TODO
+        System.out.println("checking \"" + filename + "\" for existense");  // TODO
 
         if(filename.exists() && filename.isFile()){
-//            log(filename + " exists");
+            System.out.println(filename + " exists");
         }else{
-//            log("file \"" + filename + "\" does not exists, throwing exception");  // TODO
-//            throw new FileNotFoundException(filename + " does not exists");
+            System.out.println("file \"" + filename + "\" does not exists, throwing exception");  // TODO
+            throw new FileNotFoundException(filename + " does not exists");
 
         }
 

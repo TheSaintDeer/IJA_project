@@ -1,17 +1,14 @@
 package sample.uml;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UMLClassifier extends Element{
 
-    private boolean isUserDefined;
-    private String[] nonUserDefined = {"int","boolean","String","void"};
+    private final boolean isUserDefined;
 
     public UMLClassifier(String name) {
         super(name);
+        String[] nonUserDefined = {"int", "boolean", "String", "void"};
         for (String s : nonUserDefined) {
-            if (s == name) {
+            if (s.equals(name)) {
                 isUserDefined = false;
                 return;
             }

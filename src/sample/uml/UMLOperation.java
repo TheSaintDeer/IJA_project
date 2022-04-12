@@ -6,7 +6,7 @@ import java.util.List;
 public class UMLOperation extends UMLAttribute{
 
 //    private
-    private List<UMLAttribute> attributeList;
+    private final List<UMLAttribute> attributeList;
 
     public UMLOperation(String visibility, String name, UMLClassifier type) {
         super(visibility, name, type);
@@ -17,7 +17,7 @@ public class UMLOperation extends UMLAttribute{
         UMLOperation op = new UMLOperation(visibility, name, type);
 
         for (Object attr : args) {
-            if (attr.getClass() == UMLClass.class) {
+            if (attr.getClass() == UMLAttribute.class) {
                 op.addArgument( (UMLAttribute) attr);
             }
         }

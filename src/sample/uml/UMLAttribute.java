@@ -2,8 +2,8 @@ package sample.uml;
 
 public class UMLAttribute extends Element{
 
-    private UMLClassifier type;
-    private String visibility;
+    private final UMLClassifier type;
+    private final String visibility;
 
     public UMLAttribute(String visibility, String name, UMLClassifier type) {
         super(name);
