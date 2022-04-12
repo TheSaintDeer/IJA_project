@@ -1,10 +1,12 @@
 package sample.controller;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView.EditEvent;
@@ -16,6 +18,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.DefaultStringConverter;
 import sample.Main;
@@ -90,8 +94,6 @@ public class MainController extends Main {
     @FXML
     void initialize() {
 
-        diagramName.setText(diagram.getName());
-
         for (UMLClass c : diagram.getAll()) {
             System.out.println("adding class: " + c.getName());
             addNewClass(c);
@@ -105,14 +107,12 @@ public class MainController extends Main {
         createClass.setOnAction(event -> {
             nameOfClass.setVisible(true);
             acceptClass.setVisible(true);
-
-//            diagram.findClass("Command").getAttributeByName("hello:-string(true)").setName("bye");
         });
 
         acceptClass.setOnAction(event -> {
             UMLClass newClass = diagram.createClass(nameOfClass.getText());
             if (newClass == null) {
-                System.out.println("error eblan");
+                System.out.println("class already exists!");
             } else {
                 nameOfClass.setVisible(false);
                 acceptClass.setVisible(false);
@@ -135,9 +135,7 @@ public class MainController extends Main {
         });
 
         submitChangeButton.setOnAction(event -> {
-            UMLAttribute selected = (UMLAttribute) attributesOfSelectedClass.getSelectionModel().getSelectedItem();
-            String className = nameOfSelectedClass.getText();
-            diagram.findClass(className).deleteAttribute(selected);
+
 
         });
     }
@@ -159,9 +157,7 @@ public class MainController extends Main {
                 attributesOfSelectedClass.setItems(c.getAttributes());
 
 
-
                 nameOfActiveObject = newClass.getId();
-
                 SceneX = event.getSceneX();
                 SceneY = event.getSceneY();
                 TranslateX = ((TitledPane)(event.getSource())).getTranslateX();

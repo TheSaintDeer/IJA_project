@@ -11,13 +11,11 @@ public class UMLClass extends UMLClassifier {
 
 //    private StringProperty className = new SimpleStringProperty();
     private final ObservableList<UMLAttribute> attributes;
-    private final ObservableList<UMLOperation> operations;
 
     public UMLClass(String name) {
         super(name);
         this.isAbstract = false;
         attributes = FXCollections.observableArrayList();
-        operations = FXCollections.observableArrayList();
     }
 
 
@@ -59,17 +57,9 @@ public class UMLClass extends UMLClassifier {
         return pos;
     }
 
-    public void addOperation(UMLOperation operation) {
-        operations.add(operation);
-    }
-
     public ObservableList getAttributes() {
-//        ObservableList result = FXCollections.observableArrayList();
-//        result.addAll(attributes);
-//        result.addAll(operations);
         return attributes;
     }
-
 
     public void deleteAttribute(UMLAttribute selected) {
         attributes.remove(selected);

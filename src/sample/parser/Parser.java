@@ -2,7 +2,6 @@ package sample.parser;
 
 import sample.uml.ClassDiagram;
 import sample.uml.UMLAttribute;
-import sample.uml.UMLOperation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -142,7 +141,7 @@ public class Parser {
                 attributes.add(attr);
             }
 //            System.out.println(attributes.toString());
-            diagram.getLast().addOperation(UMLOperation.create(visibility, name, diagram.classifierForName("method") ,(attributes).toArray()));
+            diagram.getLast().addAttribute(new UMLAttribute(visibility, name, diagram.classifierForName("method")));
 
 
         } else if (matcher2.matches()) {
