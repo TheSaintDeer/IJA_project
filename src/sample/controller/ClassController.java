@@ -26,39 +26,6 @@ public class ClassController extends Main {
         index = i;
     }
 
-//    @FXML
-//    private Button acceptClass;
-//
-//    @FXML
-//    private Button addAttr;
-//
-//    @FXML
-//    private Button addMetod;
-//
-//    @FXML
-//    private TextField attr1;
-//
-//    @FXML
-//    private TextField attr2;
-//
-//    @FXML
-//    private Button changeClass;
-//
-//    @FXML
-//    private Button deleteClass;
-//
-//    @FXML
-//    private AnchorPane mainPane;
-//
-//    @FXML
-//    private TextField metod1;
-//
-//    @FXML
-//    private TextField metod2;
-//
-//    @FXML
-//    private TextField nameClass;
-
     @FXML
     private TitledPane titledPane;
 
@@ -84,9 +51,6 @@ public class ClassController extends Main {
         listView.setContextMenu(contextMenu);
         listView.setEditable(true);
 
-
-
-
         add.setOnAction(new EventHandler<ActionEvent>() {
             int i = 0;
             @Override
@@ -95,6 +59,9 @@ public class ClassController extends Main {
             }
 
         });
+        /**
+         *
+         */
         edit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -142,6 +109,10 @@ public class ClassController extends Main {
 
     }
 
+    /**
+     * Set class
+     * @param c input class
+     */
     public void setClass(UMLClass c) {
         this.c = c;
     }

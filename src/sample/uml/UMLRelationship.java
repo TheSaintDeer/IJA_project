@@ -2,6 +2,7 @@ package sample.uml;
 
 public class UMLRelationship {
 
+
     public enum Relationship {ASSOCIACE, AGREGACE, KOMPOZICE, GENERALIZACE, ERROR}
 
     public String fromClass;
@@ -10,6 +11,12 @@ public class UMLRelationship {
 
     //Constructors
 
+    /**
+     * Constructor for creating a relation.
+     * @param fromClass Where is the relation coming from
+     * @param toClass Where does the relation go
+     * @param relationship What type of relation
+     */
     public UMLRelationship (String fromClass, String toClass, String relationship) {
 
         char[] tmp = relationship.toCharArray();
@@ -62,14 +69,26 @@ public class UMLRelationship {
 
     // Methods
 
+    /**
+     * Find out the recipient
+     * @return Class recipient
+     */
     public String getToClass () {
         return this.toClass;
     }
 
+    /**
+     * Find out the sender
+     * @return Class sender
+     */
     public String getFromClass () {
         return this.fromClass;
     }
 
+    /**
+     * Find out the relation
+     * @return Type of relation
+     */
     public Relationship getTypeRelationship () {
         return this.typeRelationship;
     }
