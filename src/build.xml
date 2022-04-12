@@ -5,14 +5,14 @@
     <property name="build.dir" value="build"/>
     <property name="doc.dir"   value="doc"/>
     <property name="dest.dir"  value="dest"/>
-    <property name="lib.dir"   value="lib/lib"/>
+    <property name="lib.dir"   value="lib/javafx-sdk-11/lib"/>
     <property name="data" value="data/diagram.txt" />
     <property name="jar.name" value="ija-app" />
 
     <property name="main-class"  value="sample.Main"/>
 
     <path id="class.path">
-        <fileset dir="lib/lib">
+        <fileset dir="${lib.dir}">
             <include name="*.jar"/>
         </fileset>
     </path>
