@@ -4,11 +4,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -21,8 +18,6 @@ import sample.uml.UMLClass;
 import java.io.IOException;
 
 public class MainController extends Main {
-
-    private int countOfRow = 0;
 
     @FXML
     private Button acceptRelat;
@@ -37,13 +32,7 @@ public class MainController extends Main {
     private Button createRelat;
 
     @FXML
-    private TextField fromClassX;
-
-    @FXML
-    private TextField fromClassY;
-
-    @FXML
-    private GridPane grPane;
+    private TextField fromClass;
 
     @FXML
     private Label labelFrom;
@@ -55,13 +44,10 @@ public class MainController extends Main {
     private AnchorPane mainPane;
 
     @FXML
-    private TextField toClassX;
+    private TextField nameOfClass;
 
     @FXML
-    private TextField toClassY;
-
-    @FXML
-    private ListView testListView;
+    private TextField toClass;
 
     private ClassDiagram diagram;
 
@@ -73,8 +59,6 @@ public class MainController extends Main {
 
     @FXML
     void initialize() {
-//        i = 0;
-//        testListView.setItems(diagram.getAll());
 
         for (UMLClass c : diagram.getAll()) {
             addNewClass(c);
@@ -93,23 +77,30 @@ public class MainController extends Main {
         });
         acceptRelat.setOnAction(event -> {
             visibleObject(false);
-            Node fromC = getNodeByRowColumnIndex(Integer.parseInt(fromClassY.getText()), Integer.parseInt(fromClassX.getText()));
-            Node toC = getNodeByRowColumnIndex(Integer.parseInt(toClassY.getText()), Integer.parseInt(toClassX.getText()));
-            drawNewLine(fromC, toC);
-
             clearField();
         });
     }
 
-    void addNewClass() {
-        checkRow();
-        grPane.add(createNewClass(), (countOfClass % 4), (countOfClass / 4));
-        countOfClass++;
-    }
-
     void addNewClass(UMLClass c) {
-        grPane.add(createNewClass(c), (countOfClass % 4), (countOfClass / 4));
-        countOfClass++;
+        String nameClass = nameOfClass.getText();
+
+        if (!nameClass.isEmpty()) {
+//            nameOfClass.setVisible(false);
+            nameOfClass.setText(null);
+
+            if (c != null) {
+                TitledPane titledPane = new TitledPane(nameClass, createNewClass(c));
+                titledPane.setId(nameClass.replaceAll("\\s+","€"));
+                titledPane.setPrefSize(-1, -1);
+                titledPane.setLayoutX(200*(countOfClass%4));
+                titledPane.setLayoutY(300*(countOfClass++/4));
+                titledPane.setCollapsible(false);
+
+                mainPane.getChildren().add(titledPane);
+            }
+
+
+        }
     }
 
     Parent createNewClass() {
@@ -148,54 +139,14 @@ public class MainController extends Main {
     private void visibleObject(boolean switcher) {
         labelFrom.setVisible(switcher);
         labelTo.setVisible(switcher);
-        fromClassX.setVisible(switcher);
-        fromClassY.setVisible(switcher);
-        toClassX.setVisible(switcher);
-        toClassY.setVisible(switcher);
+        fromClass.setVisible(switcher);
+        toClass.setVisible(switcher);
         acceptRelat.setVisible(switcher);
     }
 
-    public Node getNodeByRowColumnIndex (final int row, final int column) {
-        Node result = null;
-        ObservableList<Node> childrens = grPane.getChildren();
-
-        for (Node node : childrens) {
-            if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
-                result = node;
-                break;
-            }
-        }
-
-        return result;
-    }
-
     public void clearField () {
-        fromClassX.setText("");
-        fromClassY.setText("");
-        toClassX.setText("");
-        toClassY.setText("");
-    }
-
-    private void drawNewLine (Node from, Node to) {
-        Line line = new Line();
-        line.setStartX(from.getLayoutX() + (grPane.getColumnConstraints().get(Integer.parseInt(fromClassX.getText())).getPrefWidth() / 2) + 5);
-        line.setStartY(from.getLayoutY() + grPane.getRowConstraints().get(Integer.parseInt(fromClassY.getText())).getPrefHeight());
-        line.setEndX(to.getLayoutX() + (grPane.getColumnConstraints().get(Integer.parseInt(toClassX.getText())).getPrefWidth() / 2) + 5);
-        line.setEndY(to.getLayoutY());
-
-
-        mainPane.getChildren().add(line);
-//        grPane.add(line, 0, 0);
-    }
-
-    public void checkRow() {
-        if (countOfRow < (countOfClass / 4)) {
-            countOfRow++;
-            RowConstraints row = new RowConstraints();
-            row.setMinHeight(240);
-            row.setFillHeight(false);
-            grPane.getRowConstraints().addAll(row);
-        }
+        fromClass.setText("");
+        toClass.setText("");
     }
 
 
