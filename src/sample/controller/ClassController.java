@@ -95,36 +95,39 @@ public class ClassController extends Main {
             }
 
         });
-//        edit.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                Stage popupSave = new Stage();
+        edit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage popupSave = new Stage();
 //                popupSave.initModality(Modality.APPLICATION_MODAL);
-////                popupSave.initOwner(SwitchingPass.stage);
-//
-//                FXMLLoader loader = new FXMLLoader();
-//                loader.setLocation(getClass().getResource("/sample/fxml/class_edit_attribute.fxml"));
-//                EditController edit = loader.getController();
-//
-//                loader.setController(edit);
-//                Parent root = null;
-//                try {
-//                    root = loader.load();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//
-//
-//                Scene scene = new Scene(root);
-//                popupSave.setScene(scene);
-//                popupSave.showAndWait();
-//
-//                //after the popup closes, this will run, setting the label's text to the popup's test variable, which is public.
-//                if (edit.newNameStr != null) {
-//                    System.out.println(edit.newNameStr);
-//                }
-//            }
-//        });
+//                popupSave.initOwner(SwitchingPass.stage);
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/sample/fxml/class_edit_attribute.fxml"));
+                EditController edit = new EditController();
+                loader.setController(edit);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+                Scene scene = new Scene(root);
+                popupSave.setScene(scene);
+                popupSave.showAndWait();
+
+                //after the popup closes, this will run, setting the label's text to the popup's test variable, which is public.
+
+                UMLAttribute selected = (UMLAttribute) listView.getSelectionModel().getSelectedItem();
+
+                if (selected != null && edit.newNameStr != null && edit.newNameStr != "") {
+                    selected.setName(edit.newNameStr);
+                }
+
+            }
+        });
         delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

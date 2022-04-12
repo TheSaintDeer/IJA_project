@@ -64,4 +64,5 @@ public class UMLClass extends UMLClassifier {
     public void deleteAttribute(UMLAttribute selected) {
         attributes.remove(selected);
     }
+
 }
