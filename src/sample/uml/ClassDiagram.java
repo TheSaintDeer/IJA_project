@@ -1,56 +1,55 @@
 package sample.uml;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
-import java.lang.String;
-import java.util.Objects;
+import java.util.List;
 
-public class ClassDiagram extends Element {
+public class ClassDiagram extends Element{
 
-    ArrayList<UMLClass> array_Class;
-
-    //Constructors
+    private List<UMLClass> classes;
+    private List<UMLClassifier> classifiers;
 
     public ClassDiagram(String name) {
-        super(name);
-        this.array_Class = new ArrayList<UMLClass>();
+        super.rename(name);
+        classes = new ArrayList<>();
     }
 
-    //Methods
-
     public UMLClass createClass(String name) {
-        for (UMLClass i: array_Class) {
-            if (Objects.equals(i.name, name)) {
-                return null;
-            }
+        for (UMLClassifier c : classes) {
+            if (c.getName() == name) return null;
         }
-
-        UMLClass new_class = new UMLClass(name);
-        new_class.isUserDefined = true;
-        this.array_Class.add(new_class);
-        return new_class;
+        UMLClass umlClass = new UMLClass(name);
+        classes.add(umlClass);
+        return umlClass;
     }
 
     public UMLClassifier classifierForName(String name) {
-        for (UMLClass i: array_Class) {
-            if (Objects.equals(i.name, name)) {
-                return i;
-            }
-        }
 
-        UMLClass new_classifier = new UMLClass(name);
-        new_classifier.isUserDefined = false;
-        this.array_Class.add(new_classifier);
-        return new_classifier;
+        UMLClassifier classifier = findClassifier(name);
+        if (classifier == null) {
+            classifier = UMLClassifier.forName(name);
+        }
+        classifiers.add(classifier);
+        return classifier;
     }
 
-    public UMLClassifier findClassifier(String name) {
-        for (UMLClass i: array_Class) {
-            if (Objects.equals(i.name, name)) {
-                return i;
-            }
-        }
 
+    public UMLClassifier findClassifier(String name) {
+        for (UMLClassifier c : classifiers) {
+            if (c.getName() == name) return c;
+        }
         return null;
+    }
+
+
+    public ObservableList<UMLClass> getAll() {
+        return FXCollections.observableList(classes);
+    }
+
+    public UMLClass getLast() {
+        return classes.get(classes.size()-1);
     }
 
 }

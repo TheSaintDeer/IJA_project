@@ -7,10 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import sample.Main;
+import sample.controller.MainController;
+import sample.uml.ClassDiagram;
 
 import java.io.IOException;
 
-public class Controller extends Main {
+public class MainController extends Main {
 
     @FXML
     private Button closeWindow;
@@ -35,6 +37,12 @@ public class Controller extends Main {
 
     @FXML
     private TextField toClassY;
+
+    private ClassDiagram diagram;
+
+    public MainController(ClassDiagram d) {
+        this.diagram = d;
+    }
 
     @FXML
     void initialize() {

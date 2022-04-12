@@ -1,26 +1,23 @@
 package sample.uml;
 
-import java.lang.String;
-
 public class UMLAttribute extends Element{
 
-    UMLClassifier type;
+    private UMLClassifier type;
+    private String visibility;
 
-    //Constructors
-
-    public UMLAttribute(String name, UMLClassifier type) {
-        super(name);
+    public UMLAttribute(String visibility, String name, UMLClassifier type) {
+        super.rename(name);
+        this.visibility = visibility;
         this.type = type;
     }
 
-    //Methods
-
     public UMLClassifier getType() {
-        return this.type;
+        return type;
     }
 
     public String toString() {
-        return name + ":" + type.toString();
+        return getName()+":"+type;
     }
-    
+
+
 }

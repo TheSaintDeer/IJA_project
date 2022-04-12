@@ -1,16 +1,17 @@
 package sample.uml;
 
-import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UMLClassifier extends Element {
+public class UMLClassifier extends Element{
 
-    public boolean isUserDefined;
-    private final String[] nonUserDefined = {"int","boolean","String","void"};
+    private boolean isUserDefined;
+    private String[] nonUserDefined = {"int","boolean","String","void"};
 
     public UMLClassifier(String name) {
-        super(name);
+        super.rename(name);
         for (String s : nonUserDefined) {
-            if (s.equals(name)) {
+            if (s == name) {
                 isUserDefined = false;
                 return;
             }
@@ -19,7 +20,7 @@ public class UMLClassifier extends Element {
     }
 
     public UMLClassifier(String name, boolean isUserDefined) {
-        super(name);
+        super.rename(name);
         this.isUserDefined = isUserDefined;
     }
 
