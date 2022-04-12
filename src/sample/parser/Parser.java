@@ -10,16 +10,22 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//import static sample.Colors.log;
 
-
-
+/**
+ * Class for parsing input file
+ */
 public class Parser {
 
     private File filename;
     private ClassDiagram diagram;
     private Scanner scanner;
 
+    /**
+     * Function for snacking individual parts of the parser.
+     * @param args - tokens
+     * @param diagram - Using diagram
+     * @throws Exception
+     */
     public void parse(String[] args, ClassDiagram diagram) throws Exception {
 
         if (args.length != 0) {
@@ -35,14 +41,14 @@ public class Parser {
         scanner.useDelimiter("\\s+|(?<=[A-Za-z0-9])(?=[{])");
 
         checkWord(scanner.next(),"@startuml");
-//        while (scanner.hasNext()) {
-//            log(scanner.next(), Colors.PURPLE);
-//        }
         body();
         scanner.close();
 
     }
 
+    /**
+     * Function for parsing the body of UML code.
+     */
     private void body() {
 
         String token;
@@ -72,8 +78,11 @@ public class Parser {
 
     }
 
+    /**
+     * Link parsing relation.
+     * @param token - part of input code
+     */
     private void parseConnection(String token) {
-
 
         String o1 = token;
         String connection = null;
@@ -83,11 +92,11 @@ public class Parser {
         o2 = scanner.next();
 
         diagram.createRelat(o1, o2, connection);
-
-//        System.out.println("o1: " + o1 + " con: " + connection + " o2: " + o2);
-
     }
 
+    /**
+     * Controlling interface
+     */
     private void checkInterface() {
 
         if (checkWord(scanner.next(),"class")) {
@@ -95,11 +104,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Controlling interface
+     */
     private void checkClass() {
 
         diagram.createClass(scanner.next()).setAbstract(false);
     }
 
+    /**
+     * Controlling attribute
+     */
     private void checkAttributes() {
 
         String str = scanner.nextLine();
@@ -112,6 +127,10 @@ public class Parser {
 
     }
 
+    /**
+     * Parsing attributes of class
+     * @param str - String with UML code
+     */
     private void parseAttribute(String str) {
 
         if (str.equals("")) return;
@@ -134,13 +153,11 @@ public class Parser {
             args_str = matcher1.group(3);
 
             if (args_str.equals(""))
-            for (String s :
-                    args_str.split(",[ ]*")) {
-                UMLAttribute attr = diagram.getLast().getAttributeByName(s);
-                if (attr == null) continue;
-                attributes.add(attr);
-            }
-//            System.out.println(attributes.toString());
+                for (String s : args_str.split(",[ ]*")) {
+                    UMLAttribute attr = diagram.getLast().getAttributeByName(s);
+                    if (attr == null) continue;
+                    attributes.add(attr);
+                }
             diagram.getLast().addAttribute(new UMLAttribute(visibility, name, diagram.classifierForName("method")));
 
 
@@ -149,7 +166,6 @@ public class Parser {
             classifier = matcher2.group(2);
             name = matcher2.group(3);
             diagram.getLast().addAttribute(new UMLAttribute(visibility,name, diagram.classifierForName(classifier)));
-//            log("visibility: " + visibility + " classifier: " + classifier + " name: " + name, Colors.YELLOW);
         } else {
             System.out.println("no match found"); // TODO
         }
@@ -158,6 +174,12 @@ public class Parser {
 
     }
 
+    /**
+     * Controlling type tokens
+     * @param next - next token
+     * @param s - current token
+     * @return If everything is true, then returns true, else false
+     */
     private boolean checkWord(String next, String s) {
         if (!next.equals(s)) {
             try {
@@ -170,7 +192,10 @@ public class Parser {
         return true;
     }
 
-
+    /**
+     * Controlling file
+     * @throws Exception using library
+     */
     private void checkFilename() throws Exception {
 
         System.out.println("checking \"" + filename + "\" for existense");  // TODO
