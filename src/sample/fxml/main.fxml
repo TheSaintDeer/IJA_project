@@ -9,8 +9,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -49,21 +47,13 @@
             <TextField fx:id="toClass" layoutX="677.0" layoutY="561.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="677.0" />
             <Button fx:id="acceptRelat" layoutX="839.0" layoutY="561.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="839.0">
                <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../asset/4879883_achievement_check_mark_ok_success_icon.png" />
-                     </image>
-                  </ImageView>
+                  <Label alignment="CENTER" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" text="OK" />
                </graphic>
             </Button>
             <TextField fx:id="nameOfClass" layoutX="203.0" layoutY="543.0" prefHeight="30.0" prefWidth="150.0" promptText="Name of class" visible="false" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="203.0" />
             <Button fx:id="acceptClass" layoutX="380.0" layoutY="548.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="370.0">
                <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../asset/4879883_achievement_check_mark_ok_success_icon.png" />
-                     </image>
-                  </ImageView>
+                  <Label alignment="CENTER" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" text="OK" />
                </graphic>
             </Button>
             <SplitPane dividerPositions="0.7504273504273504" prefHeight="525.0" prefWidth="1172.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
