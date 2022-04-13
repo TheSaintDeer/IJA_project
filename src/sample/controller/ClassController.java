@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.Main;
 import sample.uml.UMLAttribute;
@@ -31,10 +30,6 @@ public class ClassController extends Main {
 
     @FXML
     private ListView listView;
-
-    public void setExampleTextField(String text) {
-        titledPane.setText(text);
-    }
     @FXML
     void initialize() {
 
@@ -43,37 +38,38 @@ public class ClassController extends Main {
 
         ContextMenu contextMenu = new ContextMenu();
         MenuItem add = new MenuItem("Add");
-        MenuItem edit = new MenuItem("Edit");
-        MenuItem delete = new MenuItem("Delete");
+        MenuItem edit_classname = new MenuItem("Edit classname");
+        MenuItem edit_attribute = new MenuItem("Edit attribute");
+        MenuItem delete_attribute = new MenuItem("Delete attribute");
+        MenuItem delete_class = new MenuItem("Delete class");
         contextMenu.getItems().add(add);
-        contextMenu.getItems().add(edit);
-        contextMenu.getItems().add(delete);
+        contextMenu.getItems().add(edit_attribute);
+        contextMenu.getItems().add(edit_classname);
+        contextMenu.getItems().add(delete_attribute);
+        contextMenu.getItems().add(delete_class);
         listView.setContextMenu(contextMenu);
         listView.setEditable(true);
 
         /**
          * Add new attribute
          */
-        add.setOnAction(new EventHandler<ActionEvent>() {
+        add.setOnAction(new EventHandler<>() {
             int i = 0;
             @Override
             public void handle(ActionEvent actionEvent) {
-                c.addAttribute(new UMLAttribute("+","newAttribute"+String.valueOf(i++),new UMLClassifier("type")));
+                c.addAttribute(new UMLAttribute("+", "newAttribute" + i++, new UMLClassifier("type")));
             }
 
         });
 
-        /**
-         * Edit attribute
-         */
-        edit.setOnAction(new EventHandler<ActionEvent>() {
+        edit_classname.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Stage popupSave = new Stage();
 
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/sample/fxml/class_edit_attribute.fxml"));
-                EditController edit = new EditController();
+                loader.setLocation(getClass().getResource("/sample/fxml/class_edit_classname.fxml"));
+                EditClassnameController edit = new EditClassnameController();
                 loader.setController(edit);
                 Parent root = null;
                 try {
@@ -81,29 +77,62 @@ public class ClassController extends Main {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
-
                 Scene scene = new Scene(root);
                 popupSave.setScene(scene);
                 popupSave.showAndWait();
 
-                //after the popup closes, this will run, setting the label's text to the popup's test variable, which is public.
+                //after the popup closes, this will run
+                c.setName(edit.newClassNameStr);
+            }
+        });
 
+        /**
+         * Edit attribute
+         */
+        edit_attribute.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage popupSave = new Stage();
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/sample/fxml/class_edit_attribute.fxml"));
+                EditAttributeController edit = new EditAttributeController();
+                loader.setController(edit);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Scene scene = new Scene(root);
+                popupSave.setScene(scene);
+                popupSave.showAndWait();
+
+                //after the popup closes, this will run
                 UMLAttribute selected = (UMLAttribute) listView.getSelectionModel().getSelectedItem();
 
-                if (selected != null && edit.newNameStr != null && edit.newNameStr != "") {
+                if (selected != null && edit.newNameStr != null && !edit.newNameStr.equals("")) {
                     selected.setVisibility(edit.newVisibilityStr);
                     selected.setName(edit.newNameStr);
                     selected.setType(edit.newTypeStr);
                 }
 
+                listView.getSelectionModel().clearSelection();
+
+            }
+        });
+
+        delete_class.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+//                delete_class.
             }
         });
 
         /**
          * Delete attribute
          */
-        delete.setOnAction(new EventHandler<ActionEvent>() {
+        delete_attribute.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 UMLAttribute selected = (UMLAttribute) listView.getSelectionModel().getSelectedItem();

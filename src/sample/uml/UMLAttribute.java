@@ -46,6 +46,7 @@ public class UMLAttribute extends Element{
     }
 
     public void setType(String newTypeStr) {
+        if (newTypeStr.equals("")) return;
         this.type = new UMLClassifier(newTypeStr);
     }
 }

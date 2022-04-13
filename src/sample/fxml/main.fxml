@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1172.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1172.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="720.0" maxWidth="1172.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1172.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutY="94.0" prefHeight="626.0" prefWidth="1172.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
          <children>
-            <Button fx:id="createClass" alignment="CENTER" cache="true" layoutX="23.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create class" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="23.0">
+            <Button fx:id="createClass" alignment="CENTER" cache="true" layoutX="23.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create class" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -26,7 +26,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="416.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relat" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="416.0">
+            <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="416.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relation" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="415.0">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -36,13 +36,13 @@
             </Button>
             <MenuButton fx:id="typeRelat" layoutX="839.0" layoutY="534.0" mnemonicParsing="false" text="Type relat" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="839.0">
               <items>
-                <MenuItem fx:id="typeAs" mnemonicParsing="false" text="ASSOCIACE" />
-                  <MenuItem fx:id="typeAg" mnemonicParsing="false" text="AGREGACE" />
-                  <MenuItem fx:id="typeKo" mnemonicParsing="false" text="KOMPOZICE" />
-                <MenuItem fx:id="typeGe" mnemonicParsing="false" text="GENERALIZACE" />
+                <MenuItem fx:id="typeAs" mnemonicParsing="false" text="Association" />
+                  <MenuItem fx:id="typeAg" mnemonicParsing="false" text="Aggregation" />
+                  <MenuItem fx:id="typeKo" mnemonicParsing="false" text="Composition" />
+                <MenuItem fx:id="typeGe" mnemonicParsing="false" text="Generalization" />
               </items>
             </MenuButton>
-            <Label fx:id="terminalErrors" layoutX="983.0" layoutY="573.0" prefHeight="30.0" prefWidth="162.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="983.0" AnchorPane.rightAnchor="27.0" />
+            <Label fx:id="terminalErrors" layoutX="983.0" layoutY="573.0" prefHeight="30.0" prefWidth="162.0" textFill="#d70909" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="983.0" AnchorPane.rightAnchor="27.0" />
             <Label fx:id="labelFrom" layoutX="598.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="598.0" />
             <Label fx:id="labelTo" layoutX="598.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="598.0" />
             <TextField fx:id="fromClass" layoutX="677.0" layoutY="534.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="677.0" />

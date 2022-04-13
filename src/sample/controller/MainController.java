@@ -81,7 +81,7 @@ public class MainController extends Main {
 
     @FXML
     private MenuButton typeRelat;
-    private ClassDiagram diagram;
+    private final ClassDiagram diagram;
 
     public MainController(ClassDiagram d) {
         this.diagram = d;
@@ -98,7 +98,7 @@ public class MainController extends Main {
         }
 
         for (UMLRelationship r : diagram.getAllRelat()) {
-            System.out.println("adding relat: " + r.getFromClass() + " " + r.typeRelationship + " " + r.toClass);
+            System.out.println("adding relation: " + r.getFromClass() + " " + r.typeRelationship + " " + r.toClass);
             drawRelat(r);
         }
 
@@ -127,9 +127,7 @@ public class MainController extends Main {
             }
         });
 
-        createRelat.setOnAction(event -> {
-            visibleObject(true);
-        });
+        createRelat.setOnAction(event -> visibleObject(true));
 
         acceptRelat.setOnAction(event -> {
             if (fromClass.getText().isEmpty()) {
@@ -152,13 +150,13 @@ public class MainController extends Main {
                 clearField();
 
                 String type = "";
-                if (typeRelat.getText() == "ASSOCIACE") {
+                if (typeRelat.getText().equals("Association")) {
                     type = "<---";
-                } else if (typeRelat.getText() == "AGREGACE") {
+                } else if (typeRelat.getText().equals("Aggregation")) {
                     type = "<o--";
-                } else if (typeRelat.getText() == "KOMPOZICE") {
+                } else if (typeRelat.getText().equals("Composition")) {
                     type = "<*--";
-                } else if (typeRelat.getText() == "GENERALIZACE") {
+                } else if (typeRelat.getText().equals("Generalization")) {
                     type = "<|--";
                 }
                 if (diagram.findClass(fromClass.getText()) == null  || diagram.findClass(toClass.getText()) == null) {
@@ -171,21 +169,13 @@ public class MainController extends Main {
             }
         });
 
-        typeAs.setOnAction(event -> {
-            typeRelat.setText("ASSOCIACE");
-        });
+        typeAs.setOnAction(event -> typeRelat.setText("Association"));
 
-        typeAg.setOnAction(event -> {
-            typeRelat.setText("AGREGACE");
-        });
+        typeAg.setOnAction(event -> typeRelat.setText("Aggregation"));
 
-        typeKo.setOnAction(event -> {
-            typeRelat.setText("KOMPOZICE");
-        });
+        typeKo.setOnAction(event -> typeRelat.setText("Composition"));
 
-        typeGe.setOnAction(event -> {
-            typeRelat.setText("GENERALIZACE");
-        });
+        typeGe.setOnAction(event -> typeRelat.setText("Generalization"));
 
     }
 
@@ -206,7 +196,7 @@ public class MainController extends Main {
         /**
          * Action when mouse pressed on class
          */
-        newClass.setOnMousePressed(new EventHandler<MouseEvent>() {
+        newClass.setOnMousePressed(new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
 
@@ -217,8 +207,8 @@ public class MainController extends Main {
                 nameOfActiveObject = newClass.getId();
                 SceneX = event.getSceneX();
                 SceneY = event.getSceneY();
-                TranslateX = ((TitledPane)(event.getSource())).getTranslateX();
-                TranslateY = ((TitledPane)(event.getSource())).getTranslateY();
+                TranslateX = ((TitledPane) (event.getSource())).getTranslateX();
+                TranslateY = ((TitledPane) (event.getSource())).getTranslateY();
             }
         });
 
@@ -272,7 +262,7 @@ public class MainController extends Main {
 
     /**
      * makes objects visible or invisible
-     * @param switcher
+     * @param switcher boolean
      */
     private void visibleObject(boolean switcher) {
         labelFrom.setVisible(switcher);
@@ -317,7 +307,7 @@ public class MainController extends Main {
         switch (r.getTypeRelationship()) {
 
             case ASSOCIACE:
-                if (fromClass == toClass) {
+                if (fromClass.equals(toClass)) {
                     line1 = new Line(x1, y1+h1/2, x1-30, y1+h1/2);
                     line2 = new Line(x2-30, y1+h1/2, x2-30, y2-30);
                     line3 = new Line(x1-30, y1-30, x2+w2/2, y1-30);

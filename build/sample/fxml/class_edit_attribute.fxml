@@ -18,8 +18,9 @@
           <MenuItem fx:id="publicVisibility" mnemonicParsing="false" text="+" />
           <MenuItem fx:id="privateVisibility" mnemonicParsing="false" text="-" />
             <MenuItem fx:id="protectedVisibility" mnemonicParsing="false" text="#" />
-            <MenuItem fx:id="packageVisibility"  mnemonicParsing="false" text="~" />
+            <MenuItem fx:id="packageVisibility" mnemonicParsing="false" text="~" />
         </items>
       </MenuButton>
+      <Label fx:id="warningLabel" layoutX="20.0" layoutY="87.0" prefHeight="24.0" prefWidth="221.0" text="Type and Name cant be empty!" textFill="#f20b0b" visible="false" AnchorPane.topAnchor="90.0" />
    </children>
 </AnchorPane>

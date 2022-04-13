@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="125.0" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="145.0" layoutY="33.0" prefHeight="34.0" prefWidth="356.0" text="New name for class:" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <TextField fx:id="newName" layoutX="26.0" layoutY="60.0" prefHeight="26.0" prefWidth="278.0" promptText="Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+      <Button fx:id="submitButton" layoutX="314.0" layoutY="60.0" mnemonicParsing="false" text="Submit" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
+      <Label fx:id="warningLabel" layoutX="20.0" layoutY="87.0" prefHeight="24.0" prefWidth="221.0" text="Name cant be empty!" textFill="#f20b0b" visible="false" AnchorPane.topAnchor="90.0" />
+   </children>
+</AnchorPane>

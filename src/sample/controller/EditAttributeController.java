@@ -3,16 +3,10 @@ package sample.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
 
-public class EditController {
+public class EditAttributeController {
 
     @FXML
     private ResourceBundle resources;
@@ -31,6 +25,9 @@ public class EditController {
 
     @FXML
     private Button submitButton;
+
+    @FXML
+    private Label warningLabel;
 
     @FXML
     private MenuItem packageVisibility; // ~
@@ -57,9 +54,16 @@ public class EditController {
     void initialize() {
 
         submitButton.setOnAction(actionEvent -> {
+
             newNameStr = newName.getText();
             newTypeStr = newType.getText();
-            submitButton.getScene().getWindow().hide();
+
+            if (newNameStr.equals("") || newTypeStr.equals("")) {
+                warningLabel.setVisible(true);
+            } else {
+                submitButton.getScene().getWindow().hide();
+            }
+
         });
 
         publicVisibility.setOnAction(actionEvent -> {
