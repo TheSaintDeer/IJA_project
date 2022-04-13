@@ -204,7 +204,7 @@ public class Parser {
             System.out.println(filename + " exists");
         }else{
             System.out.println("file \"" + filename + "\" does not exists, throwing exception");  // TODO
-            throw new FileNotFoundException(filename + " does not exists");
+//            throw new FileNotFoundException(filename + " does not exists");
 
         }
 

@@ -2,7 +2,6 @@ package sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.controller.MainController;
@@ -32,12 +31,13 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        classDiagram = new ClassDiagram("Diagram");
+        classDiagram = new ClassDiagram("Class Diagram");
         parser = new Parser();
         try {
-            parser.parse(new String[] {"src/sample/diagram.txt"}, classDiagram);
+            parser.parse(new String[] {"data/diagram.txt"}, classDiagram);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+
         }
 
         launch();

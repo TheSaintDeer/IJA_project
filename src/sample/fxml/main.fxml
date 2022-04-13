@@ -16,7 +16,7 @@
 
 <AnchorPane maxHeight="720.0" maxWidth="1172.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1172.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="121.0" prefHeight="599.0" prefWidth="959.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="121.0">
+      <AnchorPane layoutY="94.0" prefHeight="626.0" prefWidth="1172.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
          <children>
             <MenuButton fx:id="typeRelat" layoutX="839.0" layoutY="534.0" mnemonicParsing="false" text="Type relat" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="839.0">
               <items>
@@ -74,29 +74,26 @@
                   </ScrollPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="366.0">
                      <children>
-                        <Label layoutX="91.0" layoutY="23.0" prefHeight="30.0" prefWidth="270.0" text="Selected Class" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                        <Label layoutX="91.0" layoutY="23.0" prefHeight="30.0" prefWidth="270.0" text="Selected Class:" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nameOfSelectedClass" layoutX="14.0" layoutY="49.0" promptText="Name of Class" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0" />
                         <ListView fx:id="attributesOfSelectedClass" editable="true" layoutX="20.0" layoutY="88.0" prefHeight="256.0" prefWidth="249.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="90.0" />
-                        <Label layoutX="20.0" layoutY="361.0" prefHeight="30.0" prefWidth="270.0" text="Selected Attribute" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="350.0">
+                        <Label fx:id="nameOfSelectedClass" layoutX="14.0" layoutY="50.0" prefHeight="30.0" prefWidth="270.0" text="Selected Class" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                            <font>
-                              <Font name="System Bold" size="13.0" />
+                              <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nameOfSelectedAttribute" layoutX="20.0" layoutY="380.0" promptText="Name of Attribute" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="380.0" />
-                        <Button fx:id="submitChangeButton" layoutX="207.0" layoutY="421.0" mnemonicParsing="false" text="Submit" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </items>
             </SplitPane>
          </children>
       </AnchorPane>
-      <Label fx:id="diagramName" alignment="CENTER" layoutY="25.0" prefHeight="75.0" prefWidth="1000.0" text="Class diagram" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <Label fx:id="diagramName" alignment="CENTER" layoutY="25.0" prefHeight="60.0" prefWidth="1172.0" text="Class diagram" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
          <font>
-            <Font name="System Italic" size="49.0" />
+            <Font name="System Italic" size="40.0" />
          </font>
       </Label>
    </children>

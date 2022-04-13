@@ -1,31 +1,17 @@
 package sample.controller;
 
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListView.EditEvent;
-import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import javafx.util.converter.DefaultStringConverter;
 import sample.Main;
-import sample.controller.MainController;
 import sample.uml.ClassDiagram;
-import sample.uml.UMLAttribute;
 import sample.uml.UMLClass;
 import sample.uml.UMLRelationship;
 
@@ -37,6 +23,7 @@ public class MainController extends Main {
     private String nameOfActiveObject = null;
     double SceneX, SceneY;
     double TranslateX, TranslateY;
+
 
     @FXML
     private Button acceptClass;
@@ -72,13 +59,7 @@ public class MainController extends Main {
     private TextField nameOfClass;
 
     @FXML
-    private TextField nameOfSelectedAttribute;
-
-    @FXML
-    private TextField nameOfSelectedClass;
-
-    @FXML
-    private Button submitChangeButton;
+    private Label nameOfSelectedClass;
 
     @FXML
     private TextField toClass;
@@ -179,10 +160,6 @@ public class MainController extends Main {
             typeRelat.setText("GENERALIZACE");
         });
 
-        submitChangeButton.setOnAction(event -> {
-
-
-        });
     }
 
     /**
@@ -193,8 +170,9 @@ public class MainController extends Main {
 
         TitledPane newClass = (TitledPane) createNewClass(c);
 
-        newClass.setLayoutX(200*(countOfClass % 4));
-        newClass.setLayoutY(250*(countOfClass++ /4));
+        newClass.setLayoutX(50+300*(countOfClass % 3));
+        newClass.setLayoutY(50+250*(countOfClass / 3));
+        countOfClass++;
         newClass.setCollapsible(false);
         newClass.setId(c.getName()+"id");
 
@@ -250,7 +228,7 @@ public class MainController extends Main {
      */
     Parent createNewClass(UMLClass c) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/fxml/class_sample2.fxml"));
+        loader.setLocation(getClass().getResource("/sample/fxml/class_sample.fxml"));
 
         ClassController controller = new ClassController(countOfClass);
         controller.setClass(c);
