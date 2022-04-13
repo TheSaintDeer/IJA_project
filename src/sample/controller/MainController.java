@@ -148,8 +148,6 @@ public class MainController extends Main {
                 clearField();
             } else {
                 visibleObject(false);
-                typeRelat.setText("Type relat");
-                clearField();
 
                 String type = "";
                 if (typeRelat.getText() == "ASSOCIACE") {
@@ -161,6 +159,10 @@ public class MainController extends Main {
                 } else if (typeRelat.getText() == "GENERALIZACE") {
                     type = "<|--";
                 }
+
+                typeRelat.setText("Type relat");
+                clearField();
+
                 if (diagram.findClass(fromClass.getText()) == null  || diagram.findClass(toClass.getText()) == null) {
                     terminalErrors.setText("Don't exist one of classes");
                 } else {
