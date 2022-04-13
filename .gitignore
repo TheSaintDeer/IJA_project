@@ -1,0 +1,8 @@
+target/
+build/
+doc/
+
+dest/
+demo.iml
+.idea
+*.class
