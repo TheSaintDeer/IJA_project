@@ -62,6 +62,9 @@ public class MainController extends Main {
     private Label nameOfSelectedClass;
 
     @FXML
+    private Label terminalErrors;
+
+    @FXML
     private TextField toClass;
 
     @FXML
@@ -106,9 +109,17 @@ public class MainController extends Main {
 
         acceptClass.setOnAction(event -> {
             UMLClass newClass = diagram.createClass(nameOfClass.getText());
-            if (newClass == null) {
-                System.out.println("class already exists!");
+
+            if (nameOfClass.getText().isEmpty()) {
+                terminalErrors.setText("Empty name");
+                nameOfClass.setVisible(false);
+                acceptClass.setVisible(false);
+
+            } else if (newClass == null) {
+                terminalErrors.setText("Class already exists");
+
             } else {
+                terminalErrors.setText("");
                 nameOfClass.setVisible(false);
                 acceptClass.setVisible(false);
                 addNewClass(newClass);
@@ -121,27 +132,43 @@ public class MainController extends Main {
         });
 
         acceptRelat.setOnAction(event -> {
-            visibleObject(false);
+            if (fromClass.getText().isEmpty()) {
+                terminalErrors.setText("Empty \"From class\"");
+                visibleObject(false);
+                typeRelat.setText("Type relat");
+                clearField();
+            } else if (toClass.getText().isEmpty()) {
+                terminalErrors.setText("Empty \"To class\"");
+                visibleObject(false);
+                typeRelat.setText("Type relat");
+                clearField();
+            } else if (typeRelat.getText().equals("Type relat")) {
+                terminalErrors.setText("Don't choose type");
+                visibleObject(false);
+                clearField();
+            } else {
+                visibleObject(false);
+                typeRelat.setText("Type relat");
+                clearField();
 
-            String type = "";
-            if (typeRelat.getText() == "ASSOCIACE") {
-                type = "<---";
-            } else if (typeRelat.getText() == "AGREGACE") {
-                type = "<o--";
-            } else if (typeRelat.getText() == "KOMPOZICE") {
-                type = "<*--";
-            } else if (typeRelat.getText() == "GENERALIZACE") {
-                type = "<|--";
+                String type = "";
+                if (typeRelat.getText() == "ASSOCIACE") {
+                    type = "<---";
+                } else if (typeRelat.getText() == "AGREGACE") {
+                    type = "<o--";
+                } else if (typeRelat.getText() == "KOMPOZICE") {
+                    type = "<*--";
+                } else if (typeRelat.getText() == "GENERALIZACE") {
+                    type = "<|--";
+                }
+                if (diagram.findClass(fromClass.getText()) == null  || diagram.findClass(toClass.getText()) == null) {
+                    terminalErrors.setText("Don't exist one of classes");
+                } else {
+                    UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
+                    drawRelat(relat);
+                    terminalErrors.setText("");
+                }
             }
-
-            typeRelat.setText("Type relat");
-
-            if (diagram.findClass(fromClass.getText()) != null && diagram.findClass(toClass.getText()) != null && type != "") {
-                UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
-                drawRelat(relat);
-            }
-
-            clearField();
         });
 
         typeAs.setOnAction(event -> {
