@@ -8,8 +8,8 @@ package sample.uml;
  */
 public class UMLAttribute extends Element{
 
-    private final UMLClassifier type;
-    private final String visibility;
+    private UMLClassifier type;
+    private String visibility;
 
     /**
      * Creates an attribute instance.
@@ -41,4 +41,11 @@ public class UMLAttribute extends Element{
     }
 
 
+    public void setVisibility(String newVisibilityStr) {
+        this.visibility = newVisibilityStr;
+    }
+
+    public void setType(String newTypeStr) {
+        this.type = new UMLClassifier(newTypeStr);
+    }
 }

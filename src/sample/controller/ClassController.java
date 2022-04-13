@@ -92,7 +92,9 @@ public class ClassController extends Main {
                 UMLAttribute selected = (UMLAttribute) listView.getSelectionModel().getSelectedItem();
 
                 if (selected != null && edit.newNameStr != null && edit.newNameStr != "") {
+                    selected.setVisibility(edit.newVisibilityStr);
                     selected.setName(edit.newNameStr);
+                    selected.setType(edit.newTypeStr);
                 }
 
             }
