@@ -117,6 +117,7 @@ public class MainController extends Main {
 
             } else if (newClass == null) {
                 terminalErrors.setText("Class already exists");
+                nameOfClass.setText("");
 
             } else {
                 terminalErrors.setText("");
@@ -125,6 +126,8 @@ public class MainController extends Main {
                 addNewClass(newClass);
                 nameOfClass.setText("");
             }
+
+            System.out.println(diagram.getAll());
         });
 
         createRelat.setOnAction(event -> visibleObject(true));
@@ -133,15 +136,15 @@ public class MainController extends Main {
             if (fromClass.getText().isEmpty()) {
                 terminalErrors.setText("Empty \"From class\"");
                 visibleObject(false);
-                typeRelat.setText("Type relat");
+                typeRelat.setText("Type");
                 clearField();
             } else if (toClass.getText().isEmpty()) {
                 terminalErrors.setText("Empty \"To class\"");
                 visibleObject(false);
-                typeRelat.setText("Type relat");
+                typeRelat.setText("Type");
                 clearField();
-            } else if (typeRelat.getText().equals("Type relat")) {
-                terminalErrors.setText("Don't choose type");
+            } else if (typeRelat.getText().equals("Type")) {
+                terminalErrors.setText("Choose type!");
                 visibleObject(false);
                 clearField();
             } else {
@@ -158,16 +161,16 @@ public class MainController extends Main {
                     type = "<|--";
                 }
 
-                typeRelat.setText("Type relat");
-                clearField();
-
                 if (diagram.findClass(fromClass.getText()) == null  || diagram.findClass(toClass.getText()) == null) {
-                    terminalErrors.setText("Don't exist one of classes");
+                    terminalErrors.setText("One of the classes doesn't exist");
                 } else {
                     UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
                     drawRelat(relat);
                     terminalErrors.setText("");
                 }
+
+                typeRelat.setText("Type");
+                clearField();
             }
         });
 

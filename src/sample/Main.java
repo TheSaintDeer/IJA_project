@@ -34,7 +34,7 @@ public class Main extends Application {
         classDiagram = new ClassDiagram("Class Diagram");
         parser = new Parser();
         try {
-            parser.parse(new String[] {"data/diagram.txt"}, classDiagram);
+            parser.parse(args, classDiagram);
         } catch (Exception e) {
 //            e.printStackTrace();
 

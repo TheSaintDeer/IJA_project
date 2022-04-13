@@ -9,10 +9,12 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1172.0" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1172.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="720.0" maxWidth="1495.0" minHeight="705.0" minWidth="1024.0" prefHeight="705.0" prefWidth="1300.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutY="94.0" prefHeight="626.0" prefWidth="1172.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
          <children>
@@ -24,7 +26,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="416.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relation" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="415.0">
+            <Button fx:id="createRelat" alignment="CENTER" cache="true" layoutX="416.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create relation" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="415.0">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -32,7 +34,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <MenuButton fx:id="typeRelat" layoutX="839.0" layoutY="534.0" mnemonicParsing="false" text="Type relat" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="839.0">
+            <MenuButton fx:id="typeRelat" layoutX="839.0" layoutY="534.0" mnemonicParsing="false" text="Type" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="940.0">
               <items>
                 <MenuItem fx:id="typeAs" mnemonicParsing="false" text="Association" />
                   <MenuItem fx:id="typeAg" mnemonicParsing="false" text="Aggregation" />
@@ -40,20 +42,28 @@
                 <MenuItem fx:id="typeGe" mnemonicParsing="false" text="Generalization" />
               </items>
             </MenuButton>
-            <Label fx:id="terminalErrors" layoutX="983.0" layoutY="573.0" prefHeight="30.0" prefWidth="162.0" textFill="#d70909" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="983.0" AnchorPane.rightAnchor="27.0" />
-            <Label fx:id="labelFrom" layoutX="598.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="598.0" />
-            <Label fx:id="labelTo" layoutX="598.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="598.0" />
-            <TextField fx:id="fromClass" layoutX="677.0" layoutY="534.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="677.0" />
-            <TextField fx:id="toClass" layoutX="677.0" layoutY="561.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="677.0" />
-            <Button fx:id="acceptRelat" layoutX="839.0" layoutY="561.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="839.0">
+            <Label fx:id="terminalErrors" layoutX="1043.0" layoutY="573.0" prefHeight="30.0" prefWidth="230.0" textFill="#d70909" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="1043.0" AnchorPane.rightAnchor="27.0" />
+            <Label fx:id="labelFrom" layoutX="598.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="680.0" />
+            <Label fx:id="labelTo" layoutX="598.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="680.0" />
+            <TextField fx:id="fromClass" layoutX="677.0" layoutY="534.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="780.0" />
+            <TextField fx:id="toClass" layoutX="677.0" layoutY="561.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="780.0" />
+            <Button fx:id="acceptRelat" layoutX="839.0" layoutY="561.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="940.0">
                <graphic>
-                  <Label alignment="CENTER" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" text="OK" />
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/check.png" />
+                     </image>
+                  </ImageView>
                </graphic>
             </Button>
             <TextField fx:id="nameOfClass" layoutX="203.0" layoutY="543.0" prefHeight="30.0" prefWidth="150.0" promptText="Name of class" visible="false" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="203.0" />
             <Button fx:id="acceptClass" layoutX="380.0" layoutY="548.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="370.0">
                <graphic>
-                  <Label alignment="CENTER" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" text="OK" />
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/check.png" />
+                     </image>
+                  </ImageView>
                </graphic>
             </Button>
             <SplitPane dividerPositions="0.7504273504273504" prefHeight="525.0" prefWidth="1172.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
