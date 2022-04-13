@@ -18,14 +18,6 @@
    <children>
       <AnchorPane layoutY="94.0" prefHeight="626.0" prefWidth="1172.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
          <children>
-            <MenuButton fx:id="typeRelat" layoutX="839.0" layoutY="534.0" mnemonicParsing="false" text="Type relat" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="839.0">
-              <items>
-                <MenuItem fx:id="typeAs" mnemonicParsing="false" text="ASSOCIACE" />
-                  <MenuItem fx:id="typeAg" mnemonicParsing="false" text="AGREGACE" />
-                  <MenuItem fx:id="typeKo" mnemonicParsing="false" text="KOMPOZICE" />
-                <MenuItem fx:id="typeGe" mnemonicParsing="false" text="GENERALIZACE" />
-              </items>
-            </MenuButton>
             <Button fx:id="createClass" alignment="CENTER" cache="true" layoutX="23.0" layoutY="533.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Create class" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="23.0">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -42,10 +34,19 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Label fx:id="labelFrom" layoutX="598.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" AnchorPane.leftAnchor="598.0" />
-            <Label fx:id="labelTo" layoutX="598.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" AnchorPane.leftAnchor="598.0" />
-            <TextField fx:id="fromClass" layoutX="677.0" layoutY="534.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.leftAnchor="677.0" />
-            <TextField fx:id="toClass" layoutX="677.0" layoutY="561.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.leftAnchor="677.0" />
+            <MenuButton fx:id="typeRelat" layoutX="839.0" layoutY="534.0" mnemonicParsing="false" text="Type relat" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="839.0">
+              <items>
+                <MenuItem fx:id="typeAs" mnemonicParsing="false" text="ASSOCIACE" />
+                  <MenuItem fx:id="typeAg" mnemonicParsing="false" text="AGREGACE" />
+                  <MenuItem fx:id="typeKo" mnemonicParsing="false" text="KOMPOZICE" />
+                <MenuItem fx:id="typeGe" mnemonicParsing="false" text="GENERALIZACE" />
+              </items>
+            </MenuButton>
+            <Label fx:id="terminalErrors" layoutX="983.0" layoutY="573.0" prefHeight="30.0" prefWidth="162.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="983.0" AnchorPane.rightAnchor="27.0" />
+            <Label fx:id="labelFrom" layoutX="598.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="598.0" />
+            <Label fx:id="labelTo" layoutX="598.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="598.0" />
+            <TextField fx:id="fromClass" layoutX="677.0" layoutY="534.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="677.0" />
+            <TextField fx:id="toClass" layoutX="677.0" layoutY="561.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="677.0" />
             <Button fx:id="acceptRelat" layoutX="839.0" layoutY="561.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="839.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -55,8 +56,8 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TextField fx:id="nameOfClass" layoutX="203.0" layoutY="543.0" prefHeight="30.0" prefWidth="150.0" promptText="Name of class" visible="false" />
-            <Button fx:id="acceptClass" layoutX="380.0" layoutY="548.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false">
+            <TextField fx:id="nameOfClass" layoutX="203.0" layoutY="543.0" prefHeight="30.0" prefWidth="150.0" promptText="Name of class" visible="false" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="203.0" />
+            <Button fx:id="acceptClass" layoutX="380.0" layoutY="548.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="370.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
