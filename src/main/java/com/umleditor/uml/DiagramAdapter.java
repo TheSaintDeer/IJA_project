@@ -1,7 +1,6 @@
 package com.umleditor.uml;
 
 import com.google.gson.TypeAdapter;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
@@ -29,7 +28,7 @@ public class DiagramAdapter extends TypeAdapter<ClassDiagram> {
         jsonWriter.name("relations");
         jsonWriter.beginArray();
 
-        for (UMLRelationship c : classDiagram.getAllRelations()) {
+        for (UMLRelation c : classDiagram.getAllRelations()) {
 
             RelationAdapter relationAdapter = new RelationAdapter();
             relationAdapter.write(jsonWriter, c);

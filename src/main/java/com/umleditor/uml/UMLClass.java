@@ -120,4 +120,8 @@ public class UMLClass extends UMLClassifier {
         attributes.remove(selected);
     }
 
+    @Override
+    public String toString() {
+        return String.format("{name:%s;\nisAbstract:%s;\nattributes:%s;}", this.getName(),this.isAbstract,this.attributes);
+    }
 }

@@ -42,7 +42,7 @@ public class UMLAttribute extends Element{
      */
     @Override
     public String toString() {
-        return type+":"+getName();
+        return visibility+type+":"+getName();
     }
 
 

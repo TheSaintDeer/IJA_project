@@ -1,6 +1,6 @@
 package com.umleditor.uml;
 
-public class UMLRelationship {
+public class UMLRelation {
 
 
     public enum Relationship {ASSOCIACE, AGREGACE, KOMPOZICE, GENERALIZACE, ERROR}
@@ -17,7 +17,7 @@ public class UMLRelationship {
      * @param toClass Where does the relation go
      * @param relationship What type of relation
      */
-    public UMLRelationship (String fromClass, String toClass, String relationship) {
+    public UMLRelation(String fromClass, String toClass, String relationship) {
 
         char[] tmp = relationship.toCharArray();
 

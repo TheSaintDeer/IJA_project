@@ -15,7 +15,7 @@ public class ClassDiagram extends Element{
 
     private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
-    private ObservableList<UMLRelationship> relationships;
+    private ObservableList<UMLRelation> relationships;
 
     /**
      * Constructor for creating a diagram instance. Each diagram has its own name.
@@ -93,10 +93,10 @@ public class ClassDiagram extends Element{
      * with the given name already exists.
      */
 
-    public UMLRelationship createRelat (String from, String to, String type) {
-        UMLRelationship relat = new UMLRelationship(from, to, type);
+    public UMLRelation createRelat (String from, String to, String type) {
+        UMLRelation relat = new UMLRelation(from, to, type);
 
-        for (UMLRelationship r : relationships) {
+        for (UMLRelation r : relationships) {
             if (r == relat) {
                 return null;
             }
@@ -138,7 +138,7 @@ public class ClassDiagram extends Element{
      * @return List representing all relations in the diagram.
      */
 
-    public ObservableList<UMLRelationship> getAllRelationsObservable() {
+    public ObservableList<UMLRelation> getAllRelationsObservable() {
         return relationships;
     }
 
@@ -146,7 +146,7 @@ public class ClassDiagram extends Element{
      * Function to get all relations in a diagram
      * @return List representing all relations in the diagram.
      */
-    public List<UMLRelationship> getAllRelations() {
+    public List<UMLRelation> getAllRelations() {
         return Collections.unmodifiableList(relationships);
     }
 
@@ -169,11 +169,11 @@ public class ClassDiagram extends Element{
      * @param nameOfClass - class name for which we want to find all relations
      * @return List of relation in which the desired class is involved
      */
-    public List<UMLRelationship> findAllRelat(String nameOfClass){
-        List<UMLRelationship> relations = new ArrayList<>();
+    public List<UMLRelation> findAllRelat(String nameOfClass){
+        List<UMLRelation> relations = new ArrayList<>();
 
 
-        for (UMLRelationship i: relationships) {
+        for (UMLRelation i: relationships) {
             if (i.getFromClass().equals(nameOfClass) || i.getToClass().equals(nameOfClass)) {
                 relations.add(i);
             }
@@ -183,7 +183,7 @@ public class ClassDiagram extends Element{
     }
     @Override
     public String toString() {
-        return String.format("{name:%s;}", this.getName());
+        return String.format("{name:%s;\nclasses:%s;\nrelations:%s;}", this.getName(),this.classes,this.relationships);
     }
 
     public void addClass(UMLClass c) {

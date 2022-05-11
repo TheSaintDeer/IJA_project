@@ -6,11 +6,11 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class RelationAdapter extends TypeAdapter<UMLRelationship> {
+public class RelationAdapter extends TypeAdapter<UMLRelation> {
 
 
     @Override
-    public void write(JsonWriter jsonWriter, UMLRelationship umlRelationship) throws IOException {
+    public void write(JsonWriter jsonWriter, UMLRelation umlRelationship) throws IOException {
 
         jsonWriter.beginObject();
 
@@ -28,7 +28,7 @@ public class RelationAdapter extends TypeAdapter<UMLRelationship> {
     }
 
     @Override
-    public UMLRelationship read(JsonReader jsonReader) throws IOException {
+    public UMLRelation read(JsonReader jsonReader) throws IOException {
         return null;
     }
 }

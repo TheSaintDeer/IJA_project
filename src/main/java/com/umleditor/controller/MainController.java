@@ -1,7 +1,6 @@
 package com.umleditor.controller;
 
-import com.google.gson.stream.JsonReader;
-import com.umleditor.uml.DiagramAdapter;
+import com.umleditor.uml.*;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
@@ -13,9 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import com.umleditor.Main;
-import com.umleditor.uml.ClassDiagram;
-import com.umleditor.uml.UMLClass;
-import com.umleditor.uml.UMLRelationship;
 import javafx.stage.FileChooser;
 import com.google.gson.*;
 
@@ -148,8 +144,8 @@ public class MainController extends Main {
                 ((TitledPane)(event.getSource())).setTranslateX(newTranslateX);
                 ((TitledPane)(event.getSource())).setTranslateY(newTranslateY);
 
-                List<UMLRelationship> relations = diagram.findAllRelat(nameOfActiveObject.substring(0, (nameOfActiveObject.length() - 2)));
-                for (UMLRelationship i: relations) {
+                List<UMLRelation> relations = diagram.findAllRelat(nameOfActiveObject.substring(0, (nameOfActiveObject.length() - 2)));
+                for (UMLRelation i: relations) {
                     mainPane.getChildren().removeAll(mainPane.lookupAll("#" + i.getFromClass() + i.getToClass() +"id"));
                     mainPane.getChildren().removeAll(mainPane.lookupAll("#" + i.getToClass() + i.getFromClass() +"id"));
                     drawRelat(i);
@@ -207,7 +203,7 @@ public class MainController extends Main {
      * Draw line of relation
      * @param r - relation from diagram
      */
-    public void drawRelat(UMLRelationship r) {
+    public void drawRelat(UMLRelation r) {
 
         String fromClass = r.fromClass + "id";
         String toClass = r.toClass + "id";
@@ -319,7 +315,7 @@ public class MainController extends Main {
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
-        builder.registerTypeAdapter(ClassDiagram.class,new DiagramAdapter());
+        builder.registerTypeAdapter(ClassDiagram.class, new DiagramAdapter());
         gson = builder.create();
 
         diagramName.setText("Class diagram mode");
@@ -329,7 +325,7 @@ public class MainController extends Main {
             addNewClass(c);
         }
 
-        for (UMLRelationship r : diagram.getAllRelationsObservable()) {
+        for (UMLRelation r : diagram.getAllRelationsObservable()) {
             System.out.println("adding relation: " + r.getFromClass() + " " + r.typeRelationship + " " + r.toClass);
             drawRelat(r);
         }
@@ -399,7 +395,7 @@ public class MainController extends Main {
                     if (diagram.findClass(fromClass.getText()) == null || diagram.findClass(toClass.getText()) == null) {
                         terminalErrors.setText("One of the classes doesn't exist");
                     } else {
-                        UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
+                        UMLRelation relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
                         drawRelat(relat);
                         terminalErrors.setText("");
                     }
@@ -486,10 +482,12 @@ public class MainController extends Main {
         try (Reader reader = new FileReader(file)) {
 
             // Convert JSON File to Java Object
+//            diagram = gson.fromJson(reader, ClassDiagram.class);
+
             diagram = gson.fromJson(reader, ClassDiagram.class);
 
             // print staff
-            System.out.println(diagram.getClasses());
+            System.out.println(diagram);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -43,6 +43,11 @@ public class ClassAdapter extends TypeAdapter<UMLClass> {
         while (jsonReader.hasNext()) {
             JsonToken token = jsonReader.peek();
 
+            if (token.equals(JsonToken.END_OBJECT)) {
+                //get the current token
+                break;
+            }
+
             if (token.equals(JsonToken.NAME)) {
                 //get the current token
                 fieldname = jsonReader.nextName();
@@ -65,7 +70,7 @@ public class ClassAdapter extends TypeAdapter<UMLClass> {
 
                 token = jsonReader.peek();
 
-                while (!token.equals(JsonToken.END_ARRAY)) {
+//                while (!token.equals(JsonToken.END_ARRAY)) {
 
 //                    token = jsonReader.peek();
                     jsonReader.beginArray();
@@ -77,8 +82,7 @@ public class ClassAdapter extends TypeAdapter<UMLClass> {
                     }
                     jsonReader.endArray();
 
-                }
-
+//                }
 
             }
         }
