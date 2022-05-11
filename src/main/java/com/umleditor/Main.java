@@ -31,7 +31,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        classDiagram = new ClassDiagram("Class Diagram");
+        classDiagram = new ClassDiagram("Class_Diagram");
         parser = new Parser();
         try {
             parser.parse(args, classDiagram);

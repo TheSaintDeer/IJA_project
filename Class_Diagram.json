@@ -1,0 +1,41 @@
+{
+  "name": "Class_Diagram",
+  "classes": [
+    {
+      "name": "a",
+      "isAbstract": false,
+      "attributes": [
+        {
+          "type": "haha",
+          "name": "ha"
+        },
+        {
+          "type": "hoho",
+          "name": "ho"
+        }
+      ]
+    },
+    {
+      "name": "b",
+      "isAbstract": false,
+      "attributes": [
+        {
+          "visibility": "+",
+          "type": "type",
+          "name": "newAttribute0"
+        },
+        {
+          "visibility": "+",
+          "type": "type",
+          "name": "newAttribute1"
+        },
+        {
+          "visibility": "+",
+          "type": "type",
+          "name": "newAttribute2"
+        }
+      ]
+    }
+  ],
+  "relations": []
+}

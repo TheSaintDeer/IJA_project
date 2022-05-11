@@ -9,6 +9,11 @@ package com.umleditor.uml;
 public class UMLAttribute extends Element{
 
     private UMLClassifier type;
+
+    public String getVisibility() {
+        return visibility;
+    }
+
     private String visibility;
 
     /**

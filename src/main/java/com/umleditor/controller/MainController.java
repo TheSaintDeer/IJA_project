@@ -1,5 +1,7 @@
 package com.umleditor.controller;
 
+import com.google.gson.stream.JsonReader;
+import com.umleditor.uml.DiagramAdapter;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
@@ -17,11 +19,7 @@ import com.umleditor.uml.UMLRelationship;
 import javafx.stage.FileChooser;
 import com.google.gson.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.List;
 
 public class MainController extends Main {
@@ -30,8 +28,11 @@ public class MainController extends Main {
     double SceneX, SceneY;
     double TranslateX, TranslateY;
 
+    private Gson gson;
     private boolean classMode = true;
 
+    @FXML
+    private MenuItem open;
     @FXML
     private MenuItem saveAs;
 
@@ -94,7 +95,7 @@ public class MainController extends Main {
 
     @FXML
     private MenuButton typeRelat;
-    private final ClassDiagram diagram;
+    private ClassDiagram diagram;
 
     public MainController(ClassDiagram d) {
         this.diagram = d;
@@ -122,7 +123,7 @@ public class MainController extends Main {
             public void handle(MouseEvent event) {
 
                 nameOfSelectedClass.setText(c.getName());
-                attributesOfSelectedClass.setItems(c.getAttributes());
+                attributesOfSelectedClass.setItems(c.getAttributesObservable());
 
 
                 nameOfActiveObject = newClass.getId();
@@ -311,10 +312,15 @@ public class MainController extends Main {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save As");
-        FileChooser.ExtensionFilter extFilter1 = new FileChooser.ExtensionFilter("All files", ".*");
+        FileChooser.ExtensionFilter extFilter1 = new FileChooser.ExtensionFilter("All files", "*.*");
         FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("TXT files", "*.txt");
         FileChooser.ExtensionFilter extFilter3 = new FileChooser.ExtensionFilter("JSON files", "*.json");
         fileChooser.getExtensionFilters().addAll(extFilter1,extFilter2,extFilter3);
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        builder.registerTypeAdapter(ClassDiagram.class,new DiagramAdapter());
+        gson = builder.create();
 
         diagramName.setText("Class diagram mode");
 
@@ -323,7 +329,7 @@ public class MainController extends Main {
             addNewClass(c);
         }
 
-        for (UMLRelationship r : diagram.getAllRelat()) {
+        for (UMLRelationship r : diagram.getAllRelationsObservable()) {
             System.out.println("adding relation: " + r.getFromClass() + " " + r.typeRelationship + " " + r.toClass);
             drawRelat(r);
         }
@@ -359,44 +365,48 @@ public class MainController extends Main {
         createRelation.setOnAction(event -> visibleObject(true));
 
         acceptRelat.setOnAction(event -> {
-            if (fromClass.getText().isEmpty()) {
-                terminalErrors.setText("Empty \"From class\"");
-                visibleObject(false);
-                typeRelat.setText("Type");
-                clearField();
-            } else if (toClass.getText().isEmpty()) {
-                terminalErrors.setText("Empty \"To class\"");
-                visibleObject(false);
-                typeRelat.setText("Type");
-                clearField();
-            } else if (typeRelat.getText().equals("Type")) {
-                terminalErrors.setText("Choose type!");
-                visibleObject(false);
-                clearField();
-            } else {
-                visibleObject(false);
 
-                String type = "";
-                if (typeRelat.getText().equals("Association")) {
-                    type = "<---";
-                } else if (typeRelat.getText().equals("Aggregation")) {
-                    type = "<o--";
-                } else if (typeRelat.getText().equals("Composition")) {
-                    type = "<*--";
-                } else if (typeRelat.getText().equals("Generalization")) {
-                    type = "<|--";
-                }
+            if (classMode) {
 
-                if (diagram.findClass(fromClass.getText()) == null  || diagram.findClass(toClass.getText()) == null) {
-                    terminalErrors.setText("One of the classes doesn't exist");
+                if (fromClass.getText().isEmpty()) {
+                    terminalErrors.setText("Empty \"From class\"");
+                    visibleObject(false);
+                    typeRelat.setText("Type");
+                    clearField();
+                } else if (toClass.getText().isEmpty()) {
+                    terminalErrors.setText("Empty \"To class\"");
+                    visibleObject(false);
+                    typeRelat.setText("Type");
+                    clearField();
+                } else if (typeRelat.getText().equals("Type")) {
+                    terminalErrors.setText("Choose type!");
+                    visibleObject(false);
+                    clearField();
                 } else {
-                    UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
-                    drawRelat(relat);
-                    terminalErrors.setText("");
-                }
+                    visibleObject(false);
 
-                typeRelat.setText("Type");
-                clearField();
+                    String type = "";
+                    if (typeRelat.getText().equals("Association")) {
+                        type = "<---";
+                    } else if (typeRelat.getText().equals("Aggregation")) {
+                        type = "<o--";
+                    } else if (typeRelat.getText().equals("Composition")) {
+                        type = "<*--";
+                    } else if (typeRelat.getText().equals("Generalization")) {
+                        type = "<|--";
+                    }
+
+                    if (diagram.findClass(fromClass.getText()) == null || diagram.findClass(toClass.getText()) == null) {
+                        terminalErrors.setText("One of the classes doesn't exist");
+                    } else {
+                        UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
+                        drawRelat(relat);
+                        terminalErrors.setText("");
+                    }
+
+                    typeRelat.setText("Type");
+                    clearField();
+                }
             }
         });
 
@@ -427,41 +437,64 @@ public class MainController extends Main {
             }
         });
 
-        saveAs.setOnAction(event -> {
+        open.setOnAction(event -> {
 
-            Gson gson = new GsonBuilder()
-                            .setPrettyPrinting()
-                            .create();
-            List<UMLClass> classes = new ArrayList<>();
-
-            for (UMLClass c: diagram.getClasses()) {
-
+            File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
+            if (file != null) {
+                parse_file(file);
             }
-
-            System.out.println(gson.toJson(diagram));
-//            fileChooser.setInitialFileName(diagram.getName());
-//            fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-//            File file = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
-//            if (file != null) {
-//                String filePath = file.getPath();
-//
-//                try {
-//                    Gson gson = new GsonBuilder()
-//                            .setPrettyPrinting()
-//                            .create();
-//                    Writer writer = new FileWriter(filePath);
-//                    writer.write(gson.toJson(diagram));
-//                    writer.close();
-//                } catch (Exception e) {
-//                    System.out.println((e.toString()));
-//                }
-//            } else {
-//                System.out.println(("File not saved, please select file or press Save."));
-//            }
-
 
 
         });
+
+        saveAs.setOnAction(event -> {
+
+//            GsonBuilder builder  = new GsonBuilder();
+//            builder.setPrettyPrinting();
+//            builder.registerTypeAdapter(ClassDiagram.class,new DiagramAdapter());
+//            Gson gson = builder.create();
+//            String jsonString = "";
+//
+//            jsonString = gson.toJson(diagram);
+//            System.out.println(jsonString);
+
+            fileChooser.setInitialFileName(diagram.getName()+".json");
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+            File file = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
+
+            if (file != null) {
+                String filePath = file.getPath();
+                try {
+                    Writer writer = new FileWriter(filePath);
+                    writer.write(gson.toJson(diagram));
+                    System.out.println(gson.toJson(diagram));
+                    writer.close();
+                } catch (Exception e) {
+                    System.out.println((e.toString()));
+                }
+            } else {
+                System.out.println(("file was not saved"));
+            }
+
+        });
+
+    }
+
+    private void parse_file(File file) {
+
+
+        try (Reader reader = new FileReader(file)) {
+
+            // Convert JSON File to Java Object
+            diagram = gson.fromJson(reader, ClassDiagram.class);
+
+            // print staff
+            System.out.println(diagram.getClasses());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

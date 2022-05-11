@@ -138,15 +138,22 @@ public class ClassDiagram extends Element{
      * @return List representing all relations in the diagram.
      */
 
-    public ObservableList<UMLRelationship> getAllRelat() {
+    public ObservableList<UMLRelationship> getAllRelationsObservable() {
         return relationships;
+    }
+
+    /**
+     * Function to get all relations in a diagram
+     * @return List representing all relations in the diagram.
+     */
+    public List<UMLRelationship> getAllRelations() {
+        return Collections.unmodifiableList(relationships);
     }
 
     /**
      * Function to get last class in a diagram
      * @return An object (instance) representing last class.
      */
-
     public UMLClass getLast() {
         return classes.get(classes.size()-1);
     }
@@ -174,5 +181,14 @@ public class ClassDiagram extends Element{
 
         return relations;
     }
+    @Override
+    public String toString() {
+        return String.format("{name:%s;}", this.getName());
+    }
 
+    public void addClass(UMLClass c) {
+        if (findClass(c.getName()) == null) {
+            classes.add(c);
+        }
+    }
 }

@@ -14,7 +14,20 @@ public class ClassAdapter extends TypeAdapter<UMLClass> {
     @Override
     public void write(JsonWriter jsonWriter, UMLClass umlClass) throws IOException {
 
+        jsonWriter.beginObject();
+        jsonWriter.name("name");
+        jsonWriter.value(umlClass.getName());
+        jsonWriter.name("isAbstract");
+        jsonWriter.value(umlClass.isAbstract());
+        jsonWriter.name("attributes");
 
+        jsonWriter.beginArray();
+        for (UMLAttribute c : umlClass.getAttributes()) {
+            AttributeAdapter classAdapter = new AttributeAdapter();
+            classAdapter.write(jsonWriter, c);
+        }
+        jsonWriter.endArray();
+        jsonWriter.endObject();
 
     }
 
@@ -41,19 +54,29 @@ public class ClassAdapter extends TypeAdapter<UMLClass> {
                 newClass.setName(jsonReader.nextString());
             }
 
+            if ("isAbstract".equals(fieldname)) {
+                //move to next token
+                token = jsonReader.peek();
+                newClass.setAbstract(jsonReader.nextBoolean());
+            }
+
             if("attributes".equals(fieldname)) {
                 //move to next token
 
                 token = jsonReader.peek();
 
-                if (fieldname.equals(JsonToken.BEGIN_ARRAY)) {
-                    jsonReader.beginArray();
-                    while (jsonReader.hasNext()) {
-                        UMLAttribute attribute = (UMLAttribute) gson.fromJson(jsonReader, AttributeAdapter.class);
-                        newClass.addAttribute(attribute);
+                while (!token.equals(JsonToken.END_ARRAY)) {
 
+//                    token = jsonReader.peek();
+                    jsonReader.beginArray();
+//                    token = jsonReader.peek();
+
+                    while (!jsonReader.peek().equals(JsonToken.END_ARRAY)) {
+                        AttributeAdapter attribute = new AttributeAdapter();
+                        newClass.addAttribute(attribute.read(jsonReader));
                     }
                     jsonReader.endArray();
+
                 }
 
 

@@ -34,7 +34,7 @@ public class ClassController extends Main {
     void initialize() {
 
         titledPane.textProperty().bindBidirectional(c.nameProperty());
-        listView.setItems(c.getAttributes());
+        listView.setItems(c.getAttributesObservable());
 
         ContextMenu contextMenu = new ContextMenu();
         MenuItem add = new MenuItem("Add");
@@ -95,7 +95,7 @@ public class ClassController extends Main {
                 Stage popupSave = new Stage();
 
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/sample/fxml/class_edit_attribute.fxml"));
+                loader.setLocation(getClass().getResource("class_edit_attribute.fxml"));
                 EditAttributeController edit = new EditAttributeController();
                 loader.setController(edit);
                 Parent root = null;
@@ -137,7 +137,7 @@ public class ClassController extends Main {
             public void handle(ActionEvent actionEvent) {
                 UMLAttribute selected = (UMLAttribute) listView.getSelectionModel().getSelectedItem();
                 System.out.println(selected);
-                System.out.println(c.getAttributes());
+                System.out.println(c.getAttributesObservable());
                 c.deleteAttribute(selected);
 
             }

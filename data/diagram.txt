@@ -27,3 +27,16 @@ Invoker <*-- Command
 Receiver --|> ConcreteCommand
 
 @enduml
+
+
+{
+classes : [];
+relations : [];
+sequences : [
+    {name : "cook" from: "a" to: "b" signal1: "true" signal2: "true"}
+    {name : "suck" from: "a" to: "b" signal1: "true" signal2: "false"}
+    {}
+
+];
+
+}

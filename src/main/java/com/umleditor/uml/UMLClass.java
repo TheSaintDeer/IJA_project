@@ -1,9 +1,10 @@
 package com.umleditor.uml;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The class (its instance) represents a class model from UML. Extends the UMLClassifier class. Contains a list of
@@ -103,8 +104,12 @@ public class UMLClass extends UMLClassifier {
      * Returns an unmodifiable list of attributes. Can be used to display class attributes.
      * @return Non-modifiable attribute list.
      */
-    public ObservableList getAttributes() {
+    public ObservableList getAttributesObservable() {
         return attributes;
+    }
+
+    public List<UMLAttribute> getAttributes() {
+        return Collections.unmodifiableList(attributes);
     }
 
     /**
