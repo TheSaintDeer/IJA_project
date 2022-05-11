@@ -228,14 +228,14 @@ public class MainController extends Main {
         String fromClass = r.fromClass + "id";
         String toClass = r.toClass + "id";
 
-        double x1 = mainPane.lookup("#" +fromClass).getLayoutX() + mainPane.lookup("#" +fromClass).getTranslateX();
-        double y1 = mainPane.lookup("#" +fromClass).getLayoutY() + mainPane.lookup("#" +fromClass).getTranslateY();
-        double x2 = mainPane.lookup("#" +toClass).getLayoutX() + mainPane.lookup("#" +toClass).getTranslateX();
-        double y2 = mainPane.lookup("#" +toClass).getLayoutY() + mainPane.lookup("#" +toClass).getTranslateY();
-        double h1 = mainPane.lookup("#" +fromClass).getBoundsInLocal().getHeight();
-        double w1 = mainPane.lookup("#" +fromClass).getBoundsInLocal().getWidth();
-        double h2 = mainPane.lookup("#" +toClass).getBoundsInLocal().getHeight();
-        double w2 = mainPane.lookup("#" +toClass).getBoundsInLocal().getWidth();
+        double x1 = mainPane.lookup("#" + fromClass).getLayoutX() + mainPane.lookup("#" + fromClass).getTranslateX();
+        double y1 = mainPane.lookup("#" + fromClass).getLayoutY() + mainPane.lookup("#" + fromClass).getTranslateY();
+        double x2 = mainPane.lookup("#" + toClass).getLayoutX() + mainPane.lookup("#" + toClass).getTranslateX();
+        double y2 = mainPane.lookup("#" + toClass).getLayoutY() + mainPane.lookup("#" + toClass).getTranslateY();
+        double h1 = mainPane.lookup("#" + fromClass).getBoundsInLocal().getHeight();
+        double w1 = mainPane.lookup("#" + fromClass).getBoundsInLocal().getWidth();
+        double h2 = mainPane.lookup("#" + toClass).getBoundsInLocal().getHeight();
+        double w2 = mainPane.lookup("#" + toClass).getBoundsInLocal().getWidth();
         Line line1;
         Line line2;
         Line line3;
@@ -301,6 +301,7 @@ public class MainController extends Main {
                 mainPane.getChildren().add(0, line1);
                 mainPane.getChildren().add(0, line2);
                 mainPane.getChildren().add(0, line3);
+                break;
 
             case GENERALIZATION:
                 y3 = y1+h1+50;
@@ -318,6 +319,7 @@ public class MainController extends Main {
                 mainPane.getChildren().add(0, line1);
                 mainPane.getChildren().add(0, line2);
                 mainPane.getChildren().add(0, line3);
+                break;
         }
 
 
@@ -418,6 +420,42 @@ public class MainController extends Main {
                     typeRelat.setText("Type");
                     clearField();
                 }
+
+            } else {
+
+                if (fromClass.getText().isEmpty()) {
+                    terminalErrors.setText("Empty \"From class\"");
+                    visibleObject(false);
+                    typeRelat.setText("Type");
+                    clearField();
+                } else if (toClass.getText().isEmpty()) {
+                    terminalErrors.setText("Empty \"To class\"");
+                    visibleObject(false);
+                    typeRelat.setText("Type");
+                    clearField();
+                } else {
+
+                    ClassSequence newSequence = diagram.createNewSeqRelation("lol", fromClass.getText(), toClass.getText());
+                    if (newSequence == null) {
+                        terminalErrors.setText("One of classes not exist");
+                        visibleObject(false);
+                        typeRelat.setText("Type");
+                        clearField();
+                    } else {
+                        int indexFrom = 0;
+                        int indexTo = 0;
+                        int i = 0;
+                        for (UMLClass c : diagram.getClasses()) {
+                            if (c.getName().equals(fromClass.getText()))
+                                indexFrom = i;
+                            if (c.getName().equals(toClass.getText()))
+                                indexTo = i;
+                            i++;
+                        }
+
+                        drawRelatSequence(indexFrom, indexTo);
+                    }
+                }
             }
         });
 
@@ -465,6 +503,8 @@ public class MainController extends Main {
 
         open.setOnAction(event -> {
 
+            mainPane.getChildren().removeAll(mainPane.getChildren());
+            countOfClass = 0;
             File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
             if (file != null) {
                 parse_file(file);
@@ -504,6 +544,15 @@ public class MainController extends Main {
 
         });
 
+    }
+
+    private void drawRelatSequence(int indexFrom, int indexTo) {
+
+        Line newLine = new Line(125+200*indexFrom, 120+60*countOfSequenceRelat, 125+200*indexTo, 120+60*countOfSequenceRelat);
+        Polygon newPolygon = new Polygon(125+200*indexTo-10, 120+60*countOfSequenceRelat - 5, 125+200*indexTo-10, 120+60*countOfSequenceRelat + 5, 125+200*indexTo, 120+60*countOfSequenceRelat);
+        countOfSequenceRelat++;
+        mainPane.getChildren().add(newLine);
+        mainPane.getChildren().add(newPolygon);
     }
 
     private void renderClasses() {

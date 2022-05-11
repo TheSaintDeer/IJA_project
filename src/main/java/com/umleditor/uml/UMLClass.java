@@ -127,4 +127,8 @@ public class UMLClass extends UMLClassifier {
     public String toString() {
         return String.format("{name:%s;isAbstract:%s;attributes:%s;}", this.getName(),this.isAbstract,this.attributes);
     }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }

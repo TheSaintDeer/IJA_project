@@ -95,7 +95,7 @@ public class ClassDiagram extends Element{
      * with the given name already exists.
      */
 
-    public UMLRelation createRelat (String from, String to, String type) {
+    public UMLRelation createRelat (String to, String from, String type) {
         UMLRelation relat = new UMLRelation(from, to, type);
 
         for (UMLRelation r : relations) {
@@ -207,10 +207,11 @@ public class ClassDiagram extends Element{
      * @param nameOfClass - name of class, which need start or finish lifeline
      * @return new ClassSequence if class is existed, else null
      */
-    public ClassSequence createNewLifeline(String nameOfClass) {
-        for (ClassSequence c : sequences) {
-            if (c.getNameClassFrom().equals(nameOfClass)) {
+    public ClassSequence createNewLifeline(String nameOfClass, boolean switcher) {
+        for (UMLClass c : classes) {
+            if (c.getName().equals(nameOfClass)) {
                 ClassSequence newSequence = new ClassSequence(nameOfClass);
+                c.setActive(switcher);
                 sequences.add(newSequence);
                 return newSequence;
             }
@@ -229,10 +230,10 @@ public class ClassDiagram extends Element{
         boolean from = false;
         boolean to = false;
 
-        for (ClassSequence c : sequences) {
-            if (c.getNameClassFrom().equals(nameFrom))
+        for (UMLClass c : classes) {
+            if (c.getName().equals(nameFrom))
                 from = true;
-            if (c.getNameClassTo().equals(nameTo))
+            if (c.getName().equals(nameTo))
                 to = true;
         }
 
