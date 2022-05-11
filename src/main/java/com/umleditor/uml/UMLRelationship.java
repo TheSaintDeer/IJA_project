@@ -1,4 +1,4 @@
-package sample.uml;
+package com.umleditor.uml;
 
 public class UMLRelationship {
 

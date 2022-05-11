@@ -1,7 +1,7 @@
-package sample.parser;
+package com.umleditor.parser;
 
-import sample.uml.ClassDiagram;
-import sample.uml.UMLAttribute;
+import com.umleditor.uml.ClassDiagram;
+import com.umleditor.uml.UMLAttribute;
 
 import java.io.File;
 import java.io.FileNotFoundException;

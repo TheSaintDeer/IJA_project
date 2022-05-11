@@ -1,4 +1,4 @@
-package sample.uml;
+package com.umleditor.uml;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

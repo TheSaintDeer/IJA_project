@@ -1,4 +1,4 @@
-package sample.uml;
+package com.umleditor.uml;
 
 import java.util.ArrayList;
 import java.util.List;

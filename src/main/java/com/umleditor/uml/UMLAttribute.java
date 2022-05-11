@@ -1,4 +1,4 @@
-package sample.uml;
+package com.umleditor.uml;
 
 /**
  * A class represents an attribute that has a name and a type.

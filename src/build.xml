@@ -1,19 +1,28 @@
 <project name="Main" basedir="..">
 
     <property name="src.dir"   value="src"/>
+    <property name="src.resources"   value="src/main/resources"/>
     <property name="data.dir"  value="data"/>
     <property name="build.dir" value="build"/>
+    <property name="build.java" value="build/java"/>
+
     <property name="doc.dir"   value="doc"/>
     <property name="dest.dir"  value="dest"/>
-    <property name="lib.dir"   value="lib/javafx-sdk-11/lib"/>
+    <property name="lib.dir"   value="lib"/>
+    <property name="lib.javafx"   value="lib/javafx-sdk-11/lib"/>
+    <property name="lib.gson"   value="lib/gson"/>
+
     <property name="data" value="data/diagram.txt" />
     <property name="jar.name" value="ija-app" />
+    <property name="zip.name" value="xgolik00.zip"/>
 
-    <property name="main-class"  value="sample.Main"/>
+    <property name="main-class"  value="com.umleditor.Main"/>
 
     <path id="class.path">
         <fileset dir="${lib.dir}">
             <include name="*.jar"/>
+            <include name="*/*/*.jar"/>
+
         </fileset>
     </path>
 
@@ -31,14 +40,18 @@
 
     <target name="doc">
         <mkdir dir="${doc.dir}"/>
-        <javadoc packagenames="sample.*"
-                 sourcepath="${src.dir}"
+        <javadoc packagenames="com.umleditor.*"
+                 sourcepath="${src.dir}/main/java"
                  destdir="${doc.dir}"
                  author="true"
                  version="true"
                  windowtitle="IJA Project Documentation">
-            <modulepath path="${lib.dir}"/>
+
+            <modulepath path="${lib.javafx}"/>
             <arg line="--add-modules javafx.controls,javafx.base,javafx.fxml"/>
+            <modulepath path="${lib.dir}"/>
+            <arg line="--add-modules com.google.gson"/>
+
         </javadoc>
     </target>
 
@@ -46,6 +59,7 @@
         <delete dir="${build.dir}"/>
         <delete dir="${doc.dir}"/>
         <delete dir="${dest.dir}"/>
+        <delete file="${zip.name}"/>
 
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${dest.dir}"/>
@@ -55,17 +69,20 @@
     <target name="compile">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${dest.dir}"/>
-        <copy todir="build/sample/fxml">
-            <fileset dir="src/sample/fxml"/>
-        </copy>
 
         <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
-            <modulepath path="${lib.dir}"/>
-            <compilerarg line="--add-modules javafx.controls,javafx.base,javafx.fxml"/>
             <classpath refid="class.path"/>
+            <modulepath path="${lib.javafx}/"/>
+            <compilerarg line="--add-modules javafx.controls,javafx.base,javafx.fxml,com.google.gson"/>
+
+            <modulepath path="${lib.dir}"/>
+            <compilerarg line="--add-modules com.google.gson"/>
         </javac>
 
+
+
         <jar destfile="${dest.dir}/${jar.name}.jar" basedir="${build.dir}">
+            <fileset dir="${src.resources}" />
             <manifest>
                 <attribute name="Main-class" value="${main-class}"/>
             </manifest>
@@ -74,13 +91,28 @@
 
     <target name="run" depends="compile">
         <java jar="${dest.dir}/${jar.name}.jar" fork="true">
+            <modulepath path="${lib.javafx}"/>
+            <jvmarg line="--add-modules=javafx.controls,javafx.base,javafx.fxml,com.google.gson"/>
+
             <modulepath path="${lib.dir}"/>
-            <jvmarg line="--add-modules=javafx.controls,javafx.base,javafx.fxml"/>
+            <jvmarg line="--add-modules com.google.gson"/>
         </java>
     </target>
 
     <target name="clean-build" depends="clean,compile"/>
 
     <target name="main" depends="clean,compile,doc,run"/>
+
+    <target name="zip" depends="clean">
+
+
+        <zip destfile="${zip.name}"
+             basedir="."
+             excludes="lib/javafx-sdk-11/, lib/*.zip, target/, *.gitignore, .idea/, .mvn/, pom.xml, mvnw.*, mvnw, *.bin, *.iml">
+<!--            <fileset dir="."/>-->
+        </zip>
+
+    </target>
+
 
 </project>

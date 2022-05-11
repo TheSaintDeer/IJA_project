@@ -1,4 +1,4 @@
-package sample.controller;
+package com.umleditor.controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -10,12 +10,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import sample.Main;
-import sample.uml.ClassDiagram;
-import sample.uml.UMLClass;
-import sample.uml.UMLRelationship;
+import com.umleditor.Main;
+import com.umleditor.uml.ClassDiagram;
+import com.umleditor.uml.UMLClass;
+import com.umleditor.uml.UMLRelationship;
+import javafx.stage.FileChooser;
+import com.google.gson.*;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainController extends Main {
@@ -24,6 +30,10 @@ public class MainController extends Main {
     double SceneX, SceneY;
     double TranslateX, TranslateY;
 
+    private boolean classMode = true;
+
+    @FXML
+    private MenuItem saveAs;
 
     @FXML
     private Button acceptClass;
@@ -38,7 +48,10 @@ public class MainController extends Main {
     private Button createClass;
 
     @FXML
-    private Button createRelat;
+    private Button createRelation;
+
+    @FXML
+    private Button changeMode;
 
     @FXML
     private Label diagramName;
@@ -85,103 +98,6 @@ public class MainController extends Main {
 
     public MainController(ClassDiagram d) {
         this.diagram = d;
-    }
-
-    @FXML
-    void initialize() {
-
-        diagramName.setText(diagram.getName());
-
-        for (UMLClass c : diagram.getAll()) {
-            System.out.println("adding class: " + c.getName());
-            addNewClass(c);
-        }
-
-        for (UMLRelationship r : diagram.getAllRelat()) {
-            System.out.println("adding relation: " + r.getFromClass() + " " + r.typeRelationship + " " + r.toClass);
-            drawRelat(r);
-        }
-
-        createClass.setOnAction(event -> {
-            nameOfClass.setVisible(true);
-            acceptClass.setVisible(true);
-        });
-
-        acceptClass.setOnAction(event -> {
-            UMLClass newClass = diagram.createClass(nameOfClass.getText());
-
-            if (nameOfClass.getText().isEmpty()) {
-                terminalErrors.setText("Empty name");
-                nameOfClass.setVisible(false);
-                acceptClass.setVisible(false);
-
-            } else if (newClass == null) {
-                terminalErrors.setText("Class already exists");
-                nameOfClass.setText("");
-
-            } else {
-                terminalErrors.setText("");
-                nameOfClass.setVisible(false);
-                acceptClass.setVisible(false);
-                addNewClass(newClass);
-                nameOfClass.setText("");
-            }
-
-            System.out.println(diagram.getAll());
-        });
-
-        createRelat.setOnAction(event -> visibleObject(true));
-
-        acceptRelat.setOnAction(event -> {
-            if (fromClass.getText().isEmpty()) {
-                terminalErrors.setText("Empty \"From class\"");
-                visibleObject(false);
-                typeRelat.setText("Type");
-                clearField();
-            } else if (toClass.getText().isEmpty()) {
-                terminalErrors.setText("Empty \"To class\"");
-                visibleObject(false);
-                typeRelat.setText("Type");
-                clearField();
-            } else if (typeRelat.getText().equals("Type")) {
-                terminalErrors.setText("Choose type!");
-                visibleObject(false);
-                clearField();
-            } else {
-                visibleObject(false);
-
-                String type = "";
-                if (typeRelat.getText().equals("Association")) {
-                    type = "<---";
-                } else if (typeRelat.getText().equals("Aggregation")) {
-                    type = "<o--";
-                } else if (typeRelat.getText().equals("Composition")) {
-                    type = "<*--";
-                } else if (typeRelat.getText().equals("Generalization")) {
-                    type = "<|--";
-                }
-
-                if (diagram.findClass(fromClass.getText()) == null  || diagram.findClass(toClass.getText()) == null) {
-                    terminalErrors.setText("One of the classes doesn't exist");
-                } else {
-                    UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
-                    drawRelat(relat);
-                    terminalErrors.setText("");
-                }
-
-                typeRelat.setText("Type");
-                clearField();
-            }
-        });
-
-        typeAs.setOnAction(event -> typeRelat.setText("Association"));
-
-        typeAg.setOnAction(event -> typeRelat.setText("Aggregation"));
-
-        typeKo.setOnAction(event -> typeRelat.setText("Composition"));
-
-        typeGe.setOnAction(event -> typeRelat.setText("Generalization"));
-
     }
 
     /**
@@ -250,7 +166,7 @@ public class MainController extends Main {
      */
     Parent createNewClass(UMLClass c) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/sample/fxml/class_sample.fxml"));
+        loader.setLocation(MainController.class.getResource("class_sample.fxml"));
 
         ClassController controller = new ClassController(countOfClass);
         controller.setClass(c);
@@ -389,4 +305,164 @@ public class MainController extends Main {
 
 
     }
+
+    @FXML
+    void initialize() {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save As");
+        FileChooser.ExtensionFilter extFilter1 = new FileChooser.ExtensionFilter("All files", ".*");
+        FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("TXT files", "*.txt");
+        FileChooser.ExtensionFilter extFilter3 = new FileChooser.ExtensionFilter("JSON files", "*.json");
+        fileChooser.getExtensionFilters().addAll(extFilter1,extFilter2,extFilter3);
+
+        diagramName.setText("Class diagram mode");
+
+        for (UMLClass c : diagram.getAll()) {
+            System.out.println("adding class: " + c.getName());
+            addNewClass(c);
+        }
+
+        for (UMLRelationship r : diagram.getAllRelat()) {
+            System.out.println("adding relation: " + r.getFromClass() + " " + r.typeRelationship + " " + r.toClass);
+            drawRelat(r);
+        }
+
+        createClass.setOnAction(event -> {
+            nameOfClass.setVisible(true);
+            acceptClass.setVisible(true);
+        });
+
+        acceptClass.setOnAction(event -> {
+            UMLClass newClass = diagram.createClass(nameOfClass.getText());
+
+            if (nameOfClass.getText().isEmpty()) {
+                terminalErrors.setText("Empty name");
+                nameOfClass.setVisible(false);
+                acceptClass.setVisible(false);
+
+            } else if (newClass == null) {
+                terminalErrors.setText("Class already exists");
+                nameOfClass.setText("");
+
+            } else {
+                terminalErrors.setText("");
+                nameOfClass.setVisible(false);
+                acceptClass.setVisible(false);
+                addNewClass(newClass);
+                nameOfClass.setText("");
+            }
+
+            System.out.println(diagram.getAll());
+        });
+
+        createRelation.setOnAction(event -> visibleObject(true));
+
+        acceptRelat.setOnAction(event -> {
+            if (fromClass.getText().isEmpty()) {
+                terminalErrors.setText("Empty \"From class\"");
+                visibleObject(false);
+                typeRelat.setText("Type");
+                clearField();
+            } else if (toClass.getText().isEmpty()) {
+                terminalErrors.setText("Empty \"To class\"");
+                visibleObject(false);
+                typeRelat.setText("Type");
+                clearField();
+            } else if (typeRelat.getText().equals("Type")) {
+                terminalErrors.setText("Choose type!");
+                visibleObject(false);
+                clearField();
+            } else {
+                visibleObject(false);
+
+                String type = "";
+                if (typeRelat.getText().equals("Association")) {
+                    type = "<---";
+                } else if (typeRelat.getText().equals("Aggregation")) {
+                    type = "<o--";
+                } else if (typeRelat.getText().equals("Composition")) {
+                    type = "<*--";
+                } else if (typeRelat.getText().equals("Generalization")) {
+                    type = "<|--";
+                }
+
+                if (diagram.findClass(fromClass.getText()) == null  || diagram.findClass(toClass.getText()) == null) {
+                    terminalErrors.setText("One of the classes doesn't exist");
+                } else {
+                    UMLRelationship relat = diagram.createRelat(fromClass.getText(), toClass.getText(), type);
+                    drawRelat(relat);
+                    terminalErrors.setText("");
+                }
+
+                typeRelat.setText("Type");
+                clearField();
+            }
+        });
+
+        typeAs.setOnAction(event -> typeRelat.setText("Association"));
+
+        typeAg.setOnAction(event -> typeRelat.setText("Aggregation"));
+
+        typeKo.setOnAction(event -> typeRelat.setText("Composition"));
+
+        typeGe.setOnAction(event -> typeRelat.setText("Generalization"));
+
+        changeMode.setOnAction(event -> {
+            if (classMode) {
+
+                // actions when class mode is turned on (switch to sequence mode)
+                classMode = false;
+                diagramName.setText("Sequence diagram mode");
+                createRelation.setText("Create sequence");
+
+            }else {
+
+                // actions when sequence mode is turned on (switch to class mode)
+                classMode = true;
+                diagramName.setText("Class diagram mode");
+                createRelation.setText("Create relation");
+                changeMode.setText("Class mode");
+
+            }
+        });
+
+        saveAs.setOnAction(event -> {
+
+            Gson gson = new GsonBuilder()
+                            .setPrettyPrinting()
+                            .create();
+            List<UMLClass> classes = new ArrayList<>();
+
+            for (UMLClass c: diagram.getClasses()) {
+
+            }
+
+            System.out.println(gson.toJson(diagram));
+//            fileChooser.setInitialFileName(diagram.getName());
+//            fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+//            File file = fileChooser.showSaveDialog(mainPane.getScene().getWindow());
+//            if (file != null) {
+//                String filePath = file.getPath();
+//
+//                try {
+//                    Gson gson = new GsonBuilder()
+//                            .setPrettyPrinting()
+//                            .create();
+//                    Writer writer = new FileWriter(filePath);
+//                    writer.write(gson.toJson(diagram));
+//                    writer.close();
+//                } catch (Exception e) {
+//                    System.out.println((e.toString()));
+//                }
+//            } else {
+//                System.out.println(("File not saved, please select file or press Save."));
+//            }
+
+
+
+        });
+
+    }
 }
+

@@ -1,4 +1,4 @@
-package sample.controller;
+package com.umleditor.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;

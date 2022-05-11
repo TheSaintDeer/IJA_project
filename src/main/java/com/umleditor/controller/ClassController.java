@@ -1,4 +1,4 @@
-package sample.controller;
+package com.umleditor.controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,10 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import sample.Main;
-import sample.uml.UMLAttribute;
-import sample.uml.UMLClass;
-import sample.uml.UMLClassifier;
+import com.umleditor.Main;
+import com.umleditor.uml.UMLAttribute;
+import com.umleditor.uml.UMLClass;
+import com.umleditor.uml.UMLClassifier;
 
 import java.io.IOException;
 
@@ -68,7 +68,7 @@ public class ClassController extends Main {
                 Stage popupSave = new Stage();
 
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/sample/fxml/class_edit_classname.fxml"));
+                loader.setLocation(getClass().getResource("class_edit_classname.fxml"));
                 EditClassnameController edit = new EditClassnameController();
                 loader.setController(edit);
                 Parent root = null;

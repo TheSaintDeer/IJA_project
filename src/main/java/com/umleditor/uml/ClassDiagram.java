@@ -1,11 +1,9 @@
-package sample.uml;
+package com.umleditor.uml;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * The class represents a class diagram. It is derived from the Element class (has a name).
@@ -153,14 +151,20 @@ public class ClassDiagram extends Element{
         return classes.get(classes.size()-1);
     }
 
+
+
+    public List<UMLClass> getClasses() {
+        return Collections.unmodifiableList(classes);
+    }
+
     /**
      * Finding all relations with the desired class.
      * @param nameOfClass - class name for which we want to find all relations
      * @return List of relation in which the desired class is involved
      */
-
     public List<UMLRelationship> findAllRelat(String nameOfClass){
         List<UMLRelationship> relations = new ArrayList<>();
+
 
         for (UMLRelationship i: relationships) {
             if (i.getFromClass().equals(nameOfClass) || i.getToClass().equals(nameOfClass)) {

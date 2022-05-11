@@ -3,6 +3,8 @@ build/
 doc/
 
 dest/
-demo.iml
+#demo.iml
+/lib/javafx-sdk-11
+/lib/com.google.gson.jar
 .idea
 *.class

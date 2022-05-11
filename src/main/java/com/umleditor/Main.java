@@ -1,12 +1,12 @@
-package sample;
+package com.umleditor;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.controller.MainController;
-import sample.parser.Parser;
-import sample.uml.ClassDiagram;
+import com.umleditor.controller.MainController;
+import com.umleditor.parser.Parser;
+import com.umleditor.uml.ClassDiagram;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
 
         MainController mainController = new MainController(classDiagram);
         fxmlLoader.setController(mainController);
