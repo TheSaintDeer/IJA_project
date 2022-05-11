@@ -16,6 +16,7 @@ public class Main extends Application {
     private static ClassDiagram classDiagram;
     private static Parser parser;
     public static int countOfClass = 0;
+    public static int countOfSequenceClass = 0;
 
     @Override
     public void start(Stage stage) throws IOException {

@@ -16,6 +16,7 @@ public class ClassDiagram extends Element{
     private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
     private ObservableList<UMLRelation> relationships;
+    private List<ClassSequence> sequences;
 
     /**
      * Constructor for creating a diagram instance. Each diagram has its own name.
@@ -26,6 +27,7 @@ public class ClassDiagram extends Element{
         classes = FXCollections.observableArrayList();
         classifiers = new ArrayList<>();
         relationships = FXCollections.observableArrayList();
+        sequences = new ArrayList<>();
     }
 
     /**
@@ -190,5 +192,56 @@ public class ClassDiagram extends Element{
         if (findClass(c.getName()) == null) {
             classes.add(c);
         }
+    }
+
+    /**
+     * @return get all command in sequence diagram
+     */
+
+    public List<ClassSequence> getSequences() {
+        return sequences;
+    }
+
+    /**
+     * Function for adding commands `activate <nameOfClass>` or `deactivate <nameOfClass>`
+     * @param nameOfClass - name of class, which need start or finish lifeline
+     * @return new ClassSequence if class is existed, else null
+     */
+    public ClassSequence createNewLifeline(String nameOfClass) {
+        for (ClassSequence c : sequences) {
+            if (c.getNameClassFrom().equals(nameOfClass)) {
+                ClassSequence newSequence = new ClassSequence(nameOfClass);
+                sequences.add(newSequence);
+                return newSequence;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Function for adding commands `<nameFrom> -> <nameTo>: <nameRelation>`
+     * @param nameRelation - text, which describe relation
+     * @param nameFrom - the name of the class from which the link comes
+     * @param nameTo - the name of the class to which the link goes
+     * @return
+     */
+    public ClassSequence createNewSeqRelation(String nameRelation, String nameFrom, String nameTo) {
+        boolean from = false;
+        boolean to = false;
+
+        for (ClassSequence c : sequences) {
+            if (c.getNameClassFrom().equals(nameFrom))
+                from = true;
+            if (c.getNameClassTo().equals(nameTo))
+                to = true;
+        }
+
+        if (from && to) {
+            ClassSequence newSequence = new ClassSequence(nameRelation, nameFrom, nameTo);
+            sequences.add(newSequence);
+            return newSequence;
+        }
+
+        return null;
     }
 }

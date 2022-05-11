@@ -9,7 +9,7 @@ public class ClassSequence {
     private String name;
     private String nameClassFrom;
     private String nameClassTo;
-    private boolean isActive;
+    private boolean isActive = false;
 
     /**
      * @param nameRelation - name of relation between classes
@@ -25,11 +25,10 @@ public class ClassSequence {
 
     /**
      * @param nameClass - the name of the class which active
-     * @param signal - signal, which meaning, that we need change status of class
      */
-    public ClassSequence (String nameClass, boolean signal) {
+    public ClassSequence (String nameClass) {
         this.nameClassFrom = nameClass;
-        this.isActive = signal;
+        this.isActive = true;
     }
 
     /**
@@ -45,5 +44,19 @@ public class ClassSequence {
      */
     public String getNameClassTo() {
         return nameClassTo;
+    }
+
+    /**
+     * @return the name of the relation
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return switcher of lifeline
+     */
+    public boolean isActive() {
+        return isActive;
     }
 }

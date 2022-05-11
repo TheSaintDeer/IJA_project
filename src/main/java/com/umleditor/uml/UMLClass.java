@@ -14,8 +14,10 @@ import java.util.List;
 public class UMLClass extends UMLClassifier {
 
     private boolean isAbstract;
+    private boolean isActive;
 
-//    private StringProperty className = new SimpleStringProperty();
+
+    //    private StringProperty className = new SimpleStringProperty();
     private final ObservableList<UMLAttribute> attributes;
 
     /**
@@ -25,6 +27,7 @@ public class UMLClass extends UMLClassifier {
     public UMLClass(String name) {
         super(name);
         this.isAbstract = false;
+        this.isActive = false;
         attributes = FXCollections.observableArrayList();
     }
 

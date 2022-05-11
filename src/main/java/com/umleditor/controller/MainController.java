@@ -2,16 +2,18 @@ package com.umleditor.controller;
 
 import com.umleditor.uml.*;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import com.umleditor.Main;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import com.google.gson.*;
 
@@ -95,6 +97,24 @@ public class MainController extends Main {
 
     public MainController(ClassDiagram d) {
         this.diagram = d;
+    }
+
+    void addNewSequenceClass(UMLClass c) {
+        Label newLabel = new Label();
+        newLabel.setLayoutX(50+200*countOfSequenceClass);
+        newLabel.setLayoutY(20);
+        newLabel.setPrefHeight(50);
+        newLabel.setPrefWidth(150);
+        newLabel.setText(c.getName());
+        newLabel.setFont(new Font("Bold", 18));
+        newLabel.setAlignment(Pos.CENTER);
+        newLabel.setBorder(new Border(new BorderStroke(Color.SILVER, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        mainPane.getChildren().add(newLabel);
+
+        Line newLine = new Line(125+200*countOfSequenceClass, 70, 125+200*countOfSequenceClass, 1200);
+        mainPane.getChildren().add(newLine);
+
+        countOfSequenceClass++;
     }
 
     /**
@@ -351,7 +371,10 @@ public class MainController extends Main {
                 terminalErrors.setText("");
                 nameOfClass.setVisible(false);
                 acceptClass.setVisible(false);
-                addNewClass(newClass);
+                if (classMode)
+                    addNewClass(newClass);
+                else
+                    addNewSequenceClass(newClass);
                 nameOfClass.setText("");
             }
 
@@ -421,6 +444,14 @@ public class MainController extends Main {
                 classMode = false;
                 diagramName.setText("Sequence diagram mode");
                 createRelation.setText("Create sequence");
+                changeMode.setText("Class Mode");
+
+                mainPane.getChildren().removeAll(mainPane.getChildren());
+
+                countOfSequenceClass = 0;
+
+                for (UMLClass c : diagram.getAll())
+                    addNewSequenceClass(c);
 
             }else {
 
@@ -428,7 +459,17 @@ public class MainController extends Main {
                 classMode = true;
                 diagramName.setText("Class diagram mode");
                 createRelation.setText("Create relation");
-                changeMode.setText("Class mode");
+                changeMode.setText("Sequence Mode");
+
+                mainPane.getChildren().removeAll(mainPane.getChildren());
+
+                countOfClass = 0;
+
+                for (UMLClass c : diagram.getAll())
+                    addNewClass(c);
+
+                for (UMLRelation r : diagram.getAllRelationsObservable())
+                    drawRelat(r);
 
             }
         });
