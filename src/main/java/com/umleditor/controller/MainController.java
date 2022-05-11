@@ -244,7 +244,7 @@ public class MainController extends Main {
 
         switch (r.getTypeRelationship()) {
 
-            case ASSOCIACE:
+            case ASSOCIATION:
                 if (fromClass.equals(toClass)) {
                     line1 = new Line(x1, y1+h1/2, x1-30, y1+h1/2);
                     line2 = new Line(x2-30, y1+h1/2, x2-30, y2-30);
@@ -268,7 +268,7 @@ public class MainController extends Main {
                 }
                 break;
 
-            case AGREGACE:
+            case AGGREGATION:
                 double y3 = y1+h1+60;
                 line1 = new Line(x1+w1/4*3, y1+h1/2, x1+w1/4*3, y3);
                 line2 = new Line(x2+w2/2, y3, x1+w1/4*3, y3);
@@ -286,7 +286,7 @@ public class MainController extends Main {
                 mainPane.getChildren().add(0, poly);
                 break;
 
-            case KOMPOZICE:
+            case COMPOSITION:
                 y3 = y1+h1+40;
                 line1 = new Line(x1+w1/4, y1+h1/2, x1+w1/4, y3);
                 line2 = new Line(x2+w2/2, y3, x1+w1/4, y3);
@@ -302,7 +302,7 @@ public class MainController extends Main {
                 mainPane.getChildren().add(0, line2);
                 mainPane.getChildren().add(0, line3);
 
-            case GENERALIZACE:
+            case GENERALIZATION:
                 y3 = y1+h1+50;
                 line1 = new Line(x1+w1/2, y1+h1/2, x1+w1/2, y3);
                 line2 = new Line(x2+w2/2, y3, x1+w1/2, y3);
@@ -340,15 +340,7 @@ public class MainController extends Main {
 
         diagramName.setText("Class diagram mode");
 
-        for (UMLClass c : diagram.getAll()) {
-            System.out.println("adding class: " + c.getName());
-            addNewClass(c);
-        }
-
-        for (UMLRelation r : diagram.getAllRelationsObservable()) {
-            System.out.println("adding relation: " + r.getFromClass() + " " + r.typeRelationship + " " + r.toClass);
-            drawRelat(r);
-        }
+        renderClasses();
 
         createClass.setOnAction(event -> {
             nameOfClass.setVisible(true);
@@ -406,13 +398,13 @@ public class MainController extends Main {
 
                     String type = "";
                     if (typeRelat.getText().equals("Association")) {
-                        type = "<---";
+                        type = "ASSOCIATION";
                     } else if (typeRelat.getText().equals("Aggregation")) {
-                        type = "<o--";
+                        type = "AGGREGATION";
                     } else if (typeRelat.getText().equals("Composition")) {
-                        type = "<*--";
+                        type = "COMPOSITION";
                     } else if (typeRelat.getText().equals("Generalization")) {
-                        type = "<|--";
+                        type = "GENERALIZATION";
                     }
 
                     if (diagram.findClass(fromClass.getText()) == null || diagram.findClass(toClass.getText()) == null) {
@@ -465,11 +457,8 @@ public class MainController extends Main {
 
                 countOfClass = 0;
 
-                for (UMLClass c : diagram.getAll())
-                    addNewClass(c);
+                renderClasses();
 
-                for (UMLRelation r : diagram.getAllRelationsObservable())
-                    drawRelat(r);
 
             }
         });
@@ -517,6 +506,19 @@ public class MainController extends Main {
 
     }
 
+    private void renderClasses() {
+
+        for (UMLClass c : diagram.getAll()) {
+//            System.out.println("adding class: " + c.getName());
+            addNewClass(c);
+        }
+
+        for (UMLRelation r : diagram.getAllRelations())
+            drawRelat(r);
+
+
+    }
+
     private void parse_file(File file) {
 
 
@@ -529,6 +531,7 @@ public class MainController extends Main {
 
             // print staff
             System.out.println(diagram);
+            renderClasses();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -15,7 +15,7 @@ public class ClassDiagram extends Element{
 
     private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
-    private ObservableList<UMLRelation> relationships;
+    private ObservableList<UMLRelation> relations;
     private List<ClassSequence> sequences;
 
     /**
@@ -26,7 +26,7 @@ public class ClassDiagram extends Element{
         super(name);
         classes = FXCollections.observableArrayList();
         classifiers = new ArrayList<>();
-        relationships = FXCollections.observableArrayList();
+        relations = FXCollections.observableArrayList();
         sequences = new ArrayList<>();
     }
 
@@ -98,13 +98,13 @@ public class ClassDiagram extends Element{
     public UMLRelation createRelat (String from, String to, String type) {
         UMLRelation relat = new UMLRelation(from, to, type);
 
-        for (UMLRelation r : relationships) {
+        for (UMLRelation r : relations) {
             if (r == relat) {
                 return null;
             }
         }
 
-        relationships.add(relat);
+        relations.add(relat);
         return relat;
     }
 
@@ -141,7 +141,7 @@ public class ClassDiagram extends Element{
      */
 
     public ObservableList<UMLRelation> getAllRelationsObservable() {
-        return relationships;
+        return relations;
     }
 
     /**
@@ -149,7 +149,7 @@ public class ClassDiagram extends Element{
      * @return List representing all relations in the diagram.
      */
     public List<UMLRelation> getAllRelations() {
-        return Collections.unmodifiableList(relationships);
+        return Collections.unmodifiableList(relations);
     }
 
     /**
@@ -175,7 +175,7 @@ public class ClassDiagram extends Element{
         List<UMLRelation> relations = new ArrayList<>();
 
 
-        for (UMLRelation i: relationships) {
+        for (UMLRelation i: this.relations) {
             if (i.getFromClass().equals(nameOfClass) || i.getToClass().equals(nameOfClass)) {
                 relations.add(i);
             }
@@ -185,7 +185,7 @@ public class ClassDiagram extends Element{
     }
     @Override
     public String toString() {
-        return String.format("{name:%s;\nclasses:%s;\nrelations:%s;}", this.getName(),this.classes,this.relationships);
+        return String.format("{name:%s;classes:%s;relations:%s;}", this.getName(),this.classes,this.relations);
     }
 
     public void addClass(UMLClass c) {
@@ -243,5 +243,9 @@ public class ClassDiagram extends Element{
         }
 
         return null;
+    }
+
+    public void addRelation(UMLRelation relation) {
+        relations.add(relation);
     }
 }

@@ -3,7 +3,7 @@ package com.umleditor.uml;
 public class UMLRelation {
 
 
-    public enum Relationship {ASSOCIACE, AGREGACE, KOMPOZICE, GENERALIZACE, ERROR}
+    public enum Relationship {ASSOCIATION, AGGREGATION, COMPOSITION, GENERALIZATION, ERROR}
 
     public String fromClass;
     public String toClass;
@@ -15,54 +15,27 @@ public class UMLRelation {
      * Constructor for creating a relation.
      * @param fromClass Where is the relation coming from
      * @param toClass Where does the relation go
-     * @param relationship What type of relation
+     * @param type What type of relation
      */
-    public UMLRelation(String fromClass, String toClass, String relationship) {
+    public UMLRelation(String fromClass, String toClass, String type) {
 
-        char[] tmp = relationship.toCharArray();
-
-        if (tmp[0] == '<') {
-            this.fromClass = toClass;
-            this.toClass = fromClass;
-
-            switch (tmp[1]) {
-                case '-':
-                    this.typeRelationship = Relationship.ASSOCIACE;
-                    break;
-                case 'o':
-                    this.typeRelationship = Relationship.AGREGACE;
-                    break;
-                case '*':
-                    this.typeRelationship = Relationship.KOMPOZICE;
-                    break;
-                case '|':
-                    this.typeRelationship = Relationship.GENERALIZACE;
-                    break;
-                default:
-                    this.typeRelationship = Relationship.ERROR;
-            }
-
-        } else if (tmp[tmp.length-1] == '>') {
-            this.fromClass = fromClass;
-            this.toClass = toClass;
-
-            switch (tmp[tmp.length-2]) {
-                case '-':
-                    this.typeRelationship = Relationship.ASSOCIACE;
-                    break;
-                case 'o':
-                    this.typeRelationship = Relationship.AGREGACE;
-                    break;
-                case '*':
-                    this.typeRelationship = Relationship.KOMPOZICE;
-                    break;
-                case '|':
-                    this.typeRelationship = Relationship.GENERALIZACE;
-                    break;
-                default:
-                    this.typeRelationship = Relationship.ERROR;
-            }
+        this.fromClass = fromClass;
+        this.toClass = toClass;
+        switch (type) {
+            case "AGGREGATION":
+                this.typeRelationship = Relationship.AGGREGATION;
+                break;
+            case "COMPOSITION":
+                this.typeRelationship = Relationship.COMPOSITION;
+                break;
+            case "GENERALIZATION":
+                this.typeRelationship = Relationship.GENERALIZATION;
+                break;
+            case "ASSOCIATION":
+            default:
+                this.typeRelationship = Relationship.ASSOCIATION;
         }
+
 
     }
 
@@ -91,5 +64,11 @@ public class UMLRelation {
      */
     public Relationship getTypeRelationship () {
         return this.typeRelationship;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("{from:%s;to:%s;type:%s;}", this.fromClass,this.toClass,this.typeRelationship);
+
     }
 }

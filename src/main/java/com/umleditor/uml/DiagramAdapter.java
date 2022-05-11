@@ -78,12 +78,14 @@ public class DiagramAdapter extends TypeAdapter<ClassDiagram> {
                     break;
 
                 case "relations":
-//                    token = jsonReader.peek();
-//                    String haha = jsonReader.nextName();
+                    token = jsonReader.peek();
                     jsonReader.beginArray();
-//                    System.out.println((jsonReader.peek().name()));
-                    jsonReader.skipValue();
+                    while (!jsonReader.peek().equals(JsonToken.END_ARRAY)) {
 
+                        RelationAdapter relationAdapter = new RelationAdapter();
+                        diagram.addRelation(relationAdapter.read(jsonReader));
+
+                    }
                     jsonReader.endArray();
                     break;
 

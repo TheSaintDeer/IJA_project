@@ -36,7 +36,6 @@ public class ClassAdapter extends TypeAdapter<UMLClass> {
 
         UMLClass newClass = new UMLClass("");
         String fieldname = null;
-        Gson gson = new Gson();
 
         jsonReader.beginObject();
 

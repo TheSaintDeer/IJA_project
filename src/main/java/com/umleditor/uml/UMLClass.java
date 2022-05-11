@@ -125,6 +125,6 @@ public class UMLClass extends UMLClassifier {
 
     @Override
     public String toString() {
-        return String.format("{name:%s;\nisAbstract:%s;\nattributes:%s;}", this.getName(),this.isAbstract,this.attributes);
+        return String.format("{name:%s;isAbstract:%s;attributes:%s;}", this.getName(),this.isAbstract,this.attributes);
     }
 }
