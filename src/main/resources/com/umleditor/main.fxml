@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1495.0" minHeight="705.0" minWidth="1024.0" prefHeight="705.0" prefWidth="1300.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="720.0" maxWidth="1495.0" minHeight="705.0" minWidth="1024.0" prefHeight="705.0" prefWidth="1300.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutY="94.0" prefHeight="626.0" prefWidth="1172.0" style="-fx-background-color: #fafafa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
@@ -115,7 +115,7 @@
       </AnchorPane>
       <Label fx:id="diagramName" alignment="CENTER" layoutX="-481.0" layoutY="33.0" prefHeight="60.0" prefWidth="1430.0" text="Class diagram mode" textFill="WHITE" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
          <font>
-            <Font name="System Italic" size="40.0" />
+            <Font size="40.0" />
          </font>
       </Label>
       <MenuBar layoutY="2.0" prefHeight="26.0" prefWidth="221.0" style="-fx-background-color: #fafafa;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

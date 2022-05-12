@@ -127,15 +127,11 @@ public class ClassController extends Main {
         /**
          * Delete attribute
          */
-        delete_attribute.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                UMLAttribute selected = (UMLAttribute) listView.getSelectionModel().getSelectedItem();
-                System.out.println(selected);
-                System.out.println(c.getAttributesObservable());
-                c.deleteAttribute(selected);
-
-            }
+        delete_attribute.setOnAction(event -> {
+            UMLAttribute selected = (UMLAttribute) listView.getSelectionModel().getSelectedItem();
+            System.out.println(selected);
+            System.out.println(c.getAttributesObservable());
+            c.deleteAttribute(selected);
         });
 
         changeAbstract.setOnAction(event -> {

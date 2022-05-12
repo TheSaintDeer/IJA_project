@@ -1,10 +1,11 @@
-package com.umleditor.uml;
+package com.umleditor.adapters;
 
-import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+import com.umleditor.uml.UMLAttribute;
+import com.umleditor.uml.UMLClass;
 
 import java.io.IOException;
 

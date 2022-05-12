@@ -1,46 +1,50 @@
-package com.umleditor.uml;
+package com.umleditor.adapters;
 
-import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+import com.umleditor.uml.UMLSequence;
 
 import java.io.IOException;
 
-public class RelationAdapter extends TypeAdapter<UMLRelation> {
-
+public class SequenceAdapter extends TypeAdapter<UMLSequence> {
 
     @Override
-    public void write(JsonWriter jsonWriter, UMLRelation umlRelationship) throws IOException {
+    public void write(JsonWriter jsonWriter, UMLSequence sequence) throws IOException {
 
         jsonWriter.beginObject();
 
+        jsonWriter.name("name");
+        jsonWriter.value(sequence.getName());
+
         jsonWriter.name("from");
-        jsonWriter.value(umlRelationship.fromClass);
+        jsonWriter.value(sequence.getNameClassFrom());
 
         jsonWriter.name("to");
-        jsonWriter.value(umlRelationship.toClass);
+        jsonWriter.value(sequence.getNameClassTo());
 
-        jsonWriter.name("type");
-        jsonWriter.value(String.valueOf(umlRelationship.typeRelationship));
+        jsonWriter.name("isActive");
+        jsonWriter.value(sequence.isActive());
 
         jsonWriter.endObject();
 
     }
 
     @Override
-    public UMLRelation read(JsonReader jsonReader) throws IOException {
+    public UMLSequence read(JsonReader jsonReader) throws IOException {
 
+        String name = "";
         String from = "";
         String to = "";
-        String type = "";
         String fieldname = null;
+        boolean isActive;
 
         jsonReader.beginObject();
 
         while (jsonReader.hasNext()) {
             JsonToken token = jsonReader.peek();
+
 
             if (token.equals(JsonToken.END_OBJECT)) {
                 //get the current token
@@ -53,26 +57,24 @@ public class RelationAdapter extends TypeAdapter<UMLRelation> {
             }
 
             if ("from".equals(fieldname)) {
-                //move to next token
-                token = jsonReader.peek();
                 from = jsonReader.nextString();
             }
 
             if ("to".equals(fieldname)) {
-                //move to next token
-                token = jsonReader.peek();
                 to = jsonReader.nextString();
             }
 
-            if ("type".equals(fieldname)) {
-                //move to next token
-                token = jsonReader.peek();
-                type = jsonReader.nextString();
+            if ("name".equals(fieldname)) {
+                name = jsonReader.nextString();
+            }
+
+            if ("isActive".equals(fieldname)) {
+                 isActive = jsonReader.nextBoolean();
             }
         }
 
         jsonReader.endObject();
 
-        return new UMLRelation(from,to,type);
+        return new UMLSequence(name,from,to);
     }
 }

@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.umleditor.controller.MainController;
-import com.umleditor.parser.Parser;
 import com.umleditor.uml.ClassDiagram;
 
 import java.io.IOException;
@@ -14,7 +13,6 @@ public class Main extends Application {
 
     private static Scene scene;
     private static ClassDiagram classDiagram;
-    private static Parser parser;
     public static int countOfClass = 0;
     public static int countOfSequenceClass = 0;
     public static int countOfSequenceRelat = 0;
@@ -34,14 +32,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         classDiagram = new ClassDiagram("Class_Diagram");
-        parser = new Parser();
-        try {
-            parser.parse(args, classDiagram);
-        } catch (Exception e) {
-//            e.printStackTrace();
-
-        }
-
         launch();
     }
 }

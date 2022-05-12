@@ -1,10 +1,6 @@
 package com.umleditor.uml;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-public class ClassSequence {
+public class UMLSequence {
 
     private String name;
 
@@ -34,7 +30,7 @@ public class ClassSequence {
      * @param nameClassTo - the name of the class to which the link goes
      */
 
-    public ClassSequence (String nameRelation, String nameClassFrom, String nameClassTo) {
+    public UMLSequence(String nameRelation, String nameClassFrom, String nameClassTo) {
         this.name = nameRelation;
         this.nameClassFrom = nameClassFrom;
         this.nameClassTo = nameClassTo;
@@ -43,7 +39,7 @@ public class ClassSequence {
     /**
      * @param nameClass - the name of the class which active
      */
-    public ClassSequence (String nameClass) {
+    public UMLSequence(String nameClass) {
         this.nameClassFrom = nameClass;
         this.isActive = true;
     }

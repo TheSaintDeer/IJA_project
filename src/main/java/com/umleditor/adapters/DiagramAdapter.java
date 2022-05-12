@@ -1,9 +1,13 @@
-package com.umleditor.uml;
+package com.umleditor.adapters;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+import com.umleditor.uml.ClassDiagram;
+import com.umleditor.uml.UMLSequence;
+import com.umleditor.uml.UMLClass;
+import com.umleditor.uml.UMLRelation;
 
 import java.io.IOException;
 
@@ -38,7 +42,7 @@ public class DiagramAdapter extends TypeAdapter<ClassDiagram> {
         jsonWriter.name("sequences");
         jsonWriter.beginArray();
 
-        for (ClassSequence s : classDiagram.getSequences()) {
+        for (UMLSequence s : classDiagram.getSequences()) {
 
             SequenceAdapter sequenceAdapter = new SequenceAdapter();
             sequenceAdapter.write(jsonWriter, s);

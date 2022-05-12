@@ -42,13 +42,13 @@ public class EditAttributeController {
     private MenuItem publicVisibility;  // +
 
     @FXML
-    public String newNameStr;
+    public String newNameStr = "none";
 
     @FXML
-    public String newVisibilityStr;
+    public String newVisibilityStr = "+";
 
     @FXML
-    public String newTypeStr;
+    public String newTypeStr = "none";
 
     @FXML
     void initialize() {

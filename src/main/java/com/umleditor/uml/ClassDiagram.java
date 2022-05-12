@@ -16,7 +16,7 @@ public class ClassDiagram extends Element{
     private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
     private List<UMLRelation> relations;
-    private List<ClassSequence> sequences;
+    private List<UMLSequence> sequences;
 
     /**
      * Constructor for creating a diagram instance. Each diagram has its own name.
@@ -198,7 +198,7 @@ public class ClassDiagram extends Element{
      * @return get all command in sequence diagram
      */
 
-    public List<ClassSequence> getSequences() {
+    public List<UMLSequence> getSequences() {
         return sequences;
     }
 
@@ -209,10 +209,10 @@ public class ClassDiagram extends Element{
      * @param nameOfClass - name of class, which need start or finish lifeline
      * @return new ClassSequence if class is existed, else null
      */
-    public ClassSequence createNewLifeline(String nameOfClass, boolean switcher) {
+    public UMLSequence createNewLifeline(String nameOfClass, boolean switcher) {
         for (UMLClass c : classes) {
             if (c.getName().equals(nameOfClass)) {
-                ClassSequence newSequence = new ClassSequence(nameOfClass);
+                UMLSequence newSequence = new UMLSequence(nameOfClass);
                 c.setActive(switcher);
                 sequences.add(newSequence);
                 return newSequence;
@@ -228,7 +228,7 @@ public class ClassDiagram extends Element{
      * @param nameTo - the name of the class to which the link goes
      * @return
      */
-    public ClassSequence createNewSeqRelation(String nameRelation, String nameFrom, String nameTo) {
+    public UMLSequence createNewSeqRelation(String nameRelation, String nameFrom, String nameTo) {
         boolean from = false;
         boolean to = false;
 
@@ -240,7 +240,7 @@ public class ClassDiagram extends Element{
         }
 
         if (from && to) {
-            ClassSequence newSequence = new ClassSequence(nameRelation, nameFrom, nameTo);
+            UMLSequence newSequence = new UMLSequence(nameRelation, nameFrom, nameTo);
             sequences.add(newSequence);
             return newSequence;
         }
@@ -252,7 +252,7 @@ public class ClassDiagram extends Element{
         relations.add(relation);
     }
 
-    public void addSequence(ClassSequence sequence) {
+    public void addSequence(UMLSequence sequence) {
         sequences.add(sequence);
     }
 

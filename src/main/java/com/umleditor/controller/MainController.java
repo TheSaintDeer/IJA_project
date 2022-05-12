@@ -1,5 +1,6 @@
 package com.umleditor.controller;
 
+import com.umleditor.adapters.DiagramAdapter;
 import com.umleditor.uml.*;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -477,7 +478,7 @@ public class MainController extends Main {
                     clearField();
                 } else {
 
-                    ClassSequence newSequence = diagram.createNewSeqRelation(nameOfSequenceRelat.getText(), fromClass.getText(), toClass.getText());
+                    UMLSequence newSequence = diagram.createNewSeqRelation(nameOfSequenceRelat.getText(), fromClass.getText(), toClass.getText());
                     if (newSequence == null) {
                         terminalErrors.setText("One of classes not exist");
                         visibleObject(false);
@@ -617,12 +618,12 @@ public class MainController extends Main {
         for (UMLClass c : diagram.getAll())
             addNewSequenceClass(c);
         countOfSequenceRelat = 0;
-        for (ClassSequence s : diagram.getSequences()) {
+        for (UMLSequence s : diagram.getSequences()) {
             drawRelatSequence(s);
         }
     }
 
-    private void drawRelatSequence(ClassSequence sequence) {
+    private void drawRelatSequence(UMLSequence sequence) {
 
         int indexFrom = 0;
         int indexTo = 0;

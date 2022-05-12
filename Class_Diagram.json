@@ -3,12 +3,12 @@
   "classes": [
     {
       "name": "a",
-      "isAbstract": false,
+      "isAbstract": true,
       "attributes": []
     },
     {
       "name": "b",
-      "isAbstract": false,
+      "isAbstract": true,
       "attributes": []
     }
   ],

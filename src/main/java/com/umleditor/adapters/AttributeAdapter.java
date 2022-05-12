@@ -1,9 +1,11 @@
-package com.umleditor.uml;
+package com.umleditor.adapters;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+import com.umleditor.uml.UMLAttribute;
+import com.umleditor.uml.UMLClassifier;
 
 import java.io.IOException;
 
@@ -63,7 +65,7 @@ public class AttributeAdapter extends TypeAdapter<UMLAttribute> {
             }
         }
 
-        UMLAttribute attribute = new UMLAttribute(visibility,name,UMLClassifier.forName(type));
+        UMLAttribute attribute = new UMLAttribute(visibility,name, UMLClassifier.forName(type));
 
         jsonReader.endObject();
 
