@@ -45,11 +45,12 @@
                 <MenuItem fx:id="typeGe" mnemonicParsing="false" text="Generalization" />
               </items>
             </MenuButton>
-            <Label fx:id="terminalErrors" layoutX="1043.0" layoutY="573.0" prefHeight="30.0" prefWidth="230.0" textFill="#d70909" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="1043.0" AnchorPane.rightAnchor="27.0" />
+            <Label fx:id="terminalErrors" layoutX="1043.0" layoutY="573.0" prefHeight="30.0" prefWidth="230.0" textFill="#d70909" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="1000.0" AnchorPane.rightAnchor="27.0" />
             <Label fx:id="labelFrom" layoutX="598.0" layoutY="534.0" prefHeight="23.0" prefWidth="79.0" text="From class" visible="false" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="680.0" />
             <Label fx:id="labelTo" layoutX="598.0" layoutY="560.0" prefHeight="23.0" prefWidth="79.0" text="To class" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="680.0" />
             <TextField fx:id="fromClass" layoutX="677.0" layoutY="534.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="780.0" />
             <TextField fx:id="toClass" layoutX="677.0" layoutY="561.0" prefHeight="24.0" prefWidth="143.0" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="780.0" />
+            <TextField fx:id="nameOfSequenceRelat" layoutX="1091.0" layoutY="539.0" prefHeight="24.0" prefWidth="143.0" promptText="Name of relation" visible="false" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="940.0" />
             <Button fx:id="acceptRelat" layoutX="839.0" layoutY="561.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="940.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -71,7 +72,7 @@
             </Button>
             <SplitPane dividerPositions="0.7504273504273504" prefHeight="525.0" prefWidth="1172.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="522.0" prefWidth="854.0" vbarPolicy="NEVER">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="522.0" prefWidth="2000.0">
                     <content>
                       <AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="1000.0" />
                     </content>
@@ -89,6 +90,15 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
+                        <Button fx:id="switchClass" alignment="CENTER" cache="true" layoutX="23.0" layoutY="425.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="288.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Switcher class" textAlignment="CENTER" textFill="WHITE" visible="false" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="17.0">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Button>
+                        <TextField fx:id="nameOfActivateClass" layoutX="20.0" layoutY="389.0" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                      </children>
                   </AnchorPane>
               </items>

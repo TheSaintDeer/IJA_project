@@ -47,10 +47,18 @@ public class MainController extends Main {
     private Button acceptRelat;
 
     @FXML
+    private TextField nameOfActivateClass;
+
+    @FXML
+    private Button switchClass;
+    @FXML
     private ListView<?> attributesOfSelectedClass;
 
     @FXML
     private Button createClass;
+
+    @FXML
+    private TextField nameOfSequenceRelat;
 
     @FXML
     private Button createRelation;
@@ -109,7 +117,7 @@ public class MainController extends Main {
 
     void addNewSequenceClass(UMLClass c) {
         Label newLabel = new Label();
-        newLabel.setLayoutX(50+200*countOfSequenceClass);
+        newLabel.setLayoutX(50+400*countOfSequenceClass);
         newLabel.setLayoutY(20);
         newLabel.setPrefHeight(50);
         newLabel.setPrefWidth(150);
@@ -119,7 +127,7 @@ public class MainController extends Main {
         newLabel.setBorder(new Border(new BorderStroke(Color.SILVER, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         mainPane.getChildren().add(newLabel);
 
-        Line newLine = new Line(125+200*countOfSequenceClass, 70, 125+200*countOfSequenceClass, 1200);
+        Line newLine = new Line(125+400*countOfSequenceClass, 70, 125+400*countOfSequenceClass, 1200);
         mainPane.getChildren().add(newLine);
 
         countOfSequenceClass++;
@@ -216,7 +224,10 @@ public class MainController extends Main {
         fromClass.setVisible(switcher);
         toClass.setVisible(switcher);
         acceptRelat.setVisible(switcher);
-        typeRelat.setVisible(switcher);
+        if (classMode)
+            typeRelat.setVisible(switcher);
+        else
+            nameOfSequenceRelat.setVisible(switcher);
     }
 
     /**
@@ -225,6 +236,7 @@ public class MainController extends Main {
     public void clearField () {
         fromClass.setText("");
         toClass.setText("");
+        nameOfSequenceRelat.setText("");
     }
 
     /**
@@ -357,6 +369,8 @@ public class MainController extends Main {
             acceptClass.setVisible(true);
         });
 
+//activate class
+
         acceptClass.setOnAction(event -> {
             UMLClass newClass = diagram.createClass(nameOfClass.getText());
 
@@ -430,7 +444,7 @@ public class MainController extends Main {
                 }
 
             } else {
-
+                visibleObject(false);
                 if (fromClass.getText().isEmpty()) {
                     terminalErrors.setText("Empty \"From class\"");
                     visibleObject(false);
@@ -441,27 +455,23 @@ public class MainController extends Main {
                     visibleObject(false);
                     typeRelat.setText("Type");
                     clearField();
+                } else if (nameOfSequenceRelat.getText().isEmpty()) {
+                    terminalErrors.setText("Empty \"Name of relation\"");
+                    visibleObject(false);
+                    clearField();
                 } else {
 
-                    ClassSequence newSequence = diagram.createNewSeqRelation("lol", fromClass.getText(), toClass.getText());
+                    ClassSequence newSequence = diagram.createNewSeqRelation(nameOfSequenceRelat.getText(), fromClass.getText(), toClass.getText());
                     if (newSequence == null) {
                         terminalErrors.setText("One of classes not exist");
                         visibleObject(false);
                         typeRelat.setText("Type");
                         clearField();
                     } else {
-                        int indexFrom = 0;
-                        int indexTo = 0;
-                        int i = 0;
-                        for (UMLClass c : diagram.getClasses()) {
-                            if (c.getName().equals(fromClass.getText()))
-                                indexFrom = i;
-                            if (c.getName().equals(toClass.getText()))
-                                indexTo = i;
-                            i++;
-                        }
+                        terminalErrors.setText("");
 
-                        drawRelatSequence(indexFrom, indexTo);
+                        drawRelatSequence(newSequence);
+                        clearField();
                     }
                 }
             }
@@ -483,13 +493,19 @@ public class MainController extends Main {
                 diagramName.setText("Sequence diagram mode");
                 createRelation.setText("Create sequence");
                 changeMode.setText("Class Mode");
+                switchClass.setVisible(true);
+                nameOfActivateClass.setVisible(true);
+
+                if (typeRelat.isVisible()) {
+                    nameOfSequenceRelat.setVisible(true);
+                    typeRelat.setVisible(false);
+                }
 
                 mainPane.getChildren().removeAll(mainPane.getChildren());
 
                 countOfSequenceClass = 0;
 
-                for (UMLClass c : diagram.getAll())
-                    addNewSequenceClass(c);
+                renderSequences();
 
             }else {
 
@@ -498,6 +514,13 @@ public class MainController extends Main {
                 diagramName.setText("Class diagram mode");
                 createRelation.setText("Create relation");
                 changeMode.setText("Sequence Mode");
+                switchClass.setVisible(false);
+                nameOfActivateClass.setVisible(false);
+
+                if (nameOfSequenceRelat.isVisible()) {
+                    nameOfSequenceRelat.setVisible(false);
+                    typeRelat.setVisible(true);
+                }
 
                 mainPane.getChildren().removeAll(mainPane.getChildren());
 
@@ -573,20 +596,66 @@ public class MainController extends Main {
 
     }
 
-    private void drawRelatSequence(int indexFrom, int indexTo) {
+    private void renderSequences() {
+        for (UMLClass c : diagram.getAll())
+            addNewSequenceClass(c);
+        countOfSequenceRelat = 0;
+        for (ClassSequence s : diagram.getSequences()) {
+            drawRelatSequence(s);
+        }
+    }
 
-        Line newLine = new Line(125+200*indexFrom, 120+60*countOfSequenceRelat, 125+200*indexTo, 120+60*countOfSequenceRelat);
-        Polygon newPolygon = new Polygon(125+200*indexTo-10, 120+60*countOfSequenceRelat - 5, 125+200*indexTo-10, 120+60*countOfSequenceRelat + 5, 125+200*indexTo, 120+60*countOfSequenceRelat);
+    private void drawRelatSequence(ClassSequence sequence) {
+
+
+        int indexFrom = 0;
+        int indexTo = 0;
+        int i = 0;
+        for (UMLClass c : diagram.getClasses()) {
+            if (c.getName().equals(sequence.getNameClassFrom()))
+                indexFrom = i;
+            if (c.getName().equals(sequence.getNameClassTo()))
+                indexTo = i;
+            i++;
+        }
+
+        int move;
+        int start;
+        Label newLabel = new Label();
+
+        if (indexFrom < indexTo){
+            newLabel.setAlignment(Pos.CENTER_LEFT);
+            start = 125+400*indexFrom;
+            move = -10;
+        }
+        else {
+            newLabel.setAlignment(Pos.CENTER_RIGHT);
+            start = 125+400*indexTo;
+            move = 10;
+        }
+
+        Line newLine = new Line(125+400*indexFrom, 120+60*countOfSequenceRelat, 125+400*indexTo, 120+60*countOfSequenceRelat);
+        Polygon newPolygon = new Polygon(125+400*indexTo+move, 120+60*countOfSequenceRelat - 5, 125+400*indexTo+move, 120+60*countOfSequenceRelat + 5, 125+400*indexTo, 120+60*countOfSequenceRelat);
+
+        newLabel.setLayoutX(start-move);
+        newLabel.setLayoutY(80+60*countOfSequenceRelat);
+        newLabel.setPrefHeight(50);
+        newLabel.setPrefWidth(400*Math.abs(indexFrom - indexTo));
+        newLabel.setText(sequence.getName());
+        newLabel.setFont(new Font("Bold", 12));
+
+
+
         countOfSequenceRelat++;
         mainPane.getChildren().add(newLine);
         mainPane.getChildren().add(newPolygon);
+        mainPane.getChildren().add(newLabel);
     }
 
     private void renderClasses() {
 
         for (UMLClass c : diagram.getAll())
             addNewClass(c);
-
 
         for (UMLRelation r : diagram.getAllRelations())
             drawRelat(r);
@@ -604,7 +673,12 @@ public class MainController extends Main {
 
             // print diagram
             System.out.println(diagram);
-            renderClasses();
+
+            if (classMode) {
+                renderClasses();
+            }else {
+                renderSequences();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
