@@ -202,6 +202,8 @@ public class ClassDiagram extends Element{
         return sequences;
     }
 
+
+
     /**
      * Function for adding commands `activate <nameOfClass>` or `deactivate <nameOfClass>`
      * @param nameOfClass - name of class, which need start or finish lifeline

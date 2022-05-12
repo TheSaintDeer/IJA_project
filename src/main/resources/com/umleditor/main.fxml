@@ -74,7 +74,7 @@
               <items>
                   <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="522.0" prefWidth="2000.0">
                     <content>
-                      <AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="1000.0" />
+                      <AnchorPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2000.0" prefWidth="3000.0" />
                     </content>
                   </ScrollPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="366.0">

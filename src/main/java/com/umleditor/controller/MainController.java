@@ -373,7 +373,19 @@ public class MainController extends Main {
             acceptClass.setVisible(true);
         });
 
-//activate class
+        switchClass.setOnAction(event -> {
+
+            if (nameOfActivateClass.getText().equals("")) {
+                terminalErrors.setText("Empty name of class");
+            } else {
+                UMLClass fClass = diagram.findClass(nameOfActivateClass.getText());
+                if (fClass != null) {
+                    terminalErrors.setText("");
+                    fClass.setActive(!fClass.isActive());
+                    nameOfActivateClass.setText("");
+                }
+            }
+        });
 
         acceptClass.setOnAction(event -> {
             UMLClass newClass = diagram.createClass(nameOfClass.getText());
@@ -612,10 +624,10 @@ public class MainController extends Main {
 
     private void drawRelatSequence(ClassSequence sequence) {
 
-
         int indexFrom = 0;
         int indexTo = 0;
         int i = 0;
+
         for (UMLClass c : diagram.getClasses()) {
             if (c.getName().equals(sequence.getNameClassFrom()))
                 indexFrom = i;
@@ -627,7 +639,6 @@ public class MainController extends Main {
         int move;
         int start;
         Label newLabel = new Label();
-
         if (indexFrom < indexTo){
             newLabel.setAlignment(Pos.CENTER_LEFT);
             start = 125+400*indexFrom;
@@ -649,7 +660,23 @@ public class MainController extends Main {
         newLabel.setText(sequence.getName());
         newLabel.setFont(new Font("Bold", 12));
 
+        int index = 0;
+        for (UMLClass c : diagram.getClasses()) {
+            if (c.isActive()) {
+                System.out.println(c);
+                int startLine;
+                if (countOfSequenceRelat == 0) {
+                    startLine = 120;
+                } else {
+                    startLine = 120+60*countOfSequenceRelat;
+                }
 
+                Polygon lifeline = new Polygon(120+400*index, startLine, 120+400*index, startLine+60, 130+400*index, startLine+60, 130+400*index, startLine);
+                lifeline.setFill(Color.web("#2E3348"));
+                mainPane.getChildren().add(lifeline);
+            }
+            index++;
+        }
 
         countOfSequenceRelat++;
         mainPane.getChildren().add(newLine);
@@ -664,8 +691,6 @@ public class MainController extends Main {
 
         for (UMLRelation r : diagram.getAllRelations())
             drawRelat(r);
-
-
     }
 
     private void parse_file(File file) {

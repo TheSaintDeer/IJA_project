@@ -131,4 +131,8 @@ public class UMLClass extends UMLClassifier {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    public boolean isActive() {
+        return isActive;
+    }
 }

@@ -69,6 +69,5 @@ public class UMLRelation {
     @Override
     public String toString() {
         return String.format("{from:%s;to:%s;type:%s;}", this.fromClass,this.toClass,this.typeRelationship);
-
     }
 }
