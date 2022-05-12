@@ -501,7 +501,7 @@ public class MainController extends Main {
                     typeRelat.setVisible(false);
                 }
 
-                mainPane.getChildren().removeAll(mainPane.getChildren());
+                mainPane.getChildren().clear();
 
                 countOfSequenceClass = 0;
 
@@ -522,7 +522,7 @@ public class MainController extends Main {
                     typeRelat.setVisible(true);
                 }
 
-                mainPane.getChildren().removeAll(mainPane.getChildren());
+                mainPane.getChildren().clear();
 
                 countOfClass = 0;
 
@@ -534,7 +534,9 @@ public class MainController extends Main {
 
         open.setOnAction(event -> {
 
-            mainPane.getChildren().removeAll(mainPane.getChildren());
+            mainPane.getChildren().clear();
+
+
             countOfClass = 0;
             File file = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
             if (file != null) {
@@ -554,11 +556,10 @@ public class MainController extends Main {
 
         newFile.setOnAction(event -> {
 
-//            mainPane.getChildren().removeAll(mainPane.getChildren());
-            diagram.getAll().removeAll(diagram.getAll());
-            mainPane.getChildren().removeAll(mainPane.getChildren());
-            diagram.getSequences().removeAll(diagram.getSequences());
-            diagram.getAllRelations().removeAll(diagram.getAllRelations());
+            mainPane.getChildren().clear();
+            diagram.removeAllClasses();
+            diagram.removeAllSequences();
+            diagram.removeAllRelations();
 
             System.out.println(diagram);
         });

@@ -15,7 +15,7 @@ public class ClassDiagram extends Element{
 
     private ObservableList<UMLClass> classes;
     private List<UMLClassifier> classifiers;
-    private ObservableList<UMLRelation> relations;
+    private List<UMLRelation> relations;
     private List<ClassSequence> sequences;
 
     /**
@@ -140,7 +140,7 @@ public class ClassDiagram extends Element{
      * @return List representing all relations in the diagram.
      */
 
-    public ObservableList<UMLRelation> getAllRelationsObservable() {
+    public List<UMLRelation> getAllRelationsObservable() {
         return relations;
     }
 
@@ -252,5 +252,18 @@ public class ClassDiagram extends Element{
 
     public void addSequence(ClassSequence sequence) {
         sequences.add(sequence);
+    }
+
+    public void removeAllRelations() {
+        relations.clear();
+    }
+
+    public void removeAllSequences() {
+        sequences.clear();
+
+    }
+
+    public void removeAllClasses() {
+        classes.clear();
     }
 }
