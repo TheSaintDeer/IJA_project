@@ -141,6 +141,10 @@ public class MainController extends Main {
 
         TitledPane newClass = (TitledPane) createNewClass(c);
 
+        if (c.isAbstract()) {
+            newClass.setStyle("-fx-text-fill: #009CFC");
+
+        }
         newClass.setLayoutX(50+300*(countOfClass % 3));
         newClass.setLayoutY(50+250*(countOfClass / 3));
         countOfClass++;

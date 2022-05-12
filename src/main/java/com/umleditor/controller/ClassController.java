@@ -39,16 +39,16 @@ public class ClassController extends Main {
         listView.setItems(c.getAttributesObservable());
 
         ContextMenu contextMenu = new ContextMenu();
-        MenuItem add = new MenuItem("Add");
+        MenuItem add = new MenuItem("Add attribute");
         MenuItem edit_classname = new MenuItem("Edit classname");
         MenuItem edit_attribute = new MenuItem("Edit attribute");
         MenuItem delete_attribute = new MenuItem("Delete attribute");
-        MenuItem delete_class = new MenuItem("Delete class");
+        MenuItem changeAbstract = new MenuItem("Change abstraction");
         contextMenu.getItems().add(add);
         contextMenu.getItems().add(edit_attribute);
         contextMenu.getItems().add(edit_classname);
         contextMenu.getItems().add(delete_attribute);
-        contextMenu.getItems().add(delete_class);
+        contextMenu.getItems().add(changeAbstract);
         listView.setContextMenu(contextMenu);
         listView.setEditable(true);
 
@@ -138,6 +138,17 @@ public class ClassController extends Main {
             }
         });
 
+        changeAbstract.setOnAction(event -> {
+            if (c.isAbstract()) {
+                c.setAbstract(false);
+                titledPane.setStyle(null);
+
+            }else {
+                c.setAbstract(true);
+                titledPane.setStyle("-fx-text-fill: #009CFC");
+            }
+
+        });
 
     }
 
