@@ -93,6 +93,14 @@
                   </AnchorPane>
               </items>
             </SplitPane>
+            <Button fx:id="deleteClass" alignment="CENTER" cache="true" layoutX="1109.0" layoutY="540.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Delete class" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
          </children>
       </AnchorPane>
       <Label fx:id="diagramName" alignment="CENTER" layoutX="-481.0" layoutY="33.0" prefHeight="60.0" prefWidth="1430.0" text="Class diagram mode" textFill="WHITE" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
@@ -104,18 +112,12 @@
         <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
+                  <MenuItem fx:id="newFile" mnemonicParsing="false" text="New" />
                   <MenuItem fx:id="open" mnemonicParsing="false" text="Open…" />
-                  <Menu mnemonicParsing="false" text="Open Recent" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
                   <MenuItem fx:id="saveAs" mnemonicParsing="false" text="Save As…" />
-                  <MenuItem mnemonicParsing="false" text="Revert" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Preferences…" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
+                  <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Edit">
@@ -134,12 +136,12 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                  <MenuItem mnemonicParsing="false" text="About UML Editor" />
                </items>
             </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="changeMode" alignment="CENTER" cache="true" layoutX="1067.0" layoutY="35.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="219.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Sequence Mode" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="35.0">
+      <Button fx:id="changeMode" alignment="CENTER" cache="true" layoutX="1067.0" layoutY="35.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="219.0" style="-fx-background-color: #f39c63; -fx-border-color: silver; -fx-border-radius: 7; -fx-background-radius: 7;" text="Sequence Mode" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

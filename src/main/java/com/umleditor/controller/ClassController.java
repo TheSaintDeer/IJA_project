@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -30,6 +31,7 @@ public class ClassController extends Main {
 
     @FXML
     private ListView listView;
+
     @FXML
     void initialize() {
 
@@ -122,13 +124,6 @@ public class ClassController extends Main {
             }
         });
 
-        delete_class.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-//                delete_class.
-            }
-        });
-
         /**
          * Delete attribute
          */
@@ -150,7 +145,8 @@ public class ClassController extends Main {
      * Set class
      * @param c input class
      */
-    public void setClass(UMLClass c) {
+    public void setUMLClass(UMLClass c) {
         this.c = c;
     }
+
 }

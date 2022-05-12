@@ -16,6 +16,7 @@ import com.umleditor.Main;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import com.google.gson.*;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.List;
@@ -35,8 +36,13 @@ public class MainController extends Main {
     private MenuItem saveAs;
 
     @FXML
+    private MenuItem quit;
+    @FXML
+    private MenuItem newFile;
+    @FXML
     private Button acceptClass;
-
+    @FXML
+    private Button deleteClass;
     @FXML
     private Button acceptRelat;
 
@@ -94,6 +100,8 @@ public class MainController extends Main {
     @FXML
     private MenuButton typeRelat;
     private ClassDiagram diagram;
+    @FXML
+    public ClassController classController;
 
     public MainController(ClassDiagram d) {
         this.diagram = d;
@@ -186,7 +194,7 @@ public class MainController extends Main {
         loader.setLocation(MainController.class.getResource("class_sample.fxml"));
 
         ClassController controller = new ClassController(countOfClass);
-        controller.setClass(c);
+        controller.setUMLClass(c);
         loader.setController(controller);
 
         try {
@@ -510,19 +518,26 @@ public class MainController extends Main {
                 parse_file(file);
             }
 
+        });
+
+        quit.setOnAction(event -> {
+
+            Stage stage = (Stage) mainPane.getScene().getWindow();
+            stage.close();
+
+        });
+
+
+
+        newFile.setOnAction(event -> {
+
+//            mainPane.getChildren().removeAll(mainPane.getChildren());
+            diagram.getAll().removeAll(diagram.getAll());
+            mainPane.getChildren().removeAll(mainPane.getChildren());
 
         });
 
         saveAs.setOnAction(event -> {
-
-//            GsonBuilder builder  = new GsonBuilder();
-//            builder.setPrettyPrinting();
-//            builder.registerTypeAdapter(ClassDiagram.class,new DiagramAdapter());
-//            Gson gson = builder.create();
-//            String jsonString = "";
-//
-//            jsonString = gson.toJson(diagram);
-//            System.out.println(jsonString);
 
             fileChooser.setInitialFileName(diagram.getName()+".json");
             fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -544,6 +559,15 @@ public class MainController extends Main {
 
         });
 
+        deleteClass.setOnAction(event -> {
+
+            UMLClass selected = diagram.findClass(nameOfSelectedClass.getText());
+            System.out.println(selected);
+            diagram.getAll().remove(selected);
+            mainPane.getChildren().removeAll(mainPane.lookupAll("#" + nameOfSelectedClass.getText() + "id"));
+
+        });
+
     }
 
     private void drawRelatSequence(int indexFrom, int indexTo) {
@@ -557,10 +581,9 @@ public class MainController extends Main {
 
     private void renderClasses() {
 
-        for (UMLClass c : diagram.getAll()) {
-//            System.out.println("adding class: " + c.getName());
+        for (UMLClass c : diagram.getAll())
             addNewClass(c);
-        }
+
 
         for (UMLRelation r : diagram.getAllRelations())
             drawRelat(r);
@@ -574,11 +597,9 @@ public class MainController extends Main {
         try (Reader reader = new FileReader(file)) {
 
             // Convert JSON File to Java Object
-//            diagram = gson.fromJson(reader, ClassDiagram.class);
-
             diagram = gson.fromJson(reader, ClassDiagram.class);
 
-            // print staff
+            // print diagram
             System.out.println(diagram);
             renderClasses();
 

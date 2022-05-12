@@ -6,44 +6,12 @@
       "isAbstract": false,
       "attributes": [
         {
-          "visibility": "+",
-          "type": "type",
-          "name": "newAttribute0"
-        },
-        {
-          "visibility": "+",
-          "type": "type",
-          "name": "newAttribute1"
-        },
-        {
-          "visibility": "+",
-          "type": "type",
-          "name": "newAttribute2"
-        }
-      ]
-    },
-    {
-      "name": "b",
-      "isAbstract": false,
-      "attributes": [
-        {
-          "visibility": "+",
-          "type": "type",
-          "name": "newAttribute1"
-        },
-        {
-          "visibility": "+",
-          "type": "type",
-          "name": "newAttribute2"
+          "visibility": "#",
+          "type": "a",
+          "name": "b"
         }
       ]
     }
   ],
-  "relations": [
-    {
-      "from": "a",
-      "to": "b",
-      "type": "AGGREGATION"
-    }
-  ]
+  "relations": []
 }
