@@ -7,6 +7,23 @@ import java.util.Objects;
 public class ClassSequence {
 
     private String name;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNameClassFrom(String nameClassFrom) {
+        this.nameClassFrom = nameClassFrom;
+    }
+
+    public void setNameClassTo(String nameClassTo) {
+        this.nameClassTo = nameClassTo;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     private String nameClassFrom;
     private String nameClassTo;
     private boolean isActive = false;
@@ -58,5 +75,11 @@ public class ClassSequence {
      */
     public boolean isActive() {
         return isActive;
+    }
+
+    @Override
+    public String toString() {
+       return String.format("{name:%s;from:%s;to:%s;isActive:%s;}", this.getName(),this.nameClassFrom,this.nameClassTo,this.isActive);
+
     }
 }

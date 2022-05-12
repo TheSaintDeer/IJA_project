@@ -4,14 +4,21 @@
     {
       "name": "a",
       "isAbstract": false,
-      "attributes": [
-        {
-          "visibility": "#",
-          "type": "a",
-          "name": "b"
-        }
-      ]
+      "attributes": []
+    },
+    {
+      "name": "b",
+      "isAbstract": false,
+      "attributes": []
     }
   ],
-  "relations": []
+  "relations": [],
+  "sequences": [
+    {
+      "name": "lol",
+      "from": "a",
+      "to": "b",
+      "isActive": false
+    }
+  ]
 }

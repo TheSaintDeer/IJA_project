@@ -185,7 +185,7 @@ public class ClassDiagram extends Element{
     }
     @Override
     public String toString() {
-        return String.format("{name:%s;classes:%s;relations:%s;}", this.getName(),this.classes,this.relations);
+        return String.format("{name:%s;classes:%s;relations:%s;sequences:%s;}", this.getName(),this.classes,this.relations,this.sequences);
     }
 
     public void addClass(UMLClass c) {
@@ -248,5 +248,9 @@ public class ClassDiagram extends Element{
 
     public void addRelation(UMLRelation relation) {
         relations.add(relation);
+    }
+
+    public void addSequence(ClassSequence sequence) {
+        sequences.add(sequence);
     }
 }

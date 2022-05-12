@@ -35,16 +35,16 @@ public class DiagramAdapter extends TypeAdapter<ClassDiagram> {
 
         }
         jsonWriter.endArray();
-//        jsonWriter.name("sequences");
+        jsonWriter.name("sequences");
+        jsonWriter.beginArray();
 
-//        for (UMLRelationship c : classDiagram.getAllRelations()) {
-//
-//            RelationAdapter relationAdapter = new RelationAdapter();
-//            relationAdapter.write(jsonWriter, c);
-//
-//        }
+        for (ClassSequence s : classDiagram.getSequences()) {
 
-//        jsonWriter.value(classDiagram.getName());
+            SequenceAdapter sequenceAdapter = new SequenceAdapter();
+            sequenceAdapter.write(jsonWriter, s);
+
+        }
+        jsonWriter.endArray();
 
 
         jsonWriter.endObject();
@@ -92,13 +92,17 @@ public class DiagramAdapter extends TypeAdapter<ClassDiagram> {
                 case "sequences":
                     token = jsonReader.peek();
                     jsonReader.beginArray();
-//                    System.out.println((jsonReader.peek().name()));
-                    jsonReader.skipValue();
+                    while (!jsonReader.peek().equals(JsonToken.END_ARRAY)) {
+
+                        SequenceAdapter sequenceAdapter = new SequenceAdapter();
+                        diagram.addSequence(sequenceAdapter.read(jsonReader));
+
+                    }
                     jsonReader.endArray();
                     break;
 
                 default:
-                    jsonReader.skipValue();
+//                    jsonReader.skipValue();
                     System.out.println("unknown object in class diagram");
             }
 

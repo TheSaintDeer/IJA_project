@@ -534,7 +534,10 @@ public class MainController extends Main {
 //            mainPane.getChildren().removeAll(mainPane.getChildren());
             diagram.getAll().removeAll(diagram.getAll());
             mainPane.getChildren().removeAll(mainPane.getChildren());
+            diagram.getSequences().removeAll(diagram.getSequences());
+            diagram.getAllRelations().removeAll(diagram.getAllRelations());
 
+            System.out.println(diagram);
         });
 
         saveAs.setOnAction(event -> {
